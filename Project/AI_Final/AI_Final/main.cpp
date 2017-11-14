@@ -1,11 +1,6 @@
 #include "GameApp.h"
 #include <iostream>
 
-enum Test
-{
-	EHEHEHE
-};
-
 int main()
 {
 	bool contiueLoop = true;
