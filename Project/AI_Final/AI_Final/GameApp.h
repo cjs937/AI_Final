@@ -5,6 +5,7 @@ const int FPS = 60;
 const int FPS_MS = 1000 / FPS;
 
 class Timer;
+class SaveSystem;
 
 class GameApp : public Trackable
 {
@@ -26,15 +27,15 @@ public:
 	float getDeltaTime();
 
 	//Getters
-
-
+	SaveSystem* getSaveSystem() { return mpSaveSystem; };
 
 
 private:
 	Timer* mpLoopTimer;
+	SaveSystem* mpSaveSystem;
 	bool mContinueLoop = true;
 	float mPrevFrameTime;
 	float mLoopStartTime;
 };
 
-extern GameApp* gpGameManager;
+extern GameApp* gpGameApp;

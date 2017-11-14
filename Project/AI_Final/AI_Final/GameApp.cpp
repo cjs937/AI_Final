@@ -1,5 +1,6 @@
-#include "GameManager.h"
+#include "GameApp.h"
 #include "Timer.h"
+#include "SaveSystem.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -11,6 +12,8 @@ GameApp::~GameApp()
 
 void GameApp::init(int _screenWidth, int _screenHeight)
 {
+	mpSaveSystem = new SaveSystem();
+
 	mpLoopTimer = new Timer();
 	mpLoopTimer->start();
 }
