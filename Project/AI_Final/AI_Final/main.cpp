@@ -8,19 +8,15 @@ enum Test
 
 int main()
 {
-	//bool contiueLoop = true;
+	bool contiueLoop = true;
 
-	//gpGameApp = new GameApp();
-	//gpGameApp->init(1000, 1000);
+	gpGameApp = new GameApp();
+	gpGameApp->init(1000, 1000);
 
-	//while (contiueLoop)
-	//{
-	//	contiueLoop = gpGameApp->updateLoop();
-	//}
-
-	std::cout << EHEHEHE;
-
-	system("Pause");
+	while (contiueLoop)
+	{
+		contiueLoop = gpGameApp->updateLoop();
+	}
 
 	return 0;
 }
