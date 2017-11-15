@@ -1,5 +1,5 @@
 #pragma once
-#include "Trackable.h"
+#include "Component.h"
 #include <fstream>
 #include <string>
 
@@ -27,11 +27,11 @@ public:
 	SaveDataType dataType;
 };
 
-class Saveable : public Trackable
+class SaveableComponent : public Component
 {
 public:
-	Saveable(SaveData* _saveData = NULL);
-	virtual ~Saveable();
+	SaveableComponent(SaveData* _saveData = NULL);
+	virtual ~SaveableComponent();
 
 	virtual void save(std::ofstream &_fout);
 	//virtual void save(std::string _fileName);
@@ -41,6 +41,6 @@ public:
 	virtual SaveData* getSaveData() { return mSaveData; };
 	virtual void setSaveData(SaveData* _saveData);
 
-public:
+private:
 	SaveData* mSaveData;
 };

@@ -5,7 +5,7 @@
 
 const std::string SAVEFILE_NAME = "Save.txt";
 
-class Saveable;
+class SaveableComponent;
 
 class SaveSystem : public Trackable
 {
@@ -15,9 +15,9 @@ public:
 
 	void saveState(std::string _fileName);
 	void loadFromFile(std::string _fileName);
-	bool addObject(Saveable* _object);
-	bool removeObject(Saveable* _object);
+	bool addObject(SaveableComponent* _object);
+	bool removeObject(SaveableComponent* _object);
 
 private:
-	std::vector<Saveable*> mSaveableObjects;
+	std::vector<SaveableComponent*> mSaveableObjects;
 };

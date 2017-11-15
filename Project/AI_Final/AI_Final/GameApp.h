@@ -1,52 +1,21 @@
 #pragma once
-#include "Saveable.h"
+#include "Trackable.h"
 
 const int FPS = 60;
 const int FPS_MS = 1000 / FPS;
 
+
 class Timer;
 class SaveSystem;
+class GameMessageManager;
 
-/*Uncomment for save system unit test*/
-//struct GameSaveData : public SaveData
-//{
-//	GameSaveData() :SaveData(GAME) 
-//	{
-//		test = 1;
-//	};
-//
-//	~GameSaveData() {};
-//
-//	std::string getSerializedData() 
-//	{
-//		std::string output = "";
-//
-//		output += std::to_string(dataType) + "\n"
-//			+ std::to_string(test) + "\n";
-//
-//		return output;
-//	}
-//
-//	//loads in save data
-//	void loadData(std::ifstream &_fin)
-//	{
-//		std::string junk;
-//
-//		_fin >> test;
-//
-//		std::getline(_fin, junk);
-//	}
-//
-//	int test;
-//};
-
-class GameApp : public Saveable
+class GameApp : public Trackable
 {
 public:
 	GameApp();
 	~GameApp();
 
-	void init(int screenWidth, int screenHeight);
+	void init(int _screenWidth, int _screenHeight);
 
 	//do stuff before beginning loop
 	void startLoop();
@@ -59,18 +28,25 @@ public:
 
 	void cleanup();
 
-	float getDeltaTime();
+	void quit();
 
 	//Getters
 	SaveSystem* getSaveSystem() { return mpSaveSystem; };
+	GameMessageManager* getMessageManager() { return mpMessageManager; };
+	float getDeltaTime();
+	float getCurrentTime();
 
 
 private:
 	Timer* mpLoopTimer;
 	SaveSystem* mpSaveSystem;
+	GameMessageManager* mpMessageManager;
+
 	bool mContinueLoop = true;
 	float mPrevFrameTime;
 	float mLoopStartTime;
+
+	void installAllegro();
 };
 
 extern GameApp* gpGameApp;

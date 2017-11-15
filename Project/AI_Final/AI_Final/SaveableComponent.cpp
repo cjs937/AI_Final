@@ -1,14 +1,14 @@
-#include "Saveable.h"
+#include "SaveableComponent.h"
 
-Saveable::Saveable(SaveData* _saveData):mSaveData(NULL)
+SaveableComponent::SaveableComponent(SaveData* _saveData):Component(SAVEABLE), mSaveData(NULL)
 {
 	setSaveData(_saveData);
 }
 
-Saveable::~Saveable() 
+SaveableComponent::~SaveableComponent() 
 {}
 
-void Saveable::save(std::ofstream &_fout)
+void SaveableComponent::save(std::ofstream &_fout)
 {
 	_fout << mSaveData->getSerializedData();
 }
@@ -31,17 +31,17 @@ void Saveable::save(std::ofstream &_fout)
 //	fout.close();
 //}
 
-void Saveable::load(SaveData* _data)
+void SaveableComponent::load(SaveData* _data)
 {
 	setSaveData(_data);
 }
 
-void Saveable::load(std::ifstream &_fin)
+void SaveableComponent::load(std::ifstream &_fin)
 {
 	mSaveData->loadData(_fin);
 };
 
-void Saveable::setSaveData(SaveData* _saveData) 
+void SaveableComponent::setSaveData(SaveData* _saveData) 
 { 
 	if (mSaveData != NULL)
 	{
