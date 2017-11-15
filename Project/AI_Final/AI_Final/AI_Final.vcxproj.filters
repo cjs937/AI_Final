@@ -63,9 +63,6 @@
     <ClCompile Include="StateHandler.cpp">
       <Filter>Source Files\State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameMessage.cpp">
       <Filter>Source Files\Messages</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="SpriteManager.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files\State Machine</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameMessage.h">
       <Filter>Header Files\Messages</Filter>
@@ -157,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
