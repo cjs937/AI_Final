@@ -1,5 +1,5 @@
 #include "SaveSystem.h"
-#include "Saveable.h"
+#include "SaveableObjects.h"
 #include  <fstream>
 #include <string>
 
@@ -17,9 +17,8 @@ void SaveSystem::saveState(std::string _fileName)
 	for (int i = 0; i < mSaveableObjects.size(); ++i)
 	{
 		Saveable* currObject = mSaveableObjects[i];
-
-		fout << currObject->getSaveData()->dataType << "\n"
-			<< currObject->getSaveData()->getSerializedData() << "\n";
+		
+		currObject->save(fout);
 	}
 }
 
@@ -40,7 +39,7 @@ void SaveSystem::loadFromFile(std::string _fileName)
 
 	try
 	{
-		while (!fin.eof())
+		while (fin.peek() != EOF)//fin.eof())
 		{
 			std::string junk;
 
@@ -53,11 +52,13 @@ void SaveSystem::loadFromFile(std::string _fileName)
 			if (currentType == GAME)
 			{
 				//create game SaveData object
-				
 				//call loadData on object
-
 				//send gamemessage for loading that data type
-				
+
+				/*Uncomment for save system unit test*/
+				//GameSaveData* gameData = new GameSaveData();
+				//gameData->loadData(fin);
+				//gpGameApp->load(gameData);
 			}
 			else //if the parser reads in a line that isn't recognized here it is out of sync
 			{		
