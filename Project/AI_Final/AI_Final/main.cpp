@@ -1,8 +1,12 @@
 #include "GameApp.h"
 #include <iostream>
+#include "MemoryTracker.h"
 
 int main()
 {
+
+	MemoryTracker memoryTracker;
+
 	bool contiueLoop = true;
 
 	gpGameApp = new GameApp();
@@ -12,6 +16,10 @@ int main()
 	{
 		contiueLoop = gpGameApp->updateLoop();
 	}
+
+	gMemoryTracker.reportAllocations(std::cout);
+
+	system("pause");
 
 	return 0;
 }

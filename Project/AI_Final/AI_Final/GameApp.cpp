@@ -1,8 +1,20 @@
 #include "GameApp.h"
+
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
+
 #include "Timer.h"
 #include "SaveSystem.h"
 #include "GameMessageManager.h"
-#include "allegro5\allegro.h"
+#include "GraphicsSystem.h"
+#include "GraphicsBufferManager.h"
+#include "SpriteManager.h"
+#include "GraphicsBuffer.h"
+#include "Sprite.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -17,19 +29,89 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 {
 	installAllegro();
 
+	mpGraphicsSystem = new GraphicsSystem();
+
 	mpSaveSystem = new SaveSystem();
 
 	mpMessageManager = new GameMessageManager();
 
+	mpGraphicsBufferManager = new GraphicsBufferManager();
+
+	mpSpriteManager = new SpriteManager();
+
 	mpLoopTimer = new Timer();
+
+	mpGraphicsSystem->init(_screenWidth, _screenHeight);
+
+	mpGraphicsBufferManager->init();
+
+	//hide the mouse
+	if (!al_hide_mouse_cursor(mpGraphicsSystem->getDisplay()))
+	{
+		printf("Mouse cursor not able to be hidden!\n");
+	}
+
 	mpLoopTimer->start();
 }
 
 void GameApp::installAllegro()
 {
+	if (!al_init())
+	{
+		fprintf(stderr, "allegro init failed!\n");
+	}
+
+	//load image loader addon
+	if (!al_init_image_addon())
+	{
+		fprintf(stderr, "image addon failed to load!\n");
+	}
+
+	//install audio stuff
+	if (!al_install_audio())
+	{
+		fprintf(stderr, "failed to initialize sound!\n");
+	}
+
+	if (!al_init_acodec_addon())
+	{
+		fprintf(stderr, "failed to initialize audio codecs!\n");
+	}
+
+	if (!al_reserve_samples(1))
+	{
+		fprintf(stderr, "failed to reserve samples!\n");
+	}
+
+	//should probably be done in the InputSystem!
 	if (!al_install_keyboard())
 	{
 		printf("Keyboard not installed!\n");
+	}
+
+	//should probably be done in the InputSystem!
+	if (!al_install_mouse())
+	{
+		printf("Mouse not installed!\n");
+	}
+
+	//should be somewhere else!
+	al_init_font_addon();
+	if (!al_init_ttf_addon())
+	{
+		printf("ttf font addon not initted properly!\n");
+	}
+
+	//actually load the font
+	mpDefaultFont = al_load_ttf_font("cour.ttf", 20, 0);
+	if (mpDefaultFont == NULL)
+	{
+		printf("ttf font file not loaded properly!\n");
+	}
+
+	if (!al_init_primitives_addon())
+	{
+		printf("Primitives addon not added!\n");
 	}
 }
 
@@ -44,7 +126,18 @@ bool GameApp::updateLoop()
 
 	//[process loop here]
 
+	draw();
+
 	return endLoop();
+}
+
+void GameApp::draw()
+{
+	mpGraphicsSystem->getBackBuffer()->clear();
+
+	//[draw things here]
+
+	mpGraphicsSystem->swap();
 }
 
 bool GameApp::endLoop()
@@ -80,6 +173,28 @@ void GameApp::cleanup()
 		delete mpMessageManager;
 
 		mpMessageManager = NULL;
+	}
+
+
+	if (mpGraphicsSystem != NULL)
+	{
+		delete mpGraphicsSystem;
+
+		mpGraphicsSystem = NULL;
+	}
+
+	if (mpGraphicsBufferManager != NULL)
+	{
+		delete mpGraphicsBufferManager;
+
+		mpGraphicsBufferManager = NULL;
+	}
+
+	if (mpSpriteManager != NULL)
+	{
+		delete mpSpriteManager;
+
+		mpSpriteManager = NULL;
 	}
 }
 
