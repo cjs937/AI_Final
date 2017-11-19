@@ -5,6 +5,12 @@
 const int FPS = 60;
 const int FPS_MS = 1000 / FPS;
 
+//default sprite IDs
+const IDType BACKGROUND_SPRITE_ID = 0;
+const IDType PLAYER_ICON_SPRITE_ID = 1;
+const IDType AI_ICON_SPRITE_ID = 2;
+const IDType WALL_SPRITE_ID = 3;
+const IDType CIRCLE_SPRITE_ID = 4;
 
 class Timer;
 class SaveSystem;
@@ -39,8 +45,11 @@ public:
 	//Getters
 	SaveSystem* getSaveSystem() { return mpSaveSystem; };
 	GameMessageManager* getMessageManager() { return mpMessageManager; };
-	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
+	GraphicsSystem* getGraphicsSystem() { return mpGraphicsSystem; };
+	GraphicsBufferManager* getGraphicsBufferManager() { return mpGraphicsBufferManager; };
+	SpriteManager* getSpriteManager() { return mpSpriteManager; };
 
+	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
 	float getDeltaTime();
 	float getCurrentTime();
 

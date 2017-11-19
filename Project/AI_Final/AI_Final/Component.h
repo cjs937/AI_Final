@@ -18,7 +18,6 @@ public:
 	virtual void update(float _dt) {};
 	virtual void draw() {};
 
-
 	ComponentType getType() { return mType; };
 
 protected:

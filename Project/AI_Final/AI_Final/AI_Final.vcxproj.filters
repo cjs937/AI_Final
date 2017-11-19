@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{d3772f23-6b11-4287-99e0-08da92dde865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Units">
+      <UniqueIdentifier>{0d033f0a-bdfe-4a4e-8e19-8e29c37f5e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Units">
+      <UniqueIdentifier>{fe515576-996d-46c7-b39f-20b0a01b8bec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,6 +97,15 @@
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinematic.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicUnit.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitManager .cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,6 +171,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinematic.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicUnit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="Steering.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitManager.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
