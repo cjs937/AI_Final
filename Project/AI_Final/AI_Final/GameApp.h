@@ -1,6 +1,7 @@
 #pragma once
 #include "Trackable.h"
 #include "allegro5\allegro_font.h"
+#include "Defines.h"
 
 const int FPS = 60;
 const int FPS_MS = 1000 / FPS;

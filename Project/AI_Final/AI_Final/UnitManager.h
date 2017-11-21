@@ -17,7 +17,7 @@ enum UnitType
 const float DEFAULT_MAX_VEL = 100.0f;
 const float DEFAULT_MAX_ROTATION = 100.0f;//0.5f;
 
-
+enum ComponentType;
 class Component;
 class TerrainUnit;
 class KinematicUnit;

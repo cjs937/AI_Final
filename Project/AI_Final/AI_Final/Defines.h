@@ -1,18 +1,11 @@
 #pragma once
 #include <string>
-#include "GameApp.h"
-#include "GraphicsSystem.h"
-#include "GraphicsBufferManager.h"
-#include "SpriteManager.h"
-#include "Timer.h"
-#include "SaveSystem.h"
-#include "GameMessageManager.h"
 
 typedef int IDType;
 typedef std::string IDDescriptor;
 
-const IDType INVALID_ID = -1;
-const IDType HIGHEST_ID = 9999;
+static const IDType INVALID_ID = -1;
+static const IDType HIGHEST_ID = 9999;
 
 #define GAME gpGameApp
 #define MESSAGE_MANAGER gpGameApp->getMessageManager()
@@ -20,3 +13,11 @@ const IDType HIGHEST_ID = 9999;
 #define SAVE_SYSTEM gpGameApp->getSaveSystem()
 #define BUFFER_MANAGER gpGameApp->getGraphicsBufferManager()
 #define SPRITE_MANAGER gpGameApp->getSpriteManager()
+
+#include "GameApp.h"
+#include "GraphicsSystem.h"
+#include "GraphicsBufferManager.h"
+#include "SpriteManager.h"
+#include "Timer.h"
+#include "SaveSystem.h"
+#include "GameMessageManager.h"
