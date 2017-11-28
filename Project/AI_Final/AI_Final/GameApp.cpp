@@ -15,6 +15,7 @@
 #include "SpriteManager.h"
 #include "GraphicsBuffer.h"
 #include "Sprite.h"
+#include "UnitManager.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -39,6 +40,8 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpSpriteManager = new SpriteManager();
 
+	mpUnitManager = new UnitManager();
+
 	mpLoopTimer = new Timer();
 
 	mpGraphicsSystem->init(_screenWidth, _screenHeight);
@@ -52,6 +55,8 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 	}
 
 	mpLoopTimer->start();
+
+	mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0);
 }
 
 void GameApp::installAllegro()
@@ -124,7 +129,11 @@ bool GameApp::updateLoop()
 {
 	startLoop();
 
+	float dt = getDeltaTime();
+
 	//[process loop here]
+
+	mpUnitManager->update(dt);
 
 	draw();
 
@@ -136,6 +145,7 @@ void GameApp::draw()
 	mpGraphicsSystem->getBackBuffer()->clear();
 
 	//[draw things here]
+	mpUnitManager->draw(mpGraphicsSystem->getBackBuffer());
 
 	mpGraphicsSystem->swap();
 }

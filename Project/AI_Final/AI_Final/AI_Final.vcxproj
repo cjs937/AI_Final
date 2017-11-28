@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIUnit.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="UnitManager .cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIUnit.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Defines.h" />

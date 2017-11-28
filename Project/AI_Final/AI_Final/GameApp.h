@@ -19,6 +19,7 @@ class GameMessageManager;
 class GraphicsSystem;
 class GraphicsBufferManager;
 class SpriteManager;
+class UnitManager;
 
 class GameApp : public Trackable
 {
@@ -49,6 +50,7 @@ public:
 	GraphicsSystem* getGraphicsSystem() { return mpGraphicsSystem; };
 	GraphicsBufferManager* getGraphicsBufferManager() { return mpGraphicsBufferManager; };
 	SpriteManager* getSpriteManager() { return mpSpriteManager; };
+	UnitManager* getUnitManager() { return mpUnitManager; };
 
 	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
 	float getDeltaTime();
@@ -62,6 +64,7 @@ private:
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;
 	SpriteManager* mpSpriteManager;
+	UnitManager* mpUnitManager;
 	ALLEGRO_FONT* mpDefaultFont;
 
 	bool mContinueLoop = true;

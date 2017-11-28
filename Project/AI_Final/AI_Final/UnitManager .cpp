@@ -6,7 +6,8 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Vector2D.h"
-#include "KinematicUnit.h"
+//#include "KinematicUnit.h"
+#include "AIUnit.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
@@ -26,17 +27,17 @@ UnitManager::UnitManager()
 
 void UnitManager::initBuffersAndSprites()
 {
-	mBufferIDs.insert(IDPair(PLAYER, gpGameApp->getGraphicsBufferManager()->loadBuffer("arrow.bmp")));
+	//mBufferIDs.insert(IDPair(PLAYER, gpGameApp->getGraphicsBufferManager()->loadBuffer("arrow.bmp")));
 	mBufferIDs.insert(IDPair(AI, gpGameApp->getGraphicsBufferManager()->loadBuffer("enemy-arrow.bmp")));
-	mBufferIDs.insert(IDPair(WALL, gpGameApp->getGraphicsBufferManager()->loadBuffer("wall.bmp")));
-	mBufferIDs.insert(IDPair(CIRCLE, gpGameApp->getGraphicsBufferManager()->loadBuffer("circle.bmp")));
+	//mBufferIDs.insert(IDPair(WALL, gpGameApp->getGraphicsBufferManager()->loadBuffer("wall.bmp")));
+	//mBufferIDs.insert(IDPair(CIRCLE, gpGameApp->getGraphicsBufferManager()->loadBuffer("circle.bmp")));
 
 
-	GraphicsBuffer* pPlayerBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(PLAYER));
-	if (pPlayerBuffer != NULL)
-	{
-		gpGameApp->getSpriteManager()->createAndManageSprite(PLAYER_ICON_SPRITE_ID, pPlayerBuffer, 0, 0, pPlayerBuffer->getWidth(), pPlayerBuffer->getHeight());
-	}
+	//GraphicsBuffer* pPlayerBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(PLAYER));
+	//if (pPlayerBuffer != NULL)
+	//{
+	//	gpGameApp->getSpriteManager()->createAndManageSprite(PLAYER_ICON_SPRITE_ID, pPlayerBuffer, 0, 0, pPlayerBuffer->getWidth(), pPlayerBuffer->getHeight());
+	//}
 
 	GraphicsBuffer* pAIBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(AI));
 	if (pAIBuffer != NULL)
@@ -44,17 +45,17 @@ void UnitManager::initBuffersAndSprites()
 		gpGameApp->getSpriteManager()->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, pAIBuffer->getWidth(), pAIBuffer->getHeight());
 	}
 
-	GraphicsBuffer* wallBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(WALL));
-	if (wallBuffer != NULL)
-	{
-		gpGameApp->getSpriteManager()->createAndManageSprite(WALL_SPRITE_ID, wallBuffer, 0, 0, wallBuffer->getWidth(), wallBuffer->getHeight());
-	}
+	//GraphicsBuffer* wallBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(WALL));
+	//if (wallBuffer != NULL)
+	//{
+	//	gpGameApp->getSpriteManager()->createAndManageSprite(WALL_SPRITE_ID, wallBuffer, 0, 0, wallBuffer->getWidth(), wallBuffer->getHeight());
+	//}
 
-	GraphicsBuffer* circleBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(CIRCLE));
-	if (circleBuffer != NULL)
-	{
-		gpGameApp->getSpriteManager()->createAndManageSprite(CIRCLE_SPRITE_ID, wallBuffer, 0, 0, circleBuffer->getWidth(), circleBuffer->getHeight());
-	}
+	//GraphicsBuffer* circleBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(CIRCLE));
+	//if (circleBuffer != NULL)
+	//{
+	//	gpGameApp->getSpriteManager()->createAndManageSprite(CIRCLE_SPRITE_ID, wallBuffer, 0, 0, circleBuffer->getWidth(), circleBuffer->getHeight());
+	//}
 }
 
 IDType UnitManager::getBufferID(UnitType _unitType)
@@ -186,7 +187,16 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	KUInitData unitData(newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
 
-	newUnit = new KinematicUnit(unitData);
+	switch (_type)
+	{
+	case(AI):
+		newUnit = new AIUnit(unitData);
+		break;
+
+	default:
+		newUnit = new KinematicUnit(unitData);
+		break;
+	}
 
 	mMapList[_type]->insert(mapPair(newID, newUnit));
 

@@ -9,7 +9,7 @@ using namespace std;
 Steering gNullSteering( gZeroVector2D, 0.0f );
 
 
-KUInitData::KUInitData(int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity = 1.0f, float _maxAcceleration = 1.0f)
+KUInitData::KUInitData(int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity, float _maxAcceleration)
 	:ID(_ID), pSprite(_pSprite), position(_position), orientation(_orientation), velocity(_velocity), rotationVel(_rotationVel), maxVelocity(_maxVelocity), maxAcceleration(_maxAcceleration)
 {}
 
