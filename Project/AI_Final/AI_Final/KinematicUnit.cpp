@@ -8,13 +8,21 @@ using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );
 
-KinematicUnit::KinematicUnit( int _ID, Sprite *pSprite, const Vector2D &position, float orientation, const Vector2D &velocity, float rotationVel, float maxVelocity, float maxAcceleration)
-:Kinematic( position, orientation, velocity, rotationVel )
-,mpSprite(pSprite)
+
+KUInitData::KUInitData(int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity = 1.0f, float _maxAcceleration = 1.0f)
+	:ID(_ID), pSprite(_pSprite), position(_position), orientation(_orientation), velocity(_velocity), rotationVel(_rotationVel), maxVelocity(_maxVelocity), maxAcceleration(_maxAcceleration)
+{}
+
+KUInitData::~KUInitData() {}
+
+
+KinematicUnit::KinematicUnit(KUInitData const & _data )
+:Kinematic( _data.position, _data.orientation, _data.velocity, _data.rotationVel )
+,mpSprite(_data.pSprite)
 ,mpCurrentSteering(NULL)
-,mMaxVelocity(maxVelocity)
-,mMaxAcceleration(maxAcceleration)
-,mUnitID(_ID)
+,mMaxVelocity(_data.maxVelocity)
+,mMaxAcceleration(_data.maxAcceleration)
+,mUnitID(_data.ID)
 {
 }
 

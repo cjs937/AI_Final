@@ -19,12 +19,30 @@ extern Steering gNullSteering;//global object - can point to it for a "NULL" Ste
 
 //minmimum forward speed a unit has to have inorder to rotate 
 //(keeps unit from spinning in place after stopping
+
+
+struct KUInitData
+{
+	KUInitData(int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity = 1.0f, float _maxAcceleration = 1.0f);
+
+	~KUInitData();
+
+	int ID;
+	Sprite* pSprite;
+	Vector2D position;
+	float orientation;
+	Vector2D velocity;
+	float rotationVel;
+	float maxVelocity;
+	float maxAcceleration;
+};
+
 const float MIN_VELOCITY_TO_TURN_SQUARED = 1.0f;
 
 class KinematicUnit: public Kinematic
 {
 public:
-	KinematicUnit( int _ID, Sprite* pSprite, const Vector2D& position, float orientation, const Vector2D& velocity, float rotationVel, float maxVelocity = 1.0f, float maxAcceleration = 1.0f );
+	KinematicUnit( KUInitData const & _data );
 	~KinematicUnit();
 
 	//getters and setters

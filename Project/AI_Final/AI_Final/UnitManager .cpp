@@ -184,7 +184,9 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	KinematicUnit* newUnit;
 
-	newUnit = new KinematicUnit(newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
+	KUInitData unitData(newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
+
+	newUnit = new KinematicUnit(unitData);
 
 	mMapList[_type]->insert(mapPair(newID, newUnit));
 
