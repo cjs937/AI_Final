@@ -11,6 +11,7 @@
 #include "Sprite.h"
 #include "SpriteManager.h"
 #include "Vector2D.h"
+#include "assetLoader.h"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ Editor::Editor() : Game()
 {
 	mpGrid = NULL;
 	mpGridVisualizer = NULL;
+	mpLoader = NULL;
 	mTypeOfObject = BLOCKING_VALUE; // set the default draw to a "wall"
 	mCounter = 0; // initialize this to nothing will use to track current sprite drawn
 }
@@ -38,35 +40,15 @@ bool Editor::init()
 	bool retVal = Game::init();
 	if( retVal == false )
 	{
-
 		return false;
 	}
 
 	mpGrid = new Grid(mpGraphicsSystem->getWidth(), mpGraphicsSystem->getHeight(), GRID_SQUARE_SIZE);
+	mpLoader = new AssetLoader();
 
-	//load buffers
-	mpGraphicsBufferManager->loadBuffer( BACKGROUND_ID, SPRITE_PATH + "wallpaper.bmp");
-	mpGraphicsBufferManager->loadBuffer(SPAWN_LOCATION_ID, SPRITE_PATH + "spawnlocation.bmp");
-	mpGraphicsBufferManager->loadBuffer(WALL_ID, SPRITE_PATH + "wall.bmp");
+	mpLoader->loadAssets();
+	mCounter = mpLoader->getAssetIdMax();
 
-	//setup sprites
-
-	//background
-	GraphicsBuffer* pBackGroundBuffer = mpGraphicsBufferManager->getBuffer( BACKGROUND_ID );
-	if( pBackGroundBuffer != NULL )
-		mpSpriteManager->createAndManageSprite( BACKGROUND_SPRITE_ID, pBackGroundBuffer, 0, 0, pBackGroundBuffer->getWidth(), pBackGroundBuffer->getHeight() );
-
-	//spawners
-	GraphicsBuffer* pSpawnPointer = mpGraphicsBufferManager->getBuffer(SPAWN_LOCATION_ID);
-	if (pSpawnPointer != NULL)
-		mpSpriteManager->createAndManageSprite(SPAWN_SPRITE_ID, pSpawnPointer, 0, 0, pSpawnPointer->getWidth(), pSpawnPointer->getHeight());
-
-	//walls
-	GraphicsBuffer* pWallPointer = mpGraphicsBufferManager->getBuffer(WALL_ID);
-	if (pWallPointer != NULL)
-		mpSpriteManager->createAndManageSprite(WALL_SPRITE_ID, pWallPointer, 0, 0, pWallPointer->getWidth(), pWallPointer->getHeight());
-	mCounter = 3;
-	
 	mpMasterTimer->start();
 	return true;
 }
@@ -75,6 +57,9 @@ void Editor::cleanup()
 {
 	delete mpGrid;
 	mpGrid = NULL;
+
+	delete mpLoader;
+	mpLoader = NULL;
 }
 
 void Editor::beginLoop()
@@ -110,8 +95,6 @@ void Editor::processLoop()
 	mPreviousKeyState = keyState;
 	mPreviousMouseState = mouseState;
 
-	//copy to back buffer
-	//mpLevelEditor->draw(*(mpGraphicsSystem->getBackBuffer()));
 	draw();
 
 	//should be last thing in processLoop
@@ -136,7 +119,6 @@ void Editor::draw()
 void Editor::drawLevel(Vector2D pos, Sprite* spriteToDraw)
 {
 	spriteToDraw->drawScaled(*(mpGraphicsSystem->getBackBuffer()), pos.getX(), pos.getY(), mpGrid->getGridWidth(), mpGrid->getGridWidth(), 0);
-	//spriteToDraw->draw(*(mpGraphicsSystem->getBackBuffer()), pos.getX(), pos.getY());
 }
 
 bool Editor::endLoop()

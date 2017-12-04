@@ -18,6 +18,7 @@ class Sprite;
 class Grid;
 class GridVisualizer;
 class GraphicsBuffer;
+class AssetLoader;
 
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
@@ -51,6 +52,8 @@ public:
 private:
 	Grid* mpGrid;
 	GridVisualizer* mpGridVisualizer;
+
+	AssetLoader* mpLoader;
 
 	int mTypeOfObject, mCounter;
 	IDType mpWallIconBufferID;

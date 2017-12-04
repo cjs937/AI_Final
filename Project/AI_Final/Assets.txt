@@ -1,0 +1,6 @@
+sprite
+../sprites/wallpaper.bmp
+sprite
+../sprites/spawnlocation.bmp
+sprite
+../sprites/wall.bmp
