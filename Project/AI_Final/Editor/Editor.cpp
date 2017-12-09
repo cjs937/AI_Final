@@ -24,6 +24,8 @@ Editor::Editor() : Game()
 	mpLoader = NULL;
 	mTypeOfObject = BLOCKING_VALUE; // set the default draw to a "wall"
 	mCounter = 0; // initialize this to nothing will use to track current sprite drawn
+	mLevelCounter = 0;
+	mCurrentLevel = 0;
 }
 
 Editor::~Editor()
@@ -44,6 +46,7 @@ bool Editor::init()
 
 	mpLoader->loadAssets();
 	mCounter = mpLoader->getAssetIdMax();
+	mLevelCounter = mpLoader->getLevelIdMax();
 
 	mpMasterTimer->start();
 	return true;
@@ -53,7 +56,6 @@ void Editor::cleanup()
 {
 	delete mpGrid;
 	mpGrid = NULL;
-
 	delete mpLoader;
 	mpLoader = NULL;
 }
@@ -79,13 +81,27 @@ void Editor::processLoop()
 	{
 		mpGrid->setValueAtPixelXY( mouseState.x, mouseState.y, CLEAR_VALUE );
 	}
-	if (al_key_down(&keyState, ALLEGRO_KEY_Q) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_Q)) // pressed p button
+	if (al_key_down(&keyState, ALLEGRO_KEY_Q) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_Q)) // pressed q button
 	{
 		setTypeOfObject(1);
 	}
-	if (al_key_down(&keyState, ALLEGRO_KEY_E) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_E)) // pressed w button
+	if (al_key_down(&keyState, ALLEGRO_KEY_E) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_E)) // pressed e button
 	{
 		setTypeOfObject(-1);
+	}
+	if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_RIGHT)) // pressed => button
+	{
+		setCurrentLevel(1);
+		loadLevel();
+	}
+	if (al_key_down(&keyState, ALLEGRO_KEY_LEFT) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_LEFT)) // pressed <= button
+	{
+		setCurrentLevel(-1);
+		loadLevel();
+	}
+	if (al_key_down(&keyState, ALLEGRO_KEY_S)) // pressed S button
+	{
+		saveLevel();
 	}
 
 	mPreviousKeyState = keyState;
@@ -131,6 +147,15 @@ void Editor::setTypeOfObject(int var)
 		mTypeOfObject = mCounter - 1;
 }
 
+void Editor::setCurrentLevel(int var)
+{
+	mCurrentLevel += var;
+	if (mCurrentLevel >= mLevelCounter)
+		mCurrentLevel = 0;
+	if (mCurrentLevel < 0)
+		mCurrentLevel = mLevelCounter - 1;
+}
+
 void Editor::saveGrid( ofstream& theStream )
 {
 	mpGrid->save( theStream );
@@ -139,4 +164,33 @@ void Editor::saveGrid( ofstream& theStream )
 void Editor::loadGrid( std::ifstream& theStream )
 {
 	mpGrid->load(theStream);
+}
+
+void Editor::loadLevel()
+{
+	//std::string* levelInput;  
+	Editor* pEditor = dynamic_cast<Editor*>(gpGame);
+	if (pEditor != NULL)
+	{
+		//levelInput = 
+		ifstream theStream(mpLoader->getLevelName(mCurrentLevel));
+		pEditor->loadGrid(theStream);
+		theStream.close();
+		//pEditor->getGridVisualizer()->setModified();
+		cout << "Grid loaded!\n";
+		Sleep(1000);//very bogus
+	}
+}
+
+void Editor::saveLevel()
+{
+	Editor* pEditor = dynamic_cast<Editor*>(gpGame);
+	if (pEditor != NULL)
+	{
+		ofstream theStream(mpLoader->getLevelName(mCurrentLevel));
+		pEditor->saveGrid(theStream);
+		theStream.close();
+		cout << "Grid saved!\n";
+		Sleep(1000);//very bogus
+	}
 }

@@ -46,16 +46,25 @@ public:
 	void setTypeOfObject(int var);
 	inline int getTypeOffObject() const { return mTypeOfObject; };
 
+	//sets the current level
+	void setCurrentLevel(int var);
+	inline int getCurrentLevel() const { return mCurrentLevel; };
+
     //draw level
 	void draw();
 	void drawLevel(Vector2D pos, Sprite* spriteToDraw);
+
+	//loadLevel
+	void loadLevel();
+	void saveLevel();
+
 private:
 	Grid* mpGrid;
 	GridVisualizer* mpGridVisualizer;
 
 	AssetLoader* mpLoader;
 
-	int mTypeOfObject, mCounter;
+	int mTypeOfObject, mCounter, mCurrentLevel, mLevelCounter;
 	IDType mpWallIconBufferID;
 	IDType mpSpawnIconBufferID;
 	ALLEGRO_KEYBOARD_STATE mPreviousKeyState;

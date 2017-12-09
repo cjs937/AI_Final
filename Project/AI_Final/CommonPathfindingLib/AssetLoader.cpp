@@ -5,16 +5,16 @@
 #include "GraphicsBuffer.h"
 
 AssetLoader::AssetLoader()
-	//: mpLevels(NULL)
-	//, mpCollisions(NULL)
 {
 	mAssetId = 0;
+	mLevelId = 0;
+	mCountAssets = 1;
 }
 
 AssetLoader::~AssetLoader()
 {
-	clean();
-	cleanCollisions();
+	//clean();
+	//cleanCollisions();
 }
 
 void AssetLoader::loadAssets()
@@ -29,18 +29,23 @@ void AssetLoader::loadAssets()
 	getline(fin, info);
 	while (!fin.eof())
 	{
-		if (info == SPRITE)
+		if (info == END_OF_LEVEL_ASSETS)
+		{
+			mCountAssets = 0;
+		}
+		else if (info == SPRITE)
 		{
 			getline(fin, pathToAsset);
 			getline(fin, assetType);
 			spriteLoad(pathToAsset, mAssetId, assetType);
-			mAssetId += 1;
+			mAssetId += mCountAssets;
 		}
 		else if (info == LEVEL)
 		{
 			getline(fin, pathToAsset);
 			getline(fin, nameOfAsset);
 			levelLoad(nameOfAsset, pathToAsset);
+			mLevelId++;
 		}
 		getline(fin, info);
 	}
@@ -60,15 +65,15 @@ void AssetLoader::spriteLoad(std::string assetPath, int value, std::string typeO
 
 void AssetLoader::levelLoad(std::string levelName, std::string assetPath)
 {
-
+	addLevelName(assetPath);
 }
 
-void AssetLoader::addLevelName(std::string* levelName)
+void AssetLoader::addLevelName(std::string levelName)
 {
 	mpLevels.push_back(levelName);
 }
 
-std::string* AssetLoader::getLevelName(int indexPos)
+std::string AssetLoader::getLevelName(int indexPos)
 {
 	return mpLevels.at(indexPos);
 }
@@ -84,13 +89,13 @@ void AssetLoader::deleteUnit(unsigned int indexPos)
 {
 	if (indexPos < 0 || indexPos >= mpLevels.size())
 		return;
-	delete mpLevels.at(indexPos);
+	//delete mpLevels.at(indexPos);
 }
 
 void AssetLoader::cleanCollisions()
 {
 	for (unsigned int i = 0; i < mpCollisions.size(); ++i)
-		deleteUnit(i);
+		deleteCollision(i);
 	mpCollisions.clear();
 }
 
