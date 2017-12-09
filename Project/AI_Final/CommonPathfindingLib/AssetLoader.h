@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "Trackable.h"
+#include "Sprite.h"
 
 #include <fstream>
 #include <string>
@@ -48,9 +49,13 @@ public:
 	void cleanCollisions();
 	void deleteCollision(unsigned int indexPos);
 
+	Sprite* getAssetName(std::string searchString);
+	void setAssetNames(std::string setValue, int spriteValue);
+
 private:
 	std::vector<std::string> mpLevels;
 	std::vector<int*> mpCollisions;
+	std::vector<std::string> mAssetNames;
 	int mAssetId, mLevelId, mCountAssets, mTotalAssets;
 };
 
