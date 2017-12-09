@@ -11,7 +11,7 @@ public:
 	~StateHandler();
 
 	virtual void update();
-	void changeState(State* _newState, bool _exitState = true);
+	void changeState(State & _newState, bool _exitCurrentState = true);
 
 private:
 	State* mCurrentState;

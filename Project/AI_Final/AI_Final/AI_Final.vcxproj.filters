@@ -49,6 +49,9 @@
     <Filter Include="Header Files\Units">
       <UniqueIdentifier>{fe515576-996d-46c7-b39f-20b0a01b8bec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\State Machine\PlayerStates">
+      <UniqueIdentifier>{47ddca98-4d33-4e8a-97eb-cb1e507e5973}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="AIUnit.h">
       <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUnit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files\State Machine\PlayerStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

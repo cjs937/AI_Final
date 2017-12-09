@@ -154,6 +154,8 @@
     <ClInclude Include="KinematicUnit.h" />
     <ClInclude Include="PausableComponent.h" />
     <ClInclude Include="PauseSystem.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerUnit.h" />
     <ClInclude Include="QuitGameMessage.h" />
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />

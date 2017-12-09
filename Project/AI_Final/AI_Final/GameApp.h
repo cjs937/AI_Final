@@ -21,6 +21,8 @@ class GraphicsBufferManager;
 class SpriteManager;
 class UnitManager;
 class InputSystem;
+class AssetLoader;
+class DebugSystem;
 
 class GameApp : public Trackable
 {
@@ -59,6 +61,7 @@ public:
 
 
 private:
+	AssetLoader* mpLoader;
 	Timer* mpLoopTimer;
 	SaveSystem* mpSaveSystem;
 	GameMessageManager* mpMessageManager;
@@ -67,6 +70,8 @@ private:
 	SpriteManager* mpSpriteManager;
 	UnitManager* mpUnitManager;
 	InputSystem* mpInputSystem;
+	DebugSystem* mpDebugSystem;
+
 	ALLEGRO_FONT* mpDefaultFont;
 
 	bool mContinueLoop = true;
@@ -74,6 +79,7 @@ private:
 	float mLoopStartTime;
 
 	void installAllegro();
+	void updateSystems();
 };
 
 extern GameApp* gpGameApp;

@@ -5,7 +5,8 @@ enum ComponentType
 {
 	INVALID_COMPONENT = -1,
 	SAVEABLE,
-	PAUSABLE
+	PAUSABLE,
+	HITBOX
 };
 
 
