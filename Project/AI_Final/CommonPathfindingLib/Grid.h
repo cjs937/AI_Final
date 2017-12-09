@@ -9,6 +9,9 @@ class Vector2D;
 const int CLEAR_VALUE = 0;
 const int BLOCKING_VALUE = 1;
 
+class GraphicsBuffer;
+class Sprite;
+
 class Grid:public Trackable
 {
 public:
@@ -35,6 +38,9 @@ public:
 
 	void save( std::ofstream& file );
 	void load( std::ifstream& file );
+
+	void draw(GraphicsBuffer* _backBuffer);
+	void drawLevel(Vector2D _pos, Sprite* _spriteToDraw, GraphicsBuffer* _backBuffer);
 
 private:
 	int* mpValues;

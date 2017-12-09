@@ -52,7 +52,6 @@ public:
 
     //draw level
 	void draw();
-	void drawLevel(Vector2D pos, Sprite* spriteToDraw);
 
 	//loadLevel
 	void loadLevel();

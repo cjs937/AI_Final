@@ -8,12 +8,15 @@ typedef std::string IDDescriptor;
 static const IDType INVALID_ID = -1;
 static const IDType HIGHEST_ID = 9999;
 
+static const IDDescriptor ERROR_STRING = "error";
+
 #define GAME gpGameApp
 #define MESSAGE_MANAGER gpGameApp->getMessageManager()
 #define GRAPHICS_SYSTEM gpGameApp->getGraphicsSystem()
 #define SAVE_SYSTEM gpGameApp->getSaveSystem()
 #define BUFFER_MANAGER gpGameApp->getGraphicsBufferManager()
 #define SPRITE_MANAGER gpGameApp->getSpriteManager()
+#define UNIT_MANAGER gpGameApp->getUnitManager()
 
 #include "../AI_Final/GameApp.h"
 #include "GraphicsSystem.h"
@@ -22,3 +25,4 @@ static const IDType HIGHEST_ID = 9999;
 #include "Timer.h"
 #include "../AI_Final/SaveSystem.h"
 #include "../AI_Final/GameMessageManager.h"
+#include "../AI_Final/UnitManager.h"

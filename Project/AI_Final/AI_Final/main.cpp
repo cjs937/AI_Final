@@ -4,7 +4,6 @@
 
 int main()
 {
-
 	MemoryTracker memoryTracker;
 
 	bool contiueLoop = true;
@@ -16,6 +15,10 @@ int main()
 	{
 		contiueLoop = gpGameApp->updateLoop();
 	}
+
+	delete gpGameApp;
+
+	gpGameApp = NULL;
 
 	gMemoryTracker.reportAllocations(std::cout);
 

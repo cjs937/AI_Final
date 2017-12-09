@@ -6,15 +6,32 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Vector2D.h"
-//#include "KinematicUnit.h"
 #include "AIUnit.h"
+#include "PlayerUnit.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
 typedef pair<UnitType, IDType> IDPair;
 
-UnitManager::UnitManager()
+
+SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), aiSpeed(_aiSpeed)
+{}
+
+SharedUnitData::~SharedUnitData()
+{}
+
+std::string SharedUnitData::getSerializedData()
 {
+	return "";
+}
+
+void SharedUnitData::loadData(std::ifstream &_fin)
+{}
+
+UnitManager::UnitManager(SharedUnitData* _saveData) : mPlayerID(INVALID_ID)
+{
+	mSaveComponent = new SaveableComponent(_saveData);
 
 	mUnitMaxVelocity = DEFAULT_MAX_VEL;
 	mUnitMaxRotationVelocity = DEFAULT_MAX_ROTATION;
@@ -25,37 +42,21 @@ UnitManager::UnitManager()
 	mAvailableIDs.push(0);
 }
 
+SharedUnitData* UnitManager::getUnitData()
+{
+	return static_cast<SharedUnitData*>(mSaveComponent->getSaveData());
+}
+
+
 void UnitManager::initBuffersAndSprites()
 {
-	//mBufferIDs.insert(IDPair(PLAYER, gpGameApp->getGraphicsBufferManager()->loadBuffer("arrow.bmp")));
 	mBufferIDs.insert(IDPair(AI, gpGameApp->getGraphicsBufferManager()->loadBuffer("enemy-arrow.bmp")));
-	//mBufferIDs.insert(IDPair(WALL, gpGameApp->getGraphicsBufferManager()->loadBuffer("wall.bmp")));
-	//mBufferIDs.insert(IDPair(CIRCLE, gpGameApp->getGraphicsBufferManager()->loadBuffer("circle.bmp")));
-
-
-	//GraphicsBuffer* pPlayerBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(PLAYER));
-	//if (pPlayerBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(PLAYER_ICON_SPRITE_ID, pPlayerBuffer, 0, 0, pPlayerBuffer->getWidth(), pPlayerBuffer->getHeight());
-	//}
 
 	GraphicsBuffer* pAIBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(AI));
 	if (pAIBuffer != NULL)
 	{
 		gpGameApp->getSpriteManager()->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, pAIBuffer->getWidth(), pAIBuffer->getHeight());
 	}
-
-	//GraphicsBuffer* wallBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(WALL));
-	//if (wallBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(WALL_SPRITE_ID, wallBuffer, 0, 0, wallBuffer->getWidth(), wallBuffer->getHeight());
-	//}
-
-	//GraphicsBuffer* circleBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(CIRCLE));
-	//if (circleBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(CIRCLE_SPRITE_ID, wallBuffer, 0, 0, circleBuffer->getWidth(), circleBuffer->getHeight());
-	//}
 }
 
 IDType UnitManager::getBufferID(UnitType _unitType)
@@ -79,12 +80,12 @@ UnitManager::~UnitManager()
 
 	mMapList.clear();
 
-	//for (int i = 0; i < mTerrain.size(); ++i)
-	//{
-	//	delete mTerrain[i];
+	if (mSaveComponent != NULL)
+	{
+		delete mSaveComponent;
 
-	//	mTerrain[i] = NULL;
-	//}
+		mSaveComponent = NULL;
+	}
 }
 
 std::map<int, KinematicUnit*>* UnitManager::getUnitMap(UnitType _type)
@@ -135,11 +136,6 @@ void UnitManager::update(float _dt)
 			j->second->update(_dt);
 		}
 	}
-
-	//for (int i = 0; i < mTerrain.size(); ++i)
-	//{
-	//	mTerrain[i]->update(_dt);
-	//}
 }
 
 void UnitManager::draw(GraphicsBuffer* _buffer)
@@ -151,18 +147,13 @@ void UnitManager::draw(GraphicsBuffer* _buffer)
 			j->second->draw(_buffer);
 		}
 	}
-
-	//for (int i = 0; i < mTerrain.size(); ++i)
-	//{
-	//	mTerrain[i]->draw(_buffer);
-	//}
 }
 
 
 
 KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, float orientation, const Vector2D& velocity, float rotationVel, float maxVelocity, float maxAcceleration)
 {
-	Sprite* unitSprite = getUnitSprite(_type);
+	Sprite* unitSprite = getUnitSprite(AI);
 
 	if (unitSprite == NULL)
 	{
@@ -180,6 +171,9 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	mAvailableIDs.pop();
 
+	if (_type == PLAYER)
+		mPlayerID = newID;
+
 	if (mAvailableIDs.empty())
 		mAvailableIDs.push(newID + 1);
 
@@ -189,6 +183,9 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	switch (_type)
 	{
+	case(PLAYER):
+		newUnit = new PlayerUnit(getUnitData()->playerSpeed, unitData);
+		break;
 	case(AI):
 		newUnit = new AIUnit(unitData);
 		break;
@@ -259,17 +256,6 @@ bool UnitManager::removeUnit(int _ID)
 	return false;
 }
 
-//bool UnitManager::tagExists(int _ID)
-//{
-//	for (auto i = mMapList.begin(); i != mMapList.end(); ++i)
-//	{
-//		if (i->second->find(_ID) == i->second->end())
-//			return true;
-//	}
-//
-//	return false;
-//}
-
 void UnitManager::removeRandomUnit()
 {
 	if (mMapList.size() == 1)
@@ -337,58 +323,10 @@ Component* UnitManager::addComponent(Component* _component, KinematicUnit* _unit
 	return _component;
 }
 
-//void UnitManager::spawnCircle(Vector2D _position)
-//{
-//	GraphicsBuffer* circleBuffer = gpGame->getGraphicsBufferManager()->getBuffer(getBufferID(CIRCLE));
-//	float radius = circleBuffer->getWidth() / 2;
-//
-//	TerrainUnit* circle = new EllipseTerrain(getUnitSprite(CIRCLE), _position, radius);
-//
-//	mTerrain.push_back(circle);
-//}
+PlayerUnit* UnitManager::getPlayerUnit()
+{
+	if (mPlayerID == INVALID_ID)
+		return NULL;
 
-//void UnitManager::generateBorderWall(int _width, int _height)
-//{
-//	GraphicsBuffer* wallBuffer = gpGame->getGraphicsBufferManager()->getBuffer(getBufferID(WALL));
-//	int wallWidth = wallBuffer->getWidth();// / 2;
-//	int wallHeight = wallBuffer->getHeight();// / 2;
-//	float currentWidth = 0;//wallWidth / 2;
-//	float currentHeight = 0;//wallHeight / 2;
-//	bool topOrBottom = true;
-//	TerrainUnit* newWall = NULL;
-//
-//	while (currentHeight < _height)
-//	{
-//		newWall = new TerrainUnit(getUnitSprite(WALL), Vector2D(currentWidth, currentHeight));
-//
-//		mTerrain.push_back(newWall);
-//
-//		if (topOrBottom)
-//		{
-//			currentWidth += wallWidth;
-//
-//			while (currentWidth < _width - wallWidth)
-//			{
-//				TerrainUnit* newWall = new TerrainUnit(getUnitSprite(WALL), Vector2D(currentWidth, currentHeight));
-//
-//				mTerrain.push_back(newWall);
-//
-//				currentWidth += wallWidth;
-//			}
-//
-//			topOrBottom = false;
-//		}
-//
-//		currentWidth = _width - wallWidth;
-//
-//		newWall = new TerrainUnit(getUnitSprite(WALL), Vector2D(currentWidth, currentHeight));
-//
-//		mTerrain.push_back(newWall);
-//
-//		currentHeight += wallHeight;
-//		currentWidth = 0;
-//
-//		if (currentHeight + wallHeight >= _height)
-//			topOrBottom = true;
-//	}
-//}
+	return static_cast<PlayerUnit*>(getUnit(mPlayerID, PLAYER));
+}

@@ -59,9 +59,8 @@ public:
 
 	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
 	float getDeltaTime();
-	float getCurrentTime();
+	float getCurrentTime(); 
 
-	AIUnit* test;
 private:
 	AssetLoader* mpLoader;
 	Timer* mpLoopTimer;

@@ -44,7 +44,9 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpSpriteManager = new SpriteManager();
 
-	mpUnitManager = new UnitManager();
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f);
+
+	mpUnitManager = new UnitManager(unitData);
 
 	mpInputSystem = new InputSystem();
 
@@ -68,7 +70,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	test = static_cast<AIUnit*>(mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0));
+	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
 }
 
 void GameApp::installAllegro()
@@ -100,19 +102,21 @@ void GameApp::installAllegro()
 		fprintf(stderr, "failed to reserve samples!\n");
 	}
 
-	//should probably be done in the InputSystem!
 	if (!al_install_keyboard())
 	{
 		printf("Keyboard not installed!\n");
 	}
 
-	//should probably be done in the InputSystem!
 	if (!al_install_mouse())
 	{
 		printf("Mouse not installed!\n");
 	}
 
-	//should be somewhere else!
+	if (!al_init_primitives_addon())
+	{
+		printf("Primitives addon not added!\n");
+	}
+
 	al_init_font_addon();
 	if (!al_init_ttf_addon())
 	{
@@ -124,11 +128,6 @@ void GameApp::installAllegro()
 	if (mpDefaultFont == NULL)
 	{
 		printf("ttf font file not loaded properly!\n");
-	}
-
-	if (!al_init_primitives_addon())
-	{
-		printf("Primitives addon not added!\n");
 	}
 }
 
@@ -232,6 +231,13 @@ void GameApp::cleanup()
 		mpSpriteManager = NULL;
 	}
 
+	if (mpUnitManager != NULL)
+	{
+		delete mpUnitManager;
+
+		mpUnitManager = NULL;
+	}
+
 	if (mpInputSystem != NULL)
 	{
 		delete mpMessageManager;
@@ -244,6 +250,20 @@ void GameApp::cleanup()
 		delete mpDebugSystem;
 
 		mpInputSystem = NULL;
+	}
+
+	if (mpLoader != NULL)
+	{
+		delete mpLoader;
+
+		mpLoader = NULL;
+	}
+
+	if (mpDefaultFont != NULL)
+	{
+		al_destroy_font(mpDefaultFont);
+
+		mpDefaultFont = NULL;
 	}
 }
 

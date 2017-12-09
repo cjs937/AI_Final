@@ -18,9 +18,26 @@ void InputMessage::process()
 
 		break;
 	}
-	case ALLEGRO_KEY_SPACE:
+	case ALLEGRO_KEY_W:
+	case ALLEGRO_KEY_A:
+	case ALLEGRO_KEY_S:
+	case ALLEGRO_KEY_D:
 	{
-		newMessage = new MovePlayerMessage(Vector2D(0, 1));
+		if (mInputType == KEY_HOLD || mInputType == KEY_DOWN)
+		{
+			Vector2D direction = Vector2D(0, 0);
+
+			if (mKeyCode == ALLEGRO_KEY_W)
+				direction = Vector2D(0, -1);
+			else if (mKeyCode == ALLEGRO_KEY_A)
+				direction = Vector2D(-1, 0);
+			else if (mKeyCode == ALLEGRO_KEY_S)
+				direction = Vector2D(0, 1);
+			else
+				direction = Vector2D(1, 0);
+
+			newMessage = new MovePlayerMessage(direction);
+		}
 
 		break;
 	}

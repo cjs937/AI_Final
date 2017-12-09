@@ -55,7 +55,7 @@ void SaveSystem::loadFromFile(std::string _fileName)
 			//reads first line to find what type of data to parse
 			switch(currentType)
 			{
-			case(GAME):
+			case(GAME_APP):
 				//create game SaveData object
 
 				//call loadData on object
