@@ -16,6 +16,7 @@
 #include "GraphicsBuffer.h"
 #include "Sprite.h"
 #include "UnitManager.h"
+#include "InputSystem.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -41,6 +42,8 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 	mpSpriteManager = new SpriteManager();
 
 	mpUnitManager = new UnitManager();
+
+	mpInputSystem = new InputSystem();
 
 	mpLoopTimer = new Timer();
 
@@ -131,7 +134,9 @@ bool GameApp::updateLoop()
 
 	float dt = getDeltaTime();
 
-	//[process loop here]
+	mpMessageManager->processMessagesForThisframe();
+
+	mpInputSystem->update();
 
 	mpUnitManager->update(dt);
 
@@ -205,6 +210,13 @@ void GameApp::cleanup()
 		delete mpSpriteManager;
 
 		mpSpriteManager = NULL;
+	}
+
+	if (mpInputSystem != NULL)
+	{
+		delete mpMessageManager;
+
+		mpInputSystem = NULL;
 	}
 }
 

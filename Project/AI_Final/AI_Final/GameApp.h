@@ -20,6 +20,7 @@ class GraphicsSystem;
 class GraphicsBufferManager;
 class SpriteManager;
 class UnitManager;
+class InputSystem;
 
 class GameApp : public Trackable
 {
@@ -65,6 +66,7 @@ private:
 	GraphicsBufferManager* mpGraphicsBufferManager;
 	SpriteManager* mpSpriteManager;
 	UnitManager* mpUnitManager;
+	InputSystem* mpInputSystem;
 	ALLEGRO_FONT* mpDefaultFont;
 
 	bool mContinueLoop = true;
