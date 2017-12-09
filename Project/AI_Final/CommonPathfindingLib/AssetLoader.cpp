@@ -3,6 +3,7 @@
 #include "GraphicsBufferManager.h"
 #include "SpriteManager.h"
 #include "GraphicsBuffer.h"
+#include <sstream>
 
 AssetLoader::AssetLoader()
 {
@@ -42,7 +43,7 @@ void AssetLoader::loadAssets()
 			getline(fin, assetType);
 			getline(fin, nameOfAsset);
 			spriteLoad(pathToAsset, mTotalAssets, assetType);
-			setAssetNames(nameOfAsset, pathToAsset);
+			setAssetNames(nameOfAsset, mTotalAssets);
 			mAssetId += mCountAssets; // will be added to until the END_OF_LEVEL_ASSETS is found
 			mTotalAssets++; // tracks all sprites loaded
 		}
@@ -117,21 +118,25 @@ void AssetLoader::deleteCollision(unsigned int indexPos)
 	delete mpCollisions.at(indexPos);
 }
 
-std::string AssetLoader::getAssetName(std::string searchString)
+Sprite* AssetLoader::getAssetName(std::string searchString)
 {
 	for (unsigned int i = 0; i < mAssetNames.size(); i++)
 	{
 		if (mAssetNames.at(i) == searchString)
 		{
 			i++;
-			return mAssetNames.at(i);
+			return gpGame->getSpriteManager()->getSprite(atoi(mAssetNames.at(i).c_str()));
 		}
 	}
-	return ERROR_STRING;
+	return NULL;
 }
 
-void AssetLoader::setAssetNames(std::string setValue, std::string assetPath)
+void AssetLoader::setAssetNames(std::string setValue, int spriteVal)
 {
+	std::stringstream change;
+	std::string newName;
+	change << spriteVal;
+	change >> newName;
 	mAssetNames.push_back(setValue);
-	mAssetNames.push_back(assetPath);
+	mAssetNames.push_back(newName);
 }
