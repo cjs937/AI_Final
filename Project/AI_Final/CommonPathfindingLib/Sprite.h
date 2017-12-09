@@ -14,7 +14,7 @@ Champlain College
 
 class GraphicsBuffer;
 
-class Sprite : public Trackable
+class Sprite:public Trackable
 {
 public:
 	Sprite( GraphicsBuffer* pBuffer, float srcX, float srcY, float width, float height );
@@ -22,12 +22,9 @@ public:
 
 	//draw the contents of the sprite to a GraphicsBuffer - may be rotated
 	void draw( GraphicsBuffer& dest, float dx, float dy, float rotationInRadians = 0, int flags = 0 );
-	int getWidth() { return mWidth; };
-	int getHeight() { return mHeight; };
+	void drawScaled(GraphicsBuffer& dest, float dx, float dy, float dw, float dh, int flags);
 
-	void drawScaled(GraphicsBuffer& dest, float dx, float dy, float dw, float dh, int flags);// needed for the walls and such
 private:
-
 	ALLEGRO_BITMAP* mpBitmap;//subBitmap based off the GraphicsBuffer object is contructed with
 	int mWidth;
 	int mHeight;
