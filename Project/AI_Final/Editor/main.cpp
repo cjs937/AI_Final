@@ -25,7 +25,7 @@
 #include "PerformanceTracker.h"
 #include "MemoryTracker.h"
 
-const std::string FILE_NAME = "pathgridExample.txt";
+//const std::string FILE_NAME = "pathgridExample.txt";
 
 int main(void)
 {
@@ -47,6 +47,7 @@ int main(void)
 		{
 			gpGame->markForExit();
 		}
+		/*
 		else if( al_key_down( &keyState, ALLEGRO_KEY_S ) )
 		{
 			Editor* pEditor = dynamic_cast<Editor*>(gpGame);
@@ -71,7 +72,7 @@ int main(void)
 				cout << "Grid loaded!\n";
 				Sleep(1000);//very bogus
 			}
-		}
+		}*/
 
 		gpGame->beginLoop();
 		gpGame->processLoop();

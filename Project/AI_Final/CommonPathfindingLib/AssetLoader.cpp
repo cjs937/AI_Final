@@ -5,48 +5,58 @@
 #include "GraphicsBuffer.h"
 
 AssetLoader::AssetLoader()
-	//: mpLevels(NULL)
-	//, mpCollisions(NULL)
 {
 	mAssetId = 0;
+	mLevelId = 0;
+	mTotalAssets = 0;
+	mCountAssets = 1;
 }
 
 AssetLoader::~AssetLoader()
 {
-	clean();
-	cleanCollisions();
+	//clean();
+	//cleanCollisions();
 }
-
+//this is the big boy here
 void AssetLoader::loadAssets()
 {
 	std::fstream fin;
 	std::string info = "", pathToAsset = "", nameOfAsset = "", assetType = "";
-	fin.open(ASSET_REFERENCE);
+	fin.open(ASSET_REFERENCE); // ASSET_REFERENCE is a .txt that holds all the needed info
 
 	if (!fin.good())
 		return;
 
-	getline(fin, info);
+	getline(fin, info); // get first line of the file for error checking etc.
 	while (!fin.eof())
 	{
-		if (info == SPRITE)
+		//the file will be broken up into two parts 
+		//this is mainly for sprites so the editor knows 
+		//which sprites it is allowed to use refer to the 
+		//Readme in the same folder location
+		if (info == END_OF_LEVEL_ASSETS)
+			mCountAssets = 0;
+		else if (info == SPRITE) // will execute this code if the type of thing being read is a sprite
 		{
 			getline(fin, pathToAsset);
 			getline(fin, assetType);
-			spriteLoad(pathToAsset, mAssetId, assetType);
-			mAssetId += 1;
+			spriteLoad(pathToAsset, mTotalAssets, assetType);
+			mAssetId += mCountAssets; // will be added to until the END_OF_LEVEL_ASSETS is found
+			mTotalAssets++; // tracks all sprites loaded
 		}
-		else if (info == LEVEL)
+		else if (info == LEVEL) // this will load the level, up to this point there is no use for the name of the level
 		{
 			getline(fin, pathToAsset);
 			getline(fin, nameOfAsset);
 			levelLoad(nameOfAsset, pathToAsset);
+			mLevelId++;
 		}
 		getline(fin, info);
 	}
 	fin.close();
 }
 
+//loads the sprite into the graphics buffer, as well as adds to a list of all objects that should be collided with
 void AssetLoader::spriteLoad(std::string assetPath, int value, std::string typeOfObject)
 {
 	//send to game a list of objects that can be played with
@@ -58,21 +68,25 @@ void AssetLoader::spriteLoad(std::string assetPath, int value, std::string typeO
 		addCollisionNumber(&value);
 }
 
+// just calls addLevelName to store the level
 void AssetLoader::levelLoad(std::string levelName, std::string assetPath)
 {
-
+	addLevelName(assetPath);
 }
 
-void AssetLoader::addLevelName(std::string* levelName)
+//stores the level into mpLevels
+void AssetLoader::addLevelName(std::string levelName)
 {
 	mpLevels.push_back(levelName);
 }
 
-std::string* AssetLoader::getLevelName(int indexPos)
+//Gets the name of the level
+std::string AssetLoader::getLevelName(int indexPos)
 {
 	return mpLevels.at(indexPos);
 }
 
+//the clean functions arnt really needed
 void AssetLoader::clean()
 {
 	for (unsigned int i = 0; i < mpLevels.size(); ++i)
@@ -84,13 +98,13 @@ void AssetLoader::deleteUnit(unsigned int indexPos)
 {
 	if (indexPos < 0 || indexPos >= mpLevels.size())
 		return;
-	delete mpLevels.at(indexPos);
+	//delete mpLevels.at(indexPos);
 }
 
 void AssetLoader::cleanCollisions()
 {
 	for (unsigned int i = 0; i < mpCollisions.size(); ++i)
-		deleteUnit(i);
+		deleteCollision(i);
 	mpCollisions.clear();
 }
 
