@@ -13,7 +13,7 @@ public:
 
 	virtual void process() override
 	{
-		gpGameApp->test->moveTest(mDirection, 5);
+		gpGameApp->test->moveTest(mDirection, 100);
 	}
 
 private:

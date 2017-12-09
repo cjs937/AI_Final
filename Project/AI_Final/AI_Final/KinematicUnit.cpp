@@ -60,12 +60,8 @@ void KinematicUnit::update(float time)
 
 	if( steering->shouldApplyDirectly() )
 	{
-		//not stopped
-		if( getVelocity().getLengthSquared() > MIN_VELOCITY_TO_TURN_SQUARED )
-		{
-			setVelocity( steering->getLinear() );
-			setOrientation( steering->getAngular() );
-		}
+		setVelocity( steering->getLinear() );
+		setOrientation(steering->getAngular());
 
 		//since we are applying the steering directly we don't want any rotational velocity
 		setRotationalVelocity( 0.0f );
