@@ -56,6 +56,8 @@ Vector2D Kinematic::getOrientationAsVector()
 //static
 al_fixed Kinematic::getRotationFromRadians( float radians )
 {
+	double PI = std::atan(1.0) * 4;
+
 	al_fixed angle = al_ftofix (radians * 128 / PI);
 	return angle;
 }

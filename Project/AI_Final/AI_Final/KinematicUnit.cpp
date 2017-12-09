@@ -46,7 +46,7 @@ void KinematicUnit::draw( GraphicsBuffer* pBuffer )
 void KinematicUnit::update(float time)
 {
 	for (int i = 0; i < mComponents.size(); ++i)
-		mComponents[i]->update(time);
+		mComponents[i]->update();
 
 	Steering* steering;
 	if( mpCurrentSteering != NULL )

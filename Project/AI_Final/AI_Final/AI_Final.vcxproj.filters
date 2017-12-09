@@ -37,12 +37,6 @@
     <Filter Include="Source Files\Messages">
       <UniqueIdentifier>{01039652-3979-4a9c-977e-efcb13f4a525}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Graphics">
-      <UniqueIdentifier>{d0cda55d-a645-4b2c-8ea2-38736da0444c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Graphics">
-      <UniqueIdentifier>{d3772f23-6b11-4287-99e0-08da92dde865}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Units">
       <UniqueIdentifier>{0d033f0a-bdfe-4a4e-8e19-8e29c37f5e0d}</UniqueIdentifier>
     </Filter>
@@ -51,6 +45,12 @@
     </Filter>
     <Filter Include="Header Files\State Machine\PlayerStates">
       <UniqueIdentifier>{47ddca98-4d33-4e8a-97eb-cb1e507e5973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Units\Steering">
+      <UniqueIdentifier>{4ce58811-5801-4de8-9552-f4a957fb90ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Units\Steering">
+      <UniqueIdentifier>{1cb60708-6f07-40c2-a758-f8c358f549f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,23 +81,8 @@
     <ClCompile Include="GameMessageManager.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsBuffer.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsBufferManager.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteManager.cpp">
-      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>Source Files\Systems</Filter>
@@ -113,6 +98,21 @@
     </ClCompile>
     <ClCompile Include="AIUnit.cpp">
       <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUnit.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="BlendedSteering.cpp">
+      <Filter>Source Files\Units\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="HitboxComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSteering.cpp">
+      <Filter>Source Files\Units\Steering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,25 +155,7 @@
     <ClInclude Include="QuitGameMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsBuffer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsBufferManager.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteManager.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
@@ -183,9 +165,6 @@
       <Filter>Header Files\Units</Filter>
     </ClInclude>
     <ClInclude Include="KinematicUnit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="Steering.h">
       <Filter>Header Files\Units</Filter>
     </ClInclude>
     <ClInclude Include="UnitManager.h">
@@ -199,6 +178,24 @@
     </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>Header Files\State Machine\PlayerStates</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePlayerMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Steering.h">
+      <Filter>Header Files\Units\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="BlendedSteering.h">
+      <Filter>Header Files\Units\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSteering.h">
+      <Filter>Header Files\Units\Steering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

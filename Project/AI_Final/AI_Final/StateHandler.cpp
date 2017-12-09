@@ -1,7 +1,7 @@
 #include "StateHandler.h"
 #include "State.h"
 
-StateHandler::StateHandler()
+StateHandler::StateHandler():Component(STATE_HANDLER)
 {
 	mCurrentState = NULL;
 }

@@ -12,8 +12,6 @@ Champlain College
 2011
 */
 
-const double PI = std::atan(1.0)*4;//could proved useful!
-
 //forward declarations
 class Steering;
 
@@ -24,7 +22,7 @@ public:
 	~Kinematic();
 
 	//move and rotate based on current velocities
-	void update( float time );
+	virtual void update( float time );
 
 	//modify current velocities based on passed in Steering for the specified time interval and max speeds
 	void calcNewVelocities( const Steering& theSteering, float time, float maxSpeed, float maxRotationalVelocity );

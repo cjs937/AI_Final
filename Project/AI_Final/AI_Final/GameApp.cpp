@@ -17,8 +17,9 @@
 #include "Sprite.h"
 #include "UnitManager.h"
 #include "InputSystem.h"
-#include "../CommonPathfindingLib/AssetLoader.h"
+#include "AssetLoader.h"
 #include "DebugSystem.h"
+#include "AIUnit.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -67,7 +68,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0);
+	test = static_cast<AIUnit*>(mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0));
 }
 
 void GameApp::installAllegro()

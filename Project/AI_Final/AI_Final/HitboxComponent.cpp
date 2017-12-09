@@ -1,6 +1,6 @@
 #include "HitboxComponent.h"
 
-HitboxComponent::HitboxComponent(float _width, float _height, Vector2D const & _position, bool _isTrigger, Vector2D const & _offset = Vector2D(0, 0)) 
+HitboxComponent::HitboxComponent(float _width, float _height, Vector2D const & _position, bool _isTrigger, Vector2D const & _offset) 
 	: mWidth(_width), mHeight(_height), mOffset(_offset), mIsTrigger(_isTrigger)
 {
 	mWidth = _width;

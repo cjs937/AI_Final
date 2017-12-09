@@ -16,7 +16,7 @@ public:
 	~PlayerUnit();
 
 	//Update override for kinematic unit (called by unit manager's update)
-	virtual void update(float _dt) override;
+	//virtual void update(float _dt) override;
 
 	void move( Vector2D const & _direction );
 
@@ -29,6 +29,7 @@ public:
 	void die();
 
 private:
-	StateHandler* mStateMachine;
+	//StateHandler* mStateMachine;
+	float mMoveSpeed;
 	int mHealth;
 };

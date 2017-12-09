@@ -40,8 +40,8 @@ Steering* BlendedSteering::getSteering()
 		steering->setAngular(steering->getAngular() + currentSteering->getAngular() * weight);
 	}
 
-	steering->setLinear(Vector2D(min(steering->getLinear().getX(), maxVelocity), min(steering->getLinear().getY(), maxVelocity)));
-	steering->setAngular(min(steering->getAngular(), maxRotation));
+	//steering->setLinear(Vector2D(min(steering->getLinear().getX(), maxVelocity), min(steering->getLinear().getY(), maxVelocity)));
+	//steering->setAngular(min(steering->getAngular(), maxRotation));
 
 	return steering;
 }
