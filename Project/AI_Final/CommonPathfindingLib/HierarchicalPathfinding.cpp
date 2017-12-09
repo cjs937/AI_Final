@@ -46,7 +46,7 @@ void HierarchicalPathfinding::update()
 
 int HierarchicalPathfinding::getValueAtPosition(int x, int y)
 {
-	return g
+	return 
 }
 
 void HierarchicalPathfinding::setNorth()
