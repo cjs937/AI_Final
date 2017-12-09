@@ -1,6 +1,12 @@
 sprite
 ../sprites/wallpaper.bmp
+notCollision
 sprite
 ../sprites/spawnlocation.bmp
+notCollision
 sprite
 ../sprites/wall.bmp
+collision
+sprite
+../sprites/crackedWall.png
+collision

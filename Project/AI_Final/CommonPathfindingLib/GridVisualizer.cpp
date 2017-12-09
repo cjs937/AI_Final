@@ -93,7 +93,6 @@ void GridVisualizer::draw( GraphicsBuffer& dest )
 		{
 			Vector2D ulPos = mpGrid->getULCornerOfSquare( theIndices[i] );
 			al_draw_filled_rectangle( ulPos.getX(), ulPos.getY(), ulPos.getX() + squareSize, ulPos.getY() + squareSize, iter->first );
-			//mpBuffer->fillRegion( ulPos, Vector2D( ulPos.getX() + squareSize, ulPos.getY() + squareSize ), iter->first );
 		}
 	}
 

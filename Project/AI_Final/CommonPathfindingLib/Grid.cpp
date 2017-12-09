@@ -71,12 +71,6 @@ std::vector<int> Grid::getAdjacentIndices( int theSquareIndex ) const
 {
 	std::vector<int> indices;
 
-	/*
-	static const int NUM_DIRS = 8;
-	//						        N  NE	E  SE	S	SW	 W	NW
-	static int xMods[NUM_DIRS] = {	0,	1,	1,	1,	0,	-1,	-1,	-1 };
-	static int yMods[NUM_DIRS] = { -1, -1,	0,	1,	1,	 1,	 0,	-1 };
-*/
 	//moded for 4 directions
 	static const int NUM_DIRS = 4;
 	//						        N  	E  	S	 W	
