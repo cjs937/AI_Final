@@ -1,12 +1,20 @@
 #include "SaveableComponent.h"
+#include "Defines.h"
 
 SaveableComponent::SaveableComponent(SaveData* _saveData):Component(SAVEABLE), mSaveData(NULL)
 {
 	setSaveData(_saveData);
+
+	if (GAME != NULL)
+		if (SAVE_SYSTEM != NULL)
+			SAVE_SYSTEM->addObject(this);
 }
 
 SaveableComponent::~SaveableComponent() 
-{}
+{
+	if (mSaveData != NULL)
+		delete mSaveData;
+}
 
 void SaveableComponent::save(std::ofstream &_fout)
 {

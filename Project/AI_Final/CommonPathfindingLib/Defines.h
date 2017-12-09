@@ -14,6 +14,7 @@ static const IDType HIGHEST_ID = 9999;
 #define SAVE_SYSTEM gpGameApp->getSaveSystem()
 #define BUFFER_MANAGER gpGameApp->getGraphicsBufferManager()
 #define SPRITE_MANAGER gpGameApp->getSpriteManager()
+#define UNIT_MANAGER gpGameApp->getUnitManager()
 
 #include "../AI_Final/GameApp.h"
 #include "GraphicsSystem.h"
@@ -22,3 +23,4 @@ static const IDType HIGHEST_ID = 9999;
 #include "Timer.h"
 #include "../AI_Final/SaveSystem.h"
 #include "../AI_Final/GameMessageManager.h"
+#include "../AI_Final/UnitManager.h"
