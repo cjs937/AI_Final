@@ -59,7 +59,7 @@ public:
 
 	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
 	float getDeltaTime();
-	float getCurrentTime();
+	float getCurrentTime(); 
 
 private:
 	AssetLoader* mpLoader;

@@ -115,22 +115,7 @@ void Editor::processLoop()
 
 void Editor::draw()
 {
-	Sprite* pBackgroundSprite = mpSpriteManager->getSprite(BACKGROUND_SPRITE_ID);
-	pBackgroundSprite->draw(*(mpGraphicsSystem->getBackBuffer()), 0, 0);
-	int size = mpGrid->getGridWidth() * mpGrid->getGridHeight();
-	//get any non-zero squares and make them desired sprites
-	for (int i = 0; i < size; i++)
-	{
-		if (mpGrid->getValueAtIndex(i) != 0)
-		{
-			drawLevel(mpGrid->getULCornerOfSquare(i), mpSpriteManager->getSprite(mpGrid->getValueAtIndex(i)));
-		}
-	}
-}
-
-void Editor::drawLevel(Vector2D pos, Sprite* spriteToDraw)
-{
-	spriteToDraw->drawScaled(*(mpGraphicsSystem->getBackBuffer()), pos.getX(), pos.getY(), mpGrid->getGridWidth(), mpGrid->getGridWidth(), 0);
+	mpGrid->draw(mpGraphicsSystem->getBackBuffer());
 }
 
 bool Editor::endLoop()

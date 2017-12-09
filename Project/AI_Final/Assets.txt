@@ -18,10 +18,10 @@ sprite
 eh
 editorEnd
 sprite
-../sprites/invincible.png
+../sprites/player.png
 eh
 sprite
-../sprites/player.png
+../sprites/invincible.png
 eh
 sprite
 ../sprites/bomb.png

@@ -24,6 +24,7 @@ class TerrainUnit;
 class KinematicUnit;
 class SaveableComponent;
 class PlayerUnit;
+class Sprite;
 
 struct SharedUnitData : public SaveData
 {

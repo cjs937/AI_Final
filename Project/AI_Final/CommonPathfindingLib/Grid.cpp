@@ -2,6 +2,10 @@
 #include "GraphicsSystem.h"
 #include "Vector2D.h"
 #include <memory.h>
+#include "Defines.h"
+#include "Game.h"
+#include "Sprite.h"
+#include "GraphicsBuffer.h"
 
 Grid::Grid( int pixelWidth, int pixelHeight, int squareSize )
 :mPixelWidth(pixelWidth)
@@ -17,6 +21,27 @@ Grid::Grid( int pixelWidth, int pixelHeight, int squareSize )
 Grid::~Grid()
 {
 	delete [] mpValues;
+}
+
+void Grid::draw(GraphicsBuffer* _backBuffer)
+{
+	Sprite* pBackgroundSprite = gpGame->getSpriteManager()->getSprite(BACKGROUND_SPRITE_ID);
+	pBackgroundSprite->draw(*_backBuffer, 0, 0);
+	int size = getGridWidth() * getGridHeight();
+
+	//get any non-zero squares and make them desired sprites
+	for (int i = 0; i < size; i++)
+	{
+		if (getValueAtIndex(i) != 0)
+		{
+			drawLevel(getULCornerOfSquare(i), gpGame->getSpriteManager()->getSprite(getValueAtIndex(i)), _backBuffer);
+		}
+	}
+}
+
+void Grid::drawLevel(Vector2D pos, Sprite* spriteToDraw, GraphicsBuffer* _backBuffer)
+{
+	spriteToDraw->drawScaled(*_backBuffer, pos.getX(), pos.getY(), getGridWidth(), getGridWidth(), 0);
 }
 
 int Grid::getSquareIndexFromPixelXY( int x, int y ) const
