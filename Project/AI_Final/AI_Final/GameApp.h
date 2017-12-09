@@ -61,7 +61,6 @@ public:
 	float getDeltaTime();
 	float getCurrentTime();
 
-	AIUnit* test;
 private:
 	AssetLoader* mpLoader;
 	Timer* mpLoopTimer;

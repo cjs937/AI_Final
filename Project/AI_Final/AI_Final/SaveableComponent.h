@@ -32,7 +32,7 @@ class SaveableComponent : public Component
 {
 public:
 	SaveableComponent(SaveData* _saveData = NULL);
-	virtual ~SaveableComponent();
+	virtual ~SaveableComponent() override;
 
 	virtual void save(std::ofstream &_fout);
 	//virtual void save(std::string _fileName);

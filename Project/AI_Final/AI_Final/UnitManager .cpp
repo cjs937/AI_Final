@@ -50,35 +50,13 @@ SharedUnitData* UnitManager::getUnitData()
 
 void UnitManager::initBuffersAndSprites()
 {
-	//mBufferIDs.insert(IDPair(PLAYER, gpGameApp->getGraphicsBufferManager()->loadBuffer("arrow.bmp")));
 	mBufferIDs.insert(IDPair(AI, gpGameApp->getGraphicsBufferManager()->loadBuffer("enemy-arrow.bmp")));
-	//mBufferIDs.insert(IDPair(WALL, gpGameApp->getGraphicsBufferManager()->loadBuffer("wall.bmp")));
-	//mBufferIDs.insert(IDPair(CIRCLE, gpGameApp->getGraphicsBufferManager()->loadBuffer("circle.bmp")));
-
-
-	//GraphicsBuffer* pPlayerBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(PLAYER));
-	//if (pPlayerBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(PLAYER_ICON_SPRITE_ID, pPlayerBuffer, 0, 0, pPlayerBuffer->getWidth(), pPlayerBuffer->getHeight());
-	//}
 
 	GraphicsBuffer* pAIBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(AI));
 	if (pAIBuffer != NULL)
 	{
 		gpGameApp->getSpriteManager()->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, pAIBuffer->getWidth(), pAIBuffer->getHeight());
 	}
-
-	//GraphicsBuffer* wallBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(WALL));
-	//if (wallBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(WALL_SPRITE_ID, wallBuffer, 0, 0, wallBuffer->getWidth(), wallBuffer->getHeight());
-	//}
-
-	//GraphicsBuffer* circleBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(CIRCLE));
-	//if (circleBuffer != NULL)
-	//{
-	//	gpGameApp->getSpriteManager()->createAndManageSprite(CIRCLE_SPRITE_ID, wallBuffer, 0, 0, circleBuffer->getWidth(), circleBuffer->getHeight());
-	//}
 }
 
 IDType UnitManager::getBufferID(UnitType _unitType)
@@ -102,12 +80,12 @@ UnitManager::~UnitManager()
 
 	mMapList.clear();
 
-	//for (int i = 0; i < mTerrain.size(); ++i)
-	//{
-	//	delete mTerrain[i];
+	if (mSaveComponent != NULL)
+	{
+		delete mSaveComponent;
 
-	//	mTerrain[i] = NULL;
-	//}
+		mSaveComponent = NULL;
+	}
 }
 
 std::map<int, KinematicUnit*>* UnitManager::getUnitMap(UnitType _type)
