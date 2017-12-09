@@ -40,7 +40,9 @@ void AssetLoader::loadAssets()
 		{
 			getline(fin, pathToAsset);
 			getline(fin, assetType);
+			getline(fin, nameOfAsset);
 			spriteLoad(pathToAsset, mTotalAssets, assetType);
+			setAssetNames(nameOfAsset, pathToAsset);
 			mAssetId += mCountAssets; // will be added to until the END_OF_LEVEL_ASSETS is found
 			mTotalAssets++; // tracks all sprites loaded
 		}
@@ -113,4 +115,23 @@ void AssetLoader::deleteCollision(unsigned int indexPos)
 	if (indexPos < 0 || indexPos >= mpCollisions.size())
 		return;
 	delete mpCollisions.at(indexPos);
+}
+
+std::string AssetLoader::getAssetName(std::string searchString)
+{
+	for (unsigned int i = 0; i < mAssetNames.size(); i++)
+	{
+		if (mAssetNames.at(i) == searchString)
+		{
+			i++;
+			return mAssetNames.at(i);
+		}
+	}
+	return ERROR_STRING;
+}
+
+void AssetLoader::setAssetNames(std::string setValue, std::string assetPath)
+{
+	mAssetNames.push_back(setValue);
+	mAssetNames.push_back(assetPath);
 }

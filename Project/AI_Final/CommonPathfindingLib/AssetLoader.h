@@ -48,9 +48,13 @@ public:
 	void cleanCollisions();
 	void deleteCollision(unsigned int indexPos);
 
+	std::string getAssetName(std::string searchString);
+	void setAssetNames(std::string setValue, std::string assetPath);
+
 private:
 	std::vector<std::string> mpLevels;
 	std::vector<int*> mpCollisions;
+	std::vector<std::string> mAssetNames;
 	int mAssetId, mLevelId, mCountAssets, mTotalAssets;
 };
 
