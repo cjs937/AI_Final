@@ -16,10 +16,6 @@
 using namespace std;
 
 const int GRID_SQUARE_SIZE = 32;
-const IDType BACKGROUND_ID = STARTING_SEQUENTIAL_ID;
-const IDType SPAWN_LOCATION_ID = STARTING_SEQUENTIAL_ID + 1 ;
-const IDType WALL_ID = STARTING_SEQUENTIAL_ID + 2;
-const string SPRITE_PATH = "../sprites/";
 
 Editor::Editor() : Game()
 {
@@ -75,7 +71,7 @@ void Editor::processLoop()
 	ALLEGRO_KEYBOARD_STATE keyState;
 	al_get_keyboard_state( &keyState );
 
-	if( al_mouse_button_down( &mouseState, 1 ) && !al_mouse_button_down(&mPreviousMouseState, 1))//left mouse click
+	if( al_mouse_button_down( &mouseState, 1 ))//left mouse click
 	{
 		mpGrid->setValueAtPixelXY( mouseState.x, mouseState.y, getTypeOffObject() );
 	}
