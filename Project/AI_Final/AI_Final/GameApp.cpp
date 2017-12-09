@@ -44,7 +44,9 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpSpriteManager = new SpriteManager();
 
-	mpUnitManager = new UnitManager();
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f);
+
+	mpUnitManager = new UnitManager(unitData);
 
 	mpInputSystem = new InputSystem();
 
@@ -68,7 +70,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	test = static_cast<AIUnit*>(mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0));
+	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
 }
 
 void GameApp::installAllegro()

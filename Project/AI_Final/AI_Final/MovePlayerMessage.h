@@ -1,8 +1,8 @@
 #pragma once
 #include "GameMessage.h"
 #include "Vector2D.h"
-#include "GameApp.h"
-#include "AIUnit.h"
+#include "Defines.h"
+#include "PlayerUnit.h"
 
 class MovePlayerMessage : public GameMessage
 {
@@ -13,7 +13,10 @@ public:
 
 	virtual void process() override
 	{
-		gpGameApp->test->moveTest(mDirection, 100);
+		PlayerUnit* player = UNIT_MANAGER->getPlayerUnit();
+
+		if(player != NULL)
+			player->move(mDirection);
 	}
 
 private:

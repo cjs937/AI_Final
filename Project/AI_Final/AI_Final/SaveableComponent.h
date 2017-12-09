@@ -6,7 +6,8 @@
 enum SaveDataType
 {
 	NONE = -1, 
-	GAME
+	GAME_APP,
+	UNIT_VALUES
 };
 
 //Override to hold data for different saveable objects
@@ -16,12 +17,12 @@ public:
 	SaveData(SaveDataType _dataType) :dataType(_dataType) {};
 	virtual ~SaveData() {};
 
-	//returns string with data to be saved to file
+	//returns string with data that should be saved to file
 	//only one piece of info per line
 	//all lines end with a \n
 	virtual std::string getSerializedData() = 0;
 
-	//loads in save data
+	//loads in save data based on format in getSeralizedData()
 	virtual void loadData(std::ifstream &_fin) = 0;
 
 	SaveDataType dataType;
