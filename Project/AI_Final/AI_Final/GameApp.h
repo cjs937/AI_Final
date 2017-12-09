@@ -7,7 +7,7 @@ const int FPS = 60;
 const int FPS_MS = 1000 / FPS;
 
 //default sprite IDs
-const IDType BACKGROUND_SPRITE_ID = 0;
+//const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType PLAYER_ICON_SPRITE_ID = 1;
 const IDType AI_ICON_SPRITE_ID = 2;
 const IDType WALL_SPRITE_ID = 3;
@@ -21,6 +21,10 @@ class GraphicsBufferManager;
 class SpriteManager;
 class UnitManager;
 class InputSystem;
+class AssetLoader;
+class DebugSystem;
+
+class AIUnit;
 
 class GameApp : public Trackable
 {
@@ -57,8 +61,9 @@ public:
 	float getDeltaTime();
 	float getCurrentTime();
 
-
+	AIUnit* test;
 private:
+	AssetLoader* mpLoader;
 	Timer* mpLoopTimer;
 	SaveSystem* mpSaveSystem;
 	GameMessageManager* mpMessageManager;
@@ -67,6 +72,8 @@ private:
 	SpriteManager* mpSpriteManager;
 	UnitManager* mpUnitManager;
 	InputSystem* mpInputSystem;
+	DebugSystem* mpDebugSystem;
+
 	ALLEGRO_FONT* mpDefaultFont;
 
 	bool mContinueLoop = true;
@@ -74,6 +81,7 @@ private:
 	float mLoopStartTime;
 
 	void installAllegro();
+	void updateSystems();
 };
 
 extern GameApp* gpGameApp;

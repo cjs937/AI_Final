@@ -1,7 +1,7 @@
 #include "StateHandler.h"
 #include "State.h"
 
-StateHandler::StateHandler()
+StateHandler::StateHandler():Component(STATE_HANDLER)
 {
 	mCurrentState = NULL;
 }
@@ -22,22 +22,22 @@ void StateHandler::update()
 
 	if (nextState != NULL)
 	{
-		changeState(nextState);
+		changeState(*nextState);
 	}
 }
 
 //Changes to state passed in. _exitState decides whether or not the previous state should call its exit function
-void StateHandler::changeState(State* _newState, bool _exitState)
+void StateHandler::changeState(State & _newState, bool _exitCurrentState)
 {
 	if (mCurrentState != NULL)
 	{
-		if (_exitState)
+		if (_exitCurrentState)
 			mCurrentState->onExit();
 
 		delete mCurrentState;
 	}
 
-	mCurrentState = _newState;
+	mCurrentState = &_newState;
 
 	mCurrentState->onEnter();
 }

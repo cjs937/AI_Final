@@ -5,7 +5,9 @@ enum ComponentType
 {
 	INVALID_COMPONENT = -1,
 	SAVEABLE,
-	PAUSABLE
+	PAUSABLE,
+	HITBOX,
+	STATE_HANDLER
 };
 
 
@@ -15,7 +17,7 @@ public:
 	virtual ~Component() {};
 
 	//Should be overridden if needed by children
-	virtual void update(float _dt) {};
+	virtual void update() {};
 	virtual void draw() {};
 
 	ComponentType getType() { return mType; };

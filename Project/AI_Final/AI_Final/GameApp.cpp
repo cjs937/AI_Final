@@ -17,6 +17,9 @@
 #include "Sprite.h"
 #include "UnitManager.h"
 #include "InputSystem.h"
+#include "AssetLoader.h"
+#include "DebugSystem.h"
+#include "AIUnit.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -47,9 +50,15 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer = new Timer();
 
+	mpLoader = new AssetLoader();
+
+	mpDebugSystem = new DebugSystem();
+
 	mpGraphicsSystem->init(_screenWidth, _screenHeight);
 
 	mpGraphicsBufferManager->init();
+
+	//mpLoader->loadAssets();
 
 	//hide the mouse
 	if (!al_hide_mouse_cursor(mpGraphicsSystem->getDisplay()))
@@ -59,7 +68,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0);
+	test = static_cast<AIUnit*>(mpUnitManager->addUnit(AI, Vector2D(200, 200), 1, Vector2D(), 0));
 }
 
 void GameApp::installAllegro()
@@ -132,6 +141,15 @@ bool GameApp::updateLoop()
 {
 	startLoop();
 
+	updateSystems();
+
+	draw();
+
+	return endLoop();
+}
+
+void GameApp::updateSystems()
+{
 	float dt = getDeltaTime();
 
 	mpMessageManager->processMessagesForThisframe();
@@ -140,17 +158,19 @@ bool GameApp::updateLoop()
 
 	mpUnitManager->update(dt);
 
-	draw();
-
-	return endLoop();
+	mpDebugSystem->update();
 }
 
 void GameApp::draw()
 {
-	mpGraphicsSystem->getBackBuffer()->clear();
+	GraphicsBuffer* backBuffer = mpGraphicsSystem->getBackBuffer();
+
+	backBuffer->clear();
 
 	//[draw things here]
-	mpUnitManager->draw(mpGraphicsSystem->getBackBuffer());
+	mpUnitManager->draw(backBuffer);
+
+	mpDebugSystem->draw(backBuffer);
 
 	mpGraphicsSystem->swap();
 }
@@ -215,6 +235,13 @@ void GameApp::cleanup()
 	if (mpInputSystem != NULL)
 	{
 		delete mpMessageManager;
+
+		mpInputSystem = NULL;
+	}
+
+	if (mpDebugSystem != NULL)
+	{
+		delete mpDebugSystem;
 
 		mpInputSystem = NULL;
 	}

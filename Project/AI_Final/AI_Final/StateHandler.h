@@ -1,17 +1,17 @@
 #pragma once
-#include "Trackable.h"
+#include "Component.h"
 
 class State;
 
 //State machine
-class StateHandler : public Trackable
+class StateHandler : public Component
 {
 public:
 	StateHandler();
 	~StateHandler();
 
-	virtual void update();
-	void changeState(State* _newState, bool _exitState = true);
+	virtual void update() override;
+	void changeState(State & _newState, bool _exitCurrentState = true);
 
 private:
 	State* mCurrentState;

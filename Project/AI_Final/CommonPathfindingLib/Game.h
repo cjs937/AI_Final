@@ -24,8 +24,8 @@ extern PerformanceTracker* gpPerformanceTracker;
 extern Game* gpGame;
 
 const IDType BACKGROUND_SPRITE_ID = 0;
-const IDType SPAWN_SPRITE_ID = 1;
-const IDType WALL_SPRITE_ID = 2;
+//const IDType SPAWN_SPRITE_ID = 1;
+//const IDType WALL_SPRITE_ID = 2;
 
 class Game:public Trackable
 {

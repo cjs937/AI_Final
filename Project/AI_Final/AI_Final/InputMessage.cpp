@@ -3,6 +3,7 @@
 #include "GameApp.h"
 #include "GameMessageManager.h"
 #include "QuitGameMessage.h"
+#include "MovePlayerMessage.h"
 
 void InputMessage::process()
 {
@@ -14,6 +15,12 @@ void InputMessage::process()
 	case ALLEGRO_KEY_ESCAPE:
 	{
 		newMessage = new QuitGameMessage();
+
+		break;
+	}
+	case ALLEGRO_KEY_SPACE:
+	{
+		newMessage = new MovePlayerMessage(Vector2D(0, 1));
 
 		break;
 	}

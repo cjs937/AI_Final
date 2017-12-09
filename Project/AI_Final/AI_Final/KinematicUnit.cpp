@@ -46,20 +46,12 @@ void KinematicUnit::draw( GraphicsBuffer* pBuffer )
 void KinematicUnit::update(float time)
 {
 	for (int i = 0; i < mComponents.size(); ++i)
-		mComponents[i]->update(time);
+		mComponents[i]->update();
 
 	Steering* steering;
 	if( mpCurrentSteering != NULL )
 	{
-
 		steering = mpCurrentSteering->getSteering();
-
-		//Steering* collisionSteering;
-
-		//collisionSteering =	CollisionSystem::checkUnitCollision(this, steering);
-
-		//if (collisionSteering != NULL)
-		//	steering = collisionSteering;
 	}
 	else
 	{
@@ -68,12 +60,8 @@ void KinematicUnit::update(float time)
 
 	if( steering->shouldApplyDirectly() )
 	{
-		//not stopped
-		if( getVelocity().getLengthSquared() > MIN_VELOCITY_TO_TURN_SQUARED )
-		{
-			setVelocity( steering->getLinear() );
-			setOrientation( steering->getAngular() );
-		}
+		setVelocity( steering->getLinear() );
+		setOrientation(steering->getAngular());
 
 		//since we are applying the steering directly we don't want any rotational velocity
 		setRotationalVelocity( 0.0f );
@@ -103,42 +91,6 @@ void KinematicUnit::setNewOrientation()
 { 
 	mOrientation = getOrientationFromVelocity( mOrientation, mVelocity ); 
 }
-
-//void KinematicUnit::seek(const Vector2D &target)
-//{
-//	KinematicSeekSteering* pSeekSteering = new KinematicSeekSteering( this, target );
-//	setSteering( pSeekSteering );
-//}
-//
-//void KinematicUnit::arrive(const Vector2D &target)
-//{
-//	KinematicArriveSteering* pArriveSteering = new KinematicArriveSteering( this, target );
-//	setSteering( pArriveSteering );
-//}
-//
-//void KinematicUnit::wander()
-//{
-//	KinematicWanderSteering* pWanderSteering = new KinematicWanderSteering( this );
-//	setSteering( pWanderSteering );
-//}
-//
-//void KinematicUnit::dynamicSeek( KinematicUnit* pTarget )
-//{
-//	DynamicSeekSteering* pDynamicSeekSteering = new DynamicSeekSteering( this, pTarget);
-//	setSteering( pDynamicSeekSteering );
-//}
-//
-//void KinematicUnit::dynamicFlee( KinematicUnit* pTarget )
-//{
-//	DynamicSeekSteering* pDynamicSeekSteering = new DynamicSeekSteering( this, pTarget, true );
-//	setSteering( pDynamicSeekSteering );
-//}
-//
-//void KinematicUnit::dynamicArrive( KinematicUnit* pTarget )
-//{
-//	DynamicArriveSteering* pDynamicArriveSteering = new DynamicArriveSteering( this, pTarget);
-//	setSteering( pDynamicArriveSteering );
-//}
 
 void KinematicUnit::addComponent(Component* _newComponent)
 {

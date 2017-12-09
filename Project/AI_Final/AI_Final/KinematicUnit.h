@@ -60,18 +60,9 @@ public:
 	//draw yourself to the indicated buffer
 	void draw( GraphicsBuffer* pBuffer );
 	//move according to the current velocities and update velocities based on current Steering
-	void update(float time);
-
-	//initiate behaviors
-	void seek( const Vector2D& target );
-	void arrive( const Vector2D& target );
-	void wander();
-	void dynamicSeek( KinematicUnit* pTarget );
-	void dynamicFlee( KinematicUnit* pTarget );
-	void dynamicArrive( KinematicUnit* pTarget );
+	virtual void update(float time) override;
 
 private:
-	std::vector<Component*> mComponents;
 	Sprite* mpSprite;
 	Steering* mpCurrentSteering;
 	Vector2D mTarget;//used only for Kinematic seek and arrive
@@ -80,6 +71,7 @@ private:
 	int mUnitID;
 
 protected:
+	std::vector<Component*> mComponents;
 	void setSteering( Steering* pSteering );
 
 };
