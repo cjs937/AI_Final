@@ -43,14 +43,14 @@ public:
 	inline int getLevelIdMax() { return mLevelId; };
 
 	//loads sprites that cannot be walked into i.e. the number of the sprite
-	inline void addCollisionNumber(int* collisionNumber) { mpCollisions.push_back(collisionNumber); };
-	inline int* getCollisionNumber(int indexPos) { return mpCollisions.at(indexPos); };
+	inline void addCollisionNumber(int collisionNumber) { mpCollisions.push_back(collisionNumber); };
+	inline int getCollisionNumber(int indexPos) { return mpCollisions.at(indexPos); };
 	void cleanCollisions();
 	void deleteCollision(unsigned int indexPos);
 
 private:
 	std::vector<std::string> mpLevels;
-	std::vector<int*> mpCollisions;
+	std::vector<int> mpCollisions;
 	int mAssetId, mLevelId, mCountAssets, mTotalAssets;
 };
 

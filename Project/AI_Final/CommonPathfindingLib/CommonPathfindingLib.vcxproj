@@ -19,6 +19,7 @@
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridVisualizer.h" />
+    <ClInclude Include="HierarchicalPathfinding.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
   </ItemGroup>
@@ -30,6 +31,7 @@
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridVisualizer.cpp" />
+    <ClCompile Include="HierarchicalPathfinding.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
   </ItemGroup>

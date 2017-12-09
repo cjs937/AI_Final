@@ -19,6 +19,7 @@ Grid::~Grid()
 	delete [] mpValues;
 }
 
+// use this to get the index of the node i.e. an x,y (50,50) = 2
 int Grid::getSquareIndexFromPixelXY( int x, int y ) const
 {
 	x /= mSquareSize;
@@ -26,6 +27,7 @@ int Grid::getSquareIndexFromPixelXY( int x, int y ) const
 	return y * mGridWidth + x;
 }
 
+//this returns what is currently drawn at the index
 int Grid::getValueAtIndex( int index ) const
 {
 	if (index >= 0 && index < mGridWidth*mGridHeight)

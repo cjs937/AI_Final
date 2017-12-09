@@ -65,7 +65,7 @@ void AssetLoader::spriteLoad(std::string assetPath, int value, std::string typeO
 	if (newSprite != NULL)
 		gpGame->getSpriteManager()->createAndManageSprite(value, newSprite, 0, 0, newSprite->getWidth(), newSprite->getHeight());
 	if (typeOfObject == COLLISION)
-		addCollisionNumber(&value);
+		addCollisionNumber(value);
 }
 
 // just calls addLevelName to store the level
@@ -112,5 +112,5 @@ void AssetLoader::deleteCollision(unsigned int indexPos)
 {
 	if (indexPos < 0 || indexPos >= mpCollisions.size())
 		return;
-	delete mpCollisions.at(indexPos);
+	//delete mpCollisions.at(indexPos);
 }
