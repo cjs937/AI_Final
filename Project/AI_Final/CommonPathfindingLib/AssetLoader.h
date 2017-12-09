@@ -31,8 +31,13 @@ public:
 	void clean();
 	void deleteUnit(unsigned int indexPos);
 
+	//the next two functions working in tandom will be really important
+	//you will have to subtract mAssetId from mTotalAssets to get the first non editor sprite
+	//keep this in mind when creating units
 	//get the sprites loaded
 	inline int getAssetIdMax() { return mAssetId; };
+	//get the total# of loaded assets
+	inline int getTotalLoaded() { return mTotalAssets; };
 
 	//getLevelsLoaded
 	inline int getLevelIdMax() { return mLevelId; };
@@ -46,15 +51,7 @@ public:
 private:
 	std::vector<std::string> mpLevels;
 	std::vector<int*> mpCollisions;
-	int mAssetId, mLevelId, mCountAssets;
+	int mAssetId, mLevelId, mCountAssets, mTotalAssets;
 };
 
-
-
-
-
-
-
-
 #endif // !ASSETLOADER_H
-
