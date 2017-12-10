@@ -24,7 +24,11 @@ PlayerUnit::~PlayerUnit()
 
 void PlayerUnit::move(Vector2D const & _direction)
 {
-	static_cast<GridSteering*>(getSteering())->move(_direction, mMoveSpeed);
+	Vector2D direction = _direction;
+
+	//direction += Vector2D(direction.getY() * mPosition.getX() , direction.getX() * mPosition.getY());
+
+	static_cast<GridSteering*>(getSteering())->move(direction, mMoveSpeed);
 }
 
 void PlayerUnit::dropBomb()

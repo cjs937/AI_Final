@@ -58,7 +58,7 @@ public:
 	GraphicsBufferManager* getGraphicsBufferManager() { return mpGraphicsBufferManager; };
 	SpriteManager* getSpriteManager() { return mpSpriteManager; };
 	UnitManager* getUnitManager() { return mpUnitManager; };
-
+	AssetLoader* getAssetLoader() { return mpLoader; };
 	Grid* getGrid() { return mpGrid; };
 
 	float getDeltaTime();

@@ -33,19 +33,10 @@ void DebugSystem::draw(GraphicsBuffer* const _backBuffer)
 
 	end.normalize();
 
-	std::cout << "X: " << end.getX() << " Y: " << end.getY() << std::endl;
+	end *= UNIT_MANAGER->getUnitData()->raycastDistance;
 
-	end *= -UNIT_MANAGER->getUnitData()->raycastDistance;
+	end += start;
 
-/*	if (end.getX() == 0 && end.getY() != 0)
-	{
-		end.setX(-start.getX());
-	}
-	else if (end.getY() == 0 && end.getX() != 0)
-	{
-		end.setY(-start.getY());
-	}
-	else*/ 
 	if (end == Vector2D(0, 0))
 		return;
 

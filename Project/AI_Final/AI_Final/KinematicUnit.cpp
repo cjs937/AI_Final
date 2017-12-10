@@ -5,6 +5,7 @@
 #include "Steering.h"
 #include "Component.h"
 #include "GameApp.h"
+#include "CollisionSystem.h"
 using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );
@@ -53,6 +54,12 @@ void KinematicUnit::update(float time)
 	if( mpCurrentSteering != NULL )
 	{
 		steering = mpCurrentSteering->getSteering();
+
+		if (CollisionSystem::checkUnitCollision(this, steering))
+		{
+			steering = &gNullSteering;
+		}
+
 	}
 	else
 	{
