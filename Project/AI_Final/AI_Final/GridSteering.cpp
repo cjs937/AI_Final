@@ -1,4 +1,5 @@
 #include "GridSteering.h"
+#include "CollisionSystem.h"
 
 GridSteering::GridSteering()
 {

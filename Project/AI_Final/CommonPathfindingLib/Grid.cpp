@@ -55,7 +55,7 @@ int Grid::getValueAtIndex( int index ) const
 {
 	if (index >= 0 && index < mGridWidth*mGridHeight)
 	{
-		return *(mpValues + index);
+		return  *(mpValues + index);
 	}
 	else
 	{

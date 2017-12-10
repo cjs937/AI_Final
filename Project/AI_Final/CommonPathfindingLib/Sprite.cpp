@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "GraphicsBuffer.h"
 #include "GraphicsSystem.h"
+#include "Vector2D.h"
 
 Sprite::Sprite( GraphicsBuffer* pBuffer, float sx, float sy, float sw, float sh )
 	:mpBitmap(NULL)
@@ -53,9 +54,7 @@ void Sprite::drawScaled( GraphicsBuffer& dest, float dx, float dy, float dw, flo
 	}
 }
 
-
-
-/*void Sprite::draw(GraphicsBuffer *pDestBuffer, int destX, int destY, float rotationInRadians)
+Vector2D Sprite::getSize()
 {
-	mpBuffer->copy( pDestBuffer, destX, destY, 0, 0, mWidth, mHeight, rotationInRadians );
-}*/
+	return Vector2D(mWidth, mHeight);
+}

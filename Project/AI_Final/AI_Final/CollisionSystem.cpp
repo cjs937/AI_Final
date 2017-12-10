@@ -6,32 +6,60 @@
 #include <vector>
 #include "Ray.h"
 #include "Utility.h"
+#include "Grid.h"
+#include "AssetLoader.h"
+#include "allegro5\allegro_primitives.h"
 
-//RayCollision* CollisionSystem::rayCast(KinematicUnit* _unit)
-//{
-//	std::vector<TerrainUnit*> terrainVector = gpGameApp->getUnitManager()->getTerrain();
-//	RayCollision* collision = NULL;
-//	TerrainUnit* currentTerrain = NULL;
-//
-//	for (int i = 0; i < terrainVector.size(); ++i)
-//	{
-//		currentTerrain = terrainVector[i];
-//
-//		if (currentTerrain->getType() == BOX)
-//			collision = checkWallIntersection(_unit, terrainVector[i]);
-//		else if (currentTerrain->getType() == ELLIPSE)
-//			collision = checkEllipseIntersection(_unit, (EllipseTerrain*)terrainVector[i]);
-//		else
-//			collision = NULL;
-//
-//		if (collision != NULL)
-//		{
-//			break;
-//		}
-//	}
-//
-//	return collision;
-//}
+bool CollisionSystem::checkUnitCollision(KinematicUnit* _unit, Steering* _steering)
+{
+	Ray* ray = new Ray(_unit->getCenterPosition(), gpGameApp->getUnitManager()->getUnitData()->raycastDistance, _steering->getLinear());
+
+	bool collided = rayCast(ray);
+
+	delete ray;
+
+	return collided;
+}
+
+
+bool CollisionSystem::rayCast(Ray* _ray)
+{
+	Grid* grid = gpGameApp->getGrid();
+
+	Vector2D castPoint;
+
+	for (float i = .1; i < 1.1f; i += .1)
+	{
+		castPoint = _ray->getPointAlongRay(i);
+
+		int castValue = grid->getValueAtIndex(grid->getSquareIndexFromPixelXY(castPoint.getX(), castPoint.getY()));
+
+		if (gpGameApp->getAssetLoader()->checkIfCollisionNumber(castValue))
+		{
+			return true;
+		}
+	}
+
+	return false;
+
+	//for (int i = 0; i < terrain.size(); ++i)
+	//{
+	//	currentTerrain = terrain[i];
+
+	//	if (currentTerrain->getType() == BOX)
+	//		collision = checkWallIntersection(_unit, terrain[i]);
+	//	else if (currentTerrain->getType() == ELLIPSE)
+	//		collision = checkEllipseIntersection(_unit, (EllipseTerrain*)terrainVector[i]);
+	//	else
+	//		collision = NULL;
+
+	//	if (collision != NULL)
+	//	{
+	//		break;
+	//	}
+	//}
+
+}
 //
 //RayCollision* CollisionSystem::checkWallIntersection(KinematicUnit* _unit, TerrainUnit* _wall)
 //{

@@ -22,27 +22,25 @@ void DebugSystem::draw(GraphicsBuffer* const _backBuffer)
 	if (!mIsActive)
 		return;
 
-	//PlayerUnit* player = UNIT_MANAGER->getPlayerUnit();
+	PlayerUnit* player = UNIT_MANAGER->getPlayerUnit();
 
-	//if (player == NULL)
-	//	return;
+	if (player == NULL)
+		return;
 
-	//Vector2D start = player->getPosition();
+	Vector2D start = player->getCenterPosition();
 
-	//Vector2D end = player->getSteering()->getLinear();
+	Vector2D end = player->getSteering()->getLinear();
 
-	//end.normalize();
+	end.normalize();
 
-	//std::cout << "X: " << end.getX() << " Y: " << end.getY() << std::endl;
+	end *= UNIT_MANAGER->getUnitData()->raycastDistance;
 
+	end += start;
 
-	//end *= -UNIT_MANAGER->getUnitData()->raycastDistance;
+	if (end == Vector2D(0, 0))
+		return;
 
-
-	//if (end == Vector2D(0, 0))
-	//	return;
-
-	//al_draw_line(start.getX(), start.getY(), end.getX(), end.getY(), al_map_rgb(255, 0, 0), 1);
+	al_draw_line(start.getX(), start.getY(), end.getX(), end.getY(), al_map_rgb(255, 0, 0), 1);
 }
 
 void DebugSystem::toggle()

@@ -5,6 +5,7 @@
 #include "Steering.h"
 #include "Component.h"
 #include "GameApp.h"
+#include "CollisionSystem.h"
 using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );
@@ -53,6 +54,12 @@ void KinematicUnit::update(float time)
 	if( mpCurrentSteering != NULL )
 	{
 		steering = mpCurrentSteering->getSteering();
+
+		if (CollisionSystem::checkUnitCollision(this, steering))
+		{
+			steering = &gNullSteering;
+		}
+
 	}
 	else
 	{
@@ -78,6 +85,16 @@ void KinematicUnit::update(float time)
 
 	//set the orientation to match the direction of travel
 	//setNewOrientation();
+}
+
+Vector2D KinematicUnit::getCenterPosition()
+{
+	float halfX = mpSprite->getSize().getX() / 2;
+	float halfY = mpSprite->getSize().getY() / 2;
+
+	Vector2D center = Vector2D(mPosition.getX() + halfX, mPosition.getY() + halfY);
+
+	return center;
 }
 
 //private - deletes old Steering before setting

@@ -45,7 +45,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpGraphicsSystem->init(_screenWidth, _screenHeight);
 
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f, 1.0f);
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f, 10.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 
@@ -130,8 +130,6 @@ bool GameApp::endLoop()
 
 void GameApp::cleanup()
 {
-	Game::cleanup();
-
 	if (mpSaveSystem != NULL)
 	{
 		delete mpSaveSystem;
@@ -173,6 +171,8 @@ void GameApp::cleanup()
 
 		mpLoader = NULL;
 	}
+
+	Game::cleanup();
 }
 
 
