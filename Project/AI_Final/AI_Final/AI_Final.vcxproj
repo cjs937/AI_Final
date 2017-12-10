@@ -136,7 +136,7 @@
     <ClCompile Include="SaveableComponent.cpp" />
     <ClCompile Include="SaveSystem.cpp" />
     <ClCompile Include="StateHandler.cpp" />
-    <ClCompile Include="UnitManager .cpp" />
+    <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>

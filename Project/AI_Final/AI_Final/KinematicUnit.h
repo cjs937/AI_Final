@@ -53,10 +53,12 @@ public:
 	float getMaxAcceleration() const { return mMaxAcceleration; };
 	void setVelocity( const Vector2D& velocity ){ mVelocity = velocity; };
 	int getID() { return mUnitID; };
+	Sprite* getSprite() { return mpSprite; };
+	Vector2D getCenterPosition();
 	Steering* getSteering() { return mpCurrentSteering; };
 	void addComponent(Component* _newComponent);
 	virtual void setNewOrientation();//face the direction you are moving
-
+	
 	//draw yourself to the indicated buffer
 	void draw( GraphicsBuffer* pBuffer );
 	//move according to the current velocities and update velocities based on current Steering

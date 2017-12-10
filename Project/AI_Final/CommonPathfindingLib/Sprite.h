@@ -13,6 +13,7 @@ Champlain College
 #include "Trackable.h"
 
 class GraphicsBuffer;
+class Vector2D;
 
 class Sprite:public Trackable
 {
@@ -23,6 +24,7 @@ public:
 	//draw the contents of the sprite to a GraphicsBuffer - may be rotated
 	void draw( GraphicsBuffer& dest, float dx, float dy, float rotationInRadians = 0, int flags = 0 );
 	void drawScaled(GraphicsBuffer& dest, float dx, float dy, float dw, float dh, int flags);
+	Vector2D getSize();
 
 private:
 	ALLEGRO_BITMAP* mpBitmap;//subBitmap based off the GraphicsBuffer object is contructed with

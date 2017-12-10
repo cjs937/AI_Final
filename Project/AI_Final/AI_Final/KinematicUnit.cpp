@@ -80,6 +80,16 @@ void KinematicUnit::update(float time)
 	//setNewOrientation();
 }
 
+Vector2D KinematicUnit::getCenterPosition()
+{
+	float halfX = mpSprite->getSize().getX() / 2;
+	float halfY = mpSprite->getSize().getY() / 2;
+
+	Vector2D center = Vector2D(mPosition.getX() + halfX, mPosition.getY() + halfY);
+
+	return center;
+}
+
 //private - deletes old Steering before setting
 void KinematicUnit::setSteering( Steering* pSteering )
 {
