@@ -3,7 +3,9 @@
 
 class State : public Trackable
 {
-public:
+	friend class StateHandler;
+
+protected:
 	State() {};
 	virtual ~State() {};
 

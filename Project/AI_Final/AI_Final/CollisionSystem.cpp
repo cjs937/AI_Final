@@ -8,11 +8,14 @@
 #include "Utility.h"
 #include "Grid.h"
 #include "AssetLoader.h"
-#include "allegro5\allegro_primitives.h"
+#include "DebugSystem.h"
+#include "DebugLine.h"
 
-bool CollisionSystem::checkUnitCollision(KinematicUnit* _unit, Steering* _steering)
+bool CollisionSystem::checkTerrainCollision(KinematicUnit* _unit, Steering* _steering)
 {
 	Ray* ray = new Ray(_unit->getCenterPosition(), gpGameApp->getUnitManager()->getUnitData()->raycastDistance, _steering->getLinear());
+
+	gpGameApp->getDebugSystem()->drawRequest(new DebugLine(ray));
 
 	bool collided = rayCast(ray);
 
@@ -21,6 +24,15 @@ bool CollisionSystem::checkUnitCollision(KinematicUnit* _unit, Steering* _steeri
 	return collided;
 }
 
+//Ray needs to be deleted outside this function
+bool CollisionSystem::checkTerrainCollision(Ray* _ray)
+{
+	gpGameApp->getDebugSystem()->drawRequest(new DebugLine(_ray));
+
+	bool collided = rayCast(_ray);
+
+	return collided;
+}
 
 bool CollisionSystem::rayCast(Ray* _ray)
 {

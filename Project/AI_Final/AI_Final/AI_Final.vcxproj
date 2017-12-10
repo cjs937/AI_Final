@@ -120,6 +120,7 @@
     <ClCompile Include="BlendedSteering.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
     <ClCompile Include="GridSteering.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -141,10 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIUnit.h" />
+    <ClInclude Include="AI_States.h" />
     <ClInclude Include="BlendedSteering.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugSystem.h" />
     <ClInclude Include="GridSteering.h" />
     <ClInclude Include="GameApp.h" />

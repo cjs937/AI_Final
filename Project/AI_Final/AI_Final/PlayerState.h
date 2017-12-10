@@ -9,7 +9,7 @@ public:
 	PlayerState(PlayerUnit & _player);
 	~PlayerState();
 
-	//Does nothing by default. Handles input
+	//Does nothing by default. If state needs collision input handles it
 	virtual void handleCollision() {};
 
 private:

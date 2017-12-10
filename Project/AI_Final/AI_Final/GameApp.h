@@ -62,8 +62,8 @@ public:
 	SpriteManager* getSpriteManager() { return mpSpriteManager; };
 	UnitManager* getUnitManager() { return mpUnitManager; };
 	AssetLoader* getAssetLoader() { return mpLoader; };
+	DebugSystem* getDebugSystem() { return mpDebugSystem; };
 	Grid* getGrid() { return mpGrid; };
-	AssetLoader* getAssetLoader() { return mpLoader; };
 
 	float getDeltaTime();
 	float getCurrentTime(); 

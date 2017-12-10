@@ -11,22 +11,15 @@ PlayerUnit::PlayerUnit(float _moveSpeed, KUInitData const & _data):KinematicUnit
 	mMoveSpeed = _moveSpeed;
 	mHealth = 3;
 
-	setSteering(new GridSteering());
+	setSteering(new GridSteering(this));
 }
 
 PlayerUnit::~PlayerUnit()
 {}
 
-//void PlayerUnit::update(float _dt)
-//{
-//	KinematicUnit::update(_dt);
-//}
-
 void PlayerUnit::move(Vector2D const & _direction)
 {
 	Vector2D direction = _direction;
-
-	//direction += Vector2D(direction.getY() * mPosition.getX() , direction.getX() * mPosition.getY());
 
 	static_cast<GridSteering*>(getSteering())->move(direction, mMoveSpeed);
 }

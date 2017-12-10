@@ -20,9 +20,9 @@ public:
 	~Ray()
 	{};
 
-	Vector2D getSourcePoint() { return mSourcePoint; };
-	Vector2D getDirection() { return mDirection; };
+	Vector2D const getSourcePoint() { return mSourcePoint; };
+	Vector2D const getDirection() { return mDirection; };
 
 	//R(t) = P + tD
-	Vector2D getPointAlongRay(float _t) { return mSourcePoint + (Vector2D(_t * mDirection.getX(), _t * mDirection.getY())); };
+	Vector2D const getPointAlongRay(float _t) { return mSourcePoint + (Vector2D(_t * mDirection.getX(), _t * mDirection.getY())); };
 };

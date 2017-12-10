@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Units\Steering">
       <UniqueIdentifier>{1cb60708-6f07-40c2-a758-f8c358f549f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Debugging">
+      <UniqueIdentifier>{28d0b7fc-8955-47df-8458-8f6ac2f608a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{1017815a-1199-4bb1-bc21-7140ce4fc35b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,9 +108,6 @@
     <ClCompile Include="BlendedSteering.cpp">
       <Filter>Source Files\Units\Steering</Filter>
     </ClCompile>
-    <ClCompile Include="DebugSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="HitboxComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -119,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="UnitManager.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugSystem.cpp">
+      <Filter>Source Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugLine.cpp">
+      <Filter>Source Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +203,6 @@
     <ClInclude Include="BlendedSteering.h">
       <Filter>Header Files\Units\Steering</Filter>
     </ClInclude>
-    <ClInclude Include="DebugSystem.h">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="HitboxComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -211,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSystem.h">
+      <Filter>Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLine.h">
+      <Filter>Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_States.h">
+      <Filter>Header Files\State Machine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

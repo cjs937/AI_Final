@@ -9,7 +9,17 @@ DebugSystem::DebugSystem()
 	toggle(true);
 }
 
-DebugSystem::~DebugSystem(){}
+DebugSystem::~DebugSystem()
+{
+	for (int i = 0; i < mObjectsThisFrame.size(); ++i)
+	{
+		delete mObjectsThisFrame[i];
+
+		mObjectsThisFrame[i] = NULL;
+	}
+
+	mObjectsThisFrame.clear();
+}
 
 void DebugSystem::update()
 {
@@ -17,30 +27,44 @@ void DebugSystem::update()
 		return;
 }
 
-void DebugSystem::draw(GraphicsBuffer* const _backBuffer)
+void DebugSystem::log(std::string _message, std::ostream & _stream)
 {
-	if (!mIsActive)
-		return;
+	_stream << _message << std::endl;
+}
 
-	PlayerUnit* player = UNIT_MANAGER->getPlayerUnit();
+void DebugSystem::drawRequest(DebugObject* _object)
+{
+	mObjectsThisFrame.push_back(_object);
+}
 
-	if (player == NULL)
-		return;
+void DebugSystem::draw(GraphicsBuffer* _backBuffer)
+{
+	//saves objects that shouldn't be deleted every frame
+	std::vector<DebugObject*> objectsToSave;
 
-	Vector2D start = player->getCenterPosition();
+	//draws all debug objects
+	for (int i = 0; i < mObjectsThisFrame.size(); ++i)
+	{
+		if (mIsActive)
+			mObjectsThisFrame[i]->draw(_backBuffer);
 
-	Vector2D end = player->getSteering()->getLinear();
+		//If the object shouldn't be deleted add it to the save vector
+		if (!mObjectsThisFrame[i]->deleteThisFrame)
+		{
+			objectsToSave.push_back(mObjectsThisFrame[i]);
+			
+			continue;
+		}
 
-	end.normalize();
+		delete mObjectsThisFrame[i];
 
-	end *= UNIT_MANAGER->getUnitData()->raycastDistance;
+		mObjectsThisFrame[i] = NULL;
+	}
 
-	end += start;
+	//swap values of save vector with objects this frame
+	mObjectsThisFrame.swap(objectsToSave);
 
-	if (end == Vector2D(0, 0))
-		return;
-
-	al_draw_line(start.getX(), start.getY(), end.getX(), end.getY(), al_map_rgb(255, 0, 0), 1);
+	objectsToSave.clear();
 }
 
 void DebugSystem::toggle()
@@ -52,5 +76,3 @@ void DebugSystem::toggle(bool _isOn)
 {
 	mIsActive = _isOn;
 }
-
-void DebugSystem::drawPaths(){}

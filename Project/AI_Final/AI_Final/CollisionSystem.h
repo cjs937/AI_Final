@@ -23,8 +23,8 @@ struct RayCollision : public Trackable
 class CollisionSystem : public Trackable
 {
 public:
-	static bool checkUnitCollision(KinematicUnit* _unit, Steering* _steering);
-		
+	static bool checkTerrainCollision(KinematicUnit* _unit, Steering* _steering);
+	static bool checkTerrainCollision(Ray* _ray);
 private:
 
 	static bool rayCast(Ray* _ray);
