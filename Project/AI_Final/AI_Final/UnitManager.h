@@ -30,7 +30,7 @@ struct SharedUnitData : public SaveData
 {
 public:
 
-	SharedUnitData(float _playerSpeed, float _aiSpeed);
+	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance);
 	~SharedUnitData();
 
 	virtual std::string getSerializedData() override;
@@ -39,6 +39,7 @@ public:
 
 	float playerSpeed;
 	float aiSpeed;
+	float raycastDistance;
 };
 
 class UnitManager : public Trackable

@@ -45,7 +45,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpGraphicsSystem->init(_screenWidth, _screenHeight);
 
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f);
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f, 1.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 

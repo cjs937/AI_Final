@@ -14,8 +14,8 @@ typedef std::pair <int, KinematicUnit*> mapPair;
 typedef pair<UnitType, IDType> IDPair;
 
 
-SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed): SaveData(UNIT_VALUES),
-playerSpeed(_playerSpeed), aiSpeed(_aiSpeed)
+SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance)
 {}
 
 SharedUnitData::~SharedUnitData()
