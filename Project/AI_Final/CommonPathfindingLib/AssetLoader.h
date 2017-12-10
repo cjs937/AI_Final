@@ -50,6 +50,7 @@ public:
 	void deleteCollision(unsigned int indexPos);
 
 	Sprite* getAssetName(std::string searchString);
+	int getAssetIndex(std::string searchString);
 	void setAssetNames(std::string setValue, int spriteValue);
 
 private:

@@ -8,6 +8,7 @@
 #include "Vector2D.h"
 #include "AIUnit.h"
 #include "PlayerUnit.h"
+#include "AssetLoader.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
@@ -153,7 +154,7 @@ void UnitManager::draw(GraphicsBuffer* _buffer)
 
 KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, float orientation, const Vector2D& velocity, float rotationVel, float maxVelocity, float maxAcceleration)
 {
-	Sprite* unitSprite = getUnitSprite(AI);
+	Sprite* unitSprite = getUnitSprite(_type);
 
 	if (unitSprite == NULL)
 	{
@@ -206,7 +207,7 @@ Sprite* UnitManager::getUnitSprite(UnitType _unitType)
 
 	if (_unitType == PLAYER)
 	{
-		spriteID = PLAYER_ICON_SPRITE_ID;
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(PLAYER_ID);
 	}
 	else if (_unitType == WALL)
 	{
@@ -218,7 +219,7 @@ Sprite* UnitManager::getUnitSprite(UnitType _unitType)
 	}
 	else
 	{
-		spriteID = AI_ICON_SPRITE_ID;
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(AI_ID);
 	}
 
 	return gpGameApp->getSpriteManager()->getSprite(spriteID);

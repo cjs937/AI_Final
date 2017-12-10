@@ -14,6 +14,9 @@ const IDType AI_ICON_SPRITE_ID = 2;
 const IDType WALL_SPRITE_ID = 3;
 const IDType CIRCLE_SPRITE_ID = 4;
 
+const IDDescriptor PLAYER_ID = "player";
+const IDDescriptor AI_ID = "enemy";
+
 class Timer;
 class SaveSystem;
 class GameMessageManager;
@@ -60,6 +63,7 @@ public:
 	UnitManager* getUnitManager() { return mpUnitManager; };
 
 	Grid* getGrid() { return mpGrid; };
+	AssetLoader* getAssetLoader() { return mpLoader; };
 
 	float getDeltaTime();
 	float getCurrentTime(); 

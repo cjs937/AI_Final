@@ -131,6 +131,19 @@ Sprite* AssetLoader::getAssetName(std::string searchString)
 	return NULL;
 }
 
+int AssetLoader::getAssetIndex(std::string searchString)
+{
+	for (unsigned int i = 0; i < mAssetNames.size(); i++)
+	{
+		if (mAssetNames.at(i) == searchString)
+		{
+			i++;
+			return atoi(mAssetNames.at(i).c_str());
+		}
+	}
+	return -1;
+}
+
 void AssetLoader::setAssetNames(std::string setValue, int spriteVal)
 {
 	std::stringstream change;

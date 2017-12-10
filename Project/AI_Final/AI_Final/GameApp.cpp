@@ -71,6 +71,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 	mpLoopTimer->start();
 
 	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
+	mpUnitManager->addUnit(AI, Vector2D(500, 500), 1, Vector2D(), 0);
 }
 
 void GameApp::beginLoop()
