@@ -15,12 +15,8 @@
 #include "Sprite.h"
 #include "SpriteManager.h"
 #include "Timer.h"
-#include "Defines.h"
 
 Game* gpGame = NULL;
-
-const int WIDTH = 1024;
-const int HEIGHT = 768;
 
 Game::Game()
 	:mpGraphicsSystem(NULL)
@@ -43,18 +39,14 @@ bool Game::init()
 {
 	srand(time(0));//seed random number generator
 
+	if (!initAllegro())
+		return false;
+
 	mShouldExit = false;
 
 	//create Timers
 	mpLoopTimer = new Timer;
 	mpMasterTimer = new Timer;
-
-	//startup allegro
-	if(!al_init()) 
-	{
-		fprintf(stderr, "failed to initialize allegro!\n");
-		return false;
-	}
 
 	//create and init GraphicsSystem
 	mpGraphicsSystem = new GraphicsSystem();
@@ -68,28 +60,43 @@ bool Game::init()
 	mpGraphicsBufferManager = new GraphicsBufferManager();
 	mpSpriteManager = new SpriteManager();
 
+
+
+	return true;
+}
+
+bool Game::initAllegro()
+{
+
+	//startup allegro
+	if (!al_init())
+	{
+		fprintf(stderr, "failed to initialize allegro!\n");
+		return false;
+	}
+
 	//startup a lot of allegro stuff
 
 	//load image loader addon
-	if( !al_init_image_addon() )
+	if (!al_init_image_addon())
 	{
 		fprintf(stderr, "image addon failed to load!\n");
 		return false;
 	}
 
 	//install audio stuff
-	if( !al_install_audio() )
+	if (!al_install_audio())
 	{
 		fprintf(stderr, "failed to initialize sound!\n");
 		return false;
 	}
 
-	if(!al_init_acodec_addon())
+	if (!al_init_acodec_addon())
 	{
 		fprintf(stderr, "failed to initialize audio codecs!\n");
 		return false;
 	}
- 
+
 	if (!al_reserve_samples(1))
 	{
 		fprintf(stderr, "failed to reserve samples!\n");
@@ -97,38 +104,38 @@ bool Game::init()
 	}
 
 	//should probably be done in the InputSystem!
-	if( !al_install_keyboard() )
+	if (!al_install_keyboard())
 	{
-		printf( "Keyboard not installed!\n" ); 
+		printf("Keyboard not installed!\n");
 		return false;
 	}
 
 	//should probably be done in the InputSystem!
-	if( !al_install_mouse() )
+	if (!al_install_mouse())
 	{
-		printf( "Mouse not installed!\n" ); 
+		printf("Mouse not installed!\n");
 		return false;
 	}
 
 	//should be somewhere else!
 	al_init_font_addon();
-	if( !al_init_ttf_addon() )
+	if (!al_init_ttf_addon())
 	{
-		printf( "ttf font addon not initted properly!\n" ); 
+		printf("ttf font addon not initted properly!\n");
 		return false;
 	}
 
 	//actually load the font
-	mpFont = al_load_ttf_font( "cour.ttf", 20, 0 );
-	if( mpFont == NULL )
+	mpFont = al_load_ttf_font("cour.ttf", 20, 0);
+	if (mpFont == NULL)
 	{
-		printf( "ttf font file not loaded properly!\n" ); 
+		printf("ttf font file not loaded properly!\n");
 		return false;
 	}
 
-	if( !al_init_primitives_addon() )
+	if (!al_init_primitives_addon())
 	{
-		printf( "Primitives addon not added!\n" ); 
+		printf("Primitives addon not added!\n");
 		return false;
 	}
 
@@ -168,21 +175,26 @@ void Game::cleanup()
 void Game::beginLoop()
 {
 	mpLoopTimer->start();
-
-	//draw background
-	Sprite* pBackgroundSprite = mpSpriteManager->getSprite( BACKGROUND_SPRITE_ID );
-	pBackgroundSprite->draw( *(mpGraphicsSystem->getBackBuffer()), 0, 0 );
 }
 
 void Game::processLoop()
 {
-		mpGraphicsSystem->swap();
+	draw();
+
+	mpGraphicsSystem->swap();
 }
 
 bool Game::endLoop()
 {
 	mpLoopTimer->sleepUntilElapsed( mLoopTargetTime );
 	return mShouldExit;
+}
+
+void Game::draw()
+{
+	//draw background
+	//Sprite* pBackgroundSprite = mpSpriteManager->getSprite(BACKGROUND_SPRITE_ID);
+	//pBackgroundSprite->draw(*(mpGraphicsSystem->getBackBuffer()), 0, 0);
 }
 
 
@@ -225,3 +237,4 @@ float mapRotationToRange( float rotation, float low, float high )
 	}
 	return rotation;
 }
+

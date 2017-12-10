@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Steering.h"
 #include "Component.h"
+#include "GameApp.h"
 using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );

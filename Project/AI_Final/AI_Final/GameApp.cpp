@@ -20,11 +20,14 @@
 #include "AssetLoader.h"
 #include "DebugSystem.h"
 #include "AIUnit.h"
+#include "Grid.h"
 
 GameApp* gpGameApp = NULL;
 
 GameApp::GameApp()
-{}
+{
+	gpGame = this;
+}
 
 GameApp::~GameApp()
 {
@@ -32,17 +35,15 @@ GameApp::~GameApp()
 
 void GameApp::init(int _screenWidth, int _screenHeight)
 {
-	installAllegro();
-
-	mpGraphicsSystem = new GraphicsSystem();
+	Game::init();
 
 	mpSaveSystem = new SaveSystem();
 
 	mpMessageManager = new GameMessageManager();
+	
+	mpGraphicsBufferManager->init();
 
-	mpGraphicsBufferManager = new GraphicsBufferManager();
-
-	mpSpriteManager = new SpriteManager();
+	mpGraphicsSystem->init(_screenWidth, _screenHeight);
 
 	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f);
 
@@ -50,15 +51,14 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpInputSystem = new InputSystem();
 
-	mpLoopTimer = new Timer();
-
-	mpLoader = new AssetLoader();
-
 	mpDebugSystem = new DebugSystem();
 
-	mpGraphicsSystem->init(_screenWidth, _screenHeight);
+	mpGrid = new Grid(_screenWidth, _screenHeight, GRID_SQUARE_SIZE);
 
-	mpGraphicsBufferManager->init();
+	mpLoader = new AssetLoader();
+	mpLoader->loadAssets();
+	loadLevel();
+
 
 	//mpLoader->loadAssets();
 
@@ -73,78 +73,16 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
 }
 
-void GameApp::installAllegro()
-{
-	if (!al_init())
-	{
-		fprintf(stderr, "allegro init failed!\n");
-	}
-
-	//load image loader addon
-	if (!al_init_image_addon())
-	{
-		fprintf(stderr, "image addon failed to load!\n");
-	}
-
-	//install audio stuff
-	if (!al_install_audio())
-	{
-		fprintf(stderr, "failed to initialize sound!\n");
-	}
-
-	if (!al_init_acodec_addon())
-	{
-		fprintf(stderr, "failed to initialize audio codecs!\n");
-	}
-
-	if (!al_reserve_samples(1))
-	{
-		fprintf(stderr, "failed to reserve samples!\n");
-	}
-
-	if (!al_install_keyboard())
-	{
-		printf("Keyboard not installed!\n");
-	}
-
-	if (!al_install_mouse())
-	{
-		printf("Mouse not installed!\n");
-	}
-
-	if (!al_init_primitives_addon())
-	{
-		printf("Primitives addon not added!\n");
-	}
-
-	al_init_font_addon();
-	if (!al_init_ttf_addon())
-	{
-		printf("ttf font addon not initted properly!\n");
-	}
-
-	//actually load the font
-	mpDefaultFont = al_load_ttf_font("cour.ttf", 20, 0);
-	if (mpDefaultFont == NULL)
-	{
-		printf("ttf font file not loaded properly!\n");
-	}
-}
-
-void GameApp::startLoop()
+void GameApp::beginLoop()
 {
 	mLoopStartTime = mpLoopTimer->getElapsedTime();
 }
 
-bool GameApp::updateLoop()
+void GameApp::processLoop()
 {
-	startLoop();
-
 	updateSystems();
 
 	draw();
-
-	return endLoop();
 }
 
 void GameApp::updateSystems()
@@ -166,7 +104,10 @@ void GameApp::draw()
 
 	backBuffer->clear();
 
+	Game::draw();
+
 	//[draw things here]
+	mpGrid->draw(backBuffer);
 	mpUnitManager->draw(backBuffer);
 
 	mpDebugSystem->draw(backBuffer);
@@ -188,6 +129,8 @@ bool GameApp::endLoop()
 
 void GameApp::cleanup()
 {
+	Game::cleanup();
+
 	if (mpSaveSystem != NULL)
 	{
 		delete mpSaveSystem;
@@ -195,40 +138,11 @@ void GameApp::cleanup()
 		mpSaveSystem = NULL;
 	}
 
-	if (mpLoopTimer != NULL)
-	{
-		delete mpLoopTimer;
-
-		mpLoopTimer = NULL;
-	}
-
 	if (mpMessageManager != NULL)
 	{
 		delete mpMessageManager;
 
 		mpMessageManager = NULL;
-	}
-
-
-	if (mpGraphicsSystem != NULL)
-	{
-		delete mpGraphicsSystem;
-
-		mpGraphicsSystem = NULL;
-	}
-
-	if (mpGraphicsBufferManager != NULL)
-	{
-		delete mpGraphicsBufferManager;
-
-		mpGraphicsBufferManager = NULL;
-	}
-
-	if (mpSpriteManager != NULL)
-	{
-		delete mpSpriteManager;
-
-		mpSpriteManager = NULL;
 	}
 
 	if (mpUnitManager != NULL)
@@ -258,13 +172,6 @@ void GameApp::cleanup()
 
 		mpLoader = NULL;
 	}
-
-	if (mpDefaultFont != NULL)
-	{
-		al_destroy_font(mpDefaultFont);
-
-		mpDefaultFont = NULL;
-	}
 }
 
 
@@ -283,4 +190,25 @@ float GameApp::getCurrentTime()
 void GameApp::quit()
 {
 	mContinueLoop = false;
+}
+
+void GameApp::loadGrid(std::ifstream& theStream)
+{
+	mpGrid->load(theStream);
+}
+
+void GameApp::loadLevel()
+{
+	//std::string* levelInput;  
+	GameApp* pGameApp = dynamic_cast<GameApp*>(gpGame);
+	if (pGameApp != NULL)
+	{
+		//levelInput = 
+		ifstream theStream(mpLoader->getLevelName(0));
+		pGameApp->loadGrid(theStream);
+		theStream.close();
+		//pEditor->getGridVisualizer()->setModified();
+		cout << "Grid loaded!\n";
+		Sleep(1000);//very bogus
+	}
 }

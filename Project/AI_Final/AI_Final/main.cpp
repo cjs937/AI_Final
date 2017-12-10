@@ -9,11 +9,13 @@ int main()
 	bool contiueLoop = true;
 
 	gpGameApp = new GameApp();
-	gpGameApp->init(1000, 1000);
+	gpGameApp->init(WIDTH, HEIGHT);
 
 	while (contiueLoop)
 	{
-		contiueLoop = gpGameApp->updateLoop();
+		gpGameApp->beginLoop();
+		gpGameApp->processLoop();
+		contiueLoop = gpGameApp->endLoop();
 	}
 
 	delete gpGameApp;

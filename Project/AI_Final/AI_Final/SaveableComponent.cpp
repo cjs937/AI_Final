@@ -1,6 +1,6 @@
 #include "SaveableComponent.h"
 #include "Defines.h"
-
+#include "GameApp.h"
 SaveableComponent::SaveableComponent(SaveData* _saveData):Component(SAVEABLE), mSaveData(NULL)
 {
 	setSaveData(_saveData);

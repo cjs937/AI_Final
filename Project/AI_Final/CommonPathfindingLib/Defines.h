@@ -10,6 +10,12 @@ static const IDType HIGHEST_ID = 9999;
 
 static const IDDescriptor ERROR_STRING = "error";
 
+const IDType WIDTH = 1024;
+const IDType HEIGHT = 768;
+
+const int GRID_SQUARE_SIZE = 32;
+
+
 #define GAME gpGameApp
 #define MESSAGE_MANAGER gpGameApp->getMessageManager()
 #define GRAPHICS_SYSTEM gpGameApp->getGraphicsSystem()
@@ -18,7 +24,8 @@ static const IDDescriptor ERROR_STRING = "error";
 #define SPRITE_MANAGER gpGameApp->getSpriteManager()
 #define UNIT_MANAGER gpGameApp->getUnitManager()
 
-#include "../AI_Final/GameApp.h"
+//#include "../AI_Final/GameApp.h"
+
 #include "GraphicsSystem.h"
 #include "GraphicsBufferManager.h"
 #include "SpriteManager.h"

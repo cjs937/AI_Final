@@ -1,6 +1,7 @@
-#pragma once
-#include "Trackable.h"
-#include "allegro5\allegro_font.h"
+#ifndef GAMEAPP_H
+#define GAMEAPP_H
+
+#include "Game.h"
 #include "Defines.h"
 
 const int FPS = 60;
@@ -23,10 +24,11 @@ class UnitManager;
 class InputSystem;
 class AssetLoader;
 class DebugSystem;
+class Grid;
 
 class AIUnit;
 
-class GameApp : public Trackable
+class GameApp : public Game
 {
 public:
 	GameApp();
@@ -35,17 +37,17 @@ public:
 	void init(int _screenWidth, int _screenHeight);
 
 	//do stuff before beginning loop
-	void startLoop();
+	virtual void beginLoop() override;
 
 	//process the loop
-	bool updateLoop();
+	virtual void processLoop() override;
 
 	//do stuff at end of loop and return whether it should exit or not
-	bool endLoop();
+	virtual bool endLoop() override;
 
-	void draw();
+	virtual void draw() override;
 
-	void cleanup();
+	virtual void cleanup() override;
 
 	void quit();
 
@@ -57,30 +59,33 @@ public:
 	SpriteManager* getSpriteManager() { return mpSpriteManager; };
 	UnitManager* getUnitManager() { return mpUnitManager; };
 
-	ALLEGRO_FONT* getDefaultFont() { return mpDefaultFont; }
+	Grid* getGrid() { return mpGrid; };
+
 	float getDeltaTime();
 	float getCurrentTime(); 
 
+
+	//loadLevel
+	void loadGrid(std::ifstream& theStream);
+	void loadLevel();
+
 private:
 	AssetLoader* mpLoader;
-	Timer* mpLoopTimer;
 	SaveSystem* mpSaveSystem;
 	GameMessageManager* mpMessageManager;
-	GraphicsSystem* mpGraphicsSystem;
-	GraphicsBufferManager* mpGraphicsBufferManager;
-	SpriteManager* mpSpriteManager;
 	UnitManager* mpUnitManager;
 	InputSystem* mpInputSystem;
 	DebugSystem* mpDebugSystem;
 
-	ALLEGRO_FONT* mpDefaultFont;
+	Grid* mpGrid;
 
 	bool mContinueLoop = true;
 	float mPrevFrameTime;
 	float mLoopStartTime;
 
-	void installAllegro();
+	//void installAllegro();
 	void updateSystems();
 };
 
 extern GameApp* gpGameApp;
+#endif

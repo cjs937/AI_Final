@@ -19,6 +19,7 @@
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridVisualizer.h" />
+    <ClInclude Include="MinimalDefines.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
   </ItemGroup>

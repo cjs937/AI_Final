@@ -15,7 +15,6 @@
 
 using namespace std;
 
-const int GRID_SQUARE_SIZE = 32;
 
 Editor::Editor() : Game()
 {
