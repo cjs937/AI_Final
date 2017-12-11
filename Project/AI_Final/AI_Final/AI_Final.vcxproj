@@ -158,6 +158,7 @@
     <ClInclude Include="MovePlayerMessage.h" />
     <ClInclude Include="PausableComponent.h" />
     <ClInclude Include="PauseSystem.h" />
+    <ClInclude Include="UnitSpawner.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerUnit.h" />
     <ClInclude Include="QuitGameMessage.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />
     <ClInclude Include="Steering.h" />

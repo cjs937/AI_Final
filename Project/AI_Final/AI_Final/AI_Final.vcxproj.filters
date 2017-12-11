@@ -212,5 +212,11 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpawnSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitSpawner.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
