@@ -15,9 +15,9 @@ bool CollisionSystem::checkTerrainCollision(KinematicUnit* _unit, Steering* _ste
 {
 	Ray* ray = new Ray(_unit->getCenterPosition(), gpGameApp->getUnitManager()->getUnitData()->raycastDistance, _steering->getLinear());
 
-	gpGameApp->getDebugSystem()->drawRequest(new DebugLine(ray));
-
 	bool collided = rayCast(ray);
+												// if there was collision draws red ray, else draws green
+	gpGameApp->getDebugSystem()->drawRequest( new DebugLine(ray, (collided ? Color(RED) : Color(GREEN))) );
 
 	delete ray;
 
@@ -27,9 +27,9 @@ bool CollisionSystem::checkTerrainCollision(KinematicUnit* _unit, Steering* _ste
 //Ray needs to be deleted outside this function
 bool CollisionSystem::checkTerrainCollision(Ray* _ray)
 {
-	gpGameApp->getDebugSystem()->drawRequest(new DebugLine(_ray));
-
 	bool collided = rayCast(_ray);
+
+	gpGameApp->getDebugSystem()->drawRequest(new DebugLine(_ray, (collided ? Color(RED) : Color(GREEN))));
 
 	return collided;
 }
@@ -40,7 +40,7 @@ bool CollisionSystem::rayCast(Ray* _ray)
 
 	Vector2D castPoint;
 
-	for (float i = .1; i < 1.1f; i += .1)
+	for (float i = .1; i < 1.1f; i += .3)
 	{
 		castPoint = _ray->getPointAlongRay(i);
 

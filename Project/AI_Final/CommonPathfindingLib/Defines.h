@@ -23,6 +23,7 @@ const int GRID_SQUARE_SIZE = 32;
 #define BUFFER_MANAGER gpGameApp->getGraphicsBufferManager()
 #define SPRITE_MANAGER gpGameApp->getSpriteManager()
 #define UNIT_MANAGER gpGameApp->getUnitManager()
+#define DEBUG gpGameApp->getDebugSystem()
 
 //#include "../AI_Final/GameApp.h"
 
@@ -33,3 +34,4 @@ const int GRID_SQUARE_SIZE = 32;
 #include "../AI_Final/SaveSystem.h"
 #include "../AI_Final/GameMessageManager.h"
 #include "../AI_Final/UnitManager.h"
+#include "../AI_Final/DebugSystem.h"

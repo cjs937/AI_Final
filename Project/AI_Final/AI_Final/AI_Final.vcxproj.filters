@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Debug">
       <UniqueIdentifier>{1017815a-1199-4bb1-bc21-7140ce4fc35b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\State Machine\AIStates">
+      <UniqueIdentifier>{1a256ab6-1632-4261-acdd-c3df94eb364b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State Machine\AIStates">
+      <UniqueIdentifier>{cc94f42c-475b-4400-bc13-60bef64a55e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="DebugLine.cpp">
       <Filter>Source Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_Wander.cpp">
+      <Filter>Source Files\State Machine\AIStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,8 +233,11 @@
     <ClInclude Include="DebugLine.h">
       <Filter>Header Files\Debugging</Filter>
     </ClInclude>
-    <ClInclude Include="AI_States.h">
-      <Filter>Header Files\State Machine</Filter>
+    <ClInclude Include="AIState.h">
+      <Filter>Header Files\State Machine\AIStates</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Wander.h">
+      <Filter>Header Files\State Machine\AIStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

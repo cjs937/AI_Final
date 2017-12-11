@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIUnit.cpp" />
+    <ClCompile Include="AI_Wander.cpp" />
     <ClCompile Include="BlendedSteering.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -142,7 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIUnit.h" />
-    <ClInclude Include="AI_States.h" />
+    <ClInclude Include="AIState.h" />
+    <ClInclude Include="AI_Wander.h" />
     <ClInclude Include="BlendedSteering.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
