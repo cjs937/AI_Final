@@ -24,5 +24,6 @@ private:
 
 	//gets the grid based direction ( (1,0), (0,1) etc.. ) of the index relative to the player's current  tile
 	Vector2D getDirectionFromIndex(Vector2D _unitPosition, int _index);
-	void wander();
+	void getWanderDirection();
+	void move();
 };

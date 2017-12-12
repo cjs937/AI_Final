@@ -18,21 +18,23 @@ AI_Wander::~AI_Wander()
 
 void AI_Wander::onEnter()
 {
+	getWanderDirection();
+
 	mpTimer->start();
 }
 
 State* AI_Wander::update()
 {
 	if(mpTimer->getElapsedTime() >= WANDER_DELAY)
-		wander();
+		getWanderDirection();
 
-	mUnit->move(mDirection, UNIT_MANAGER->getUnitData()->aiSpeed);
+	move();
 
 	//should return null unless base behavior changes
 	return AIState::update();
 }
 
-void AI_Wander::wander()
+void AI_Wander::getWanderDirection()
 {
 	std::vector<Vector2D> possibleDirections = getPossibleDirections(UNIT_MANAGER->getUnitData()->raycastDistance);
 
@@ -52,6 +54,17 @@ void AI_Wander::wander()
 	mpTimer->stop();
 
 	mpTimer->start();
+}
+
+
+void AI_Wander::move()
+{
+	if (CollisionSystem::checkTerrainCollision(mUnit->getCenterPosition(), mDirection, UNIT_MANAGER->getUnitData()->raycastDistance))
+	{
+		mDirection = Vector2D(-mDirection.getX(), -mDirection.getY());
+	}
+
+	mUnit->move(mDirection, UNIT_MANAGER->getUnitData()->aiSpeed);
 }
 
 

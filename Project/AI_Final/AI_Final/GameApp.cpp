@@ -33,9 +33,9 @@ GameApp::~GameApp()
 {
 }
 
-void GameApp::init(int _screenWidth, int _screenHeight)
+bool GameApp::init(int _screenWidth, int _screenHeight)
 {
-	Game::init();
+	Game::init(_screenWidth, _screenHeight);
 
 	mpSaveSystem = new SaveSystem();
 
@@ -43,9 +43,7 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 	
 	mpGraphicsBufferManager->init();
 
-	mpGraphicsSystem->init(_screenWidth, _screenHeight);
-
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 40.0f, 10.0f);
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 300.0f, 10.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 
@@ -72,6 +70,8 @@ void GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
 	mpUnitManager->addUnit(AI, Vector2D(200, 400), 1, Vector2D(), 0);
+
+	return true;
 }
 
 void GameApp::beginLoop()

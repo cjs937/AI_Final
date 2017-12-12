@@ -37,7 +37,7 @@ public:
 	GameApp();
 	~GameApp();
 
-	void init(int _screenWidth, int _screenHeight);
+	virtual bool init(int _screenWidth, int _screenHeight) override;
 
 	//do stuff before beginning loop
 	virtual void beginLoop() override;
