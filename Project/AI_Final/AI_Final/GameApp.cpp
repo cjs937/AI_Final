@@ -1,4 +1,5 @@
 #include "GameApp.h"
+#include <cmath>
 
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
@@ -79,6 +80,7 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 void GameApp::beginLoop()
 {
+	//mpLoopTimer->start();
 	mLoopStartTime = mpLoopTimer->getElapsedTime();
 }
 
@@ -92,6 +94,8 @@ void GameApp::processLoop()
 void GameApp::updateSystems()
 {
 	float dt = getDeltaTime();
+
+	DEBUG->log(std::to_string(dt));
 
 	mpMessageManager->processMessagesForThisframe();
 
@@ -181,7 +185,7 @@ void GameApp::cleanup()
 
 float GameApp::getDeltaTime()
 {
-	return mpLoopTimer->getElapsedTime() - mPrevFrameTime;
+	return abs(mpLoopTimer->getElapsedTime() - mPrevFrameTime);
 }
 
 
