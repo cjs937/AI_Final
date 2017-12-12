@@ -43,7 +43,7 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 	
 	mpGraphicsBufferManager->init();
 
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 300.0f, 10.0f);
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 100.0f, 10.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 

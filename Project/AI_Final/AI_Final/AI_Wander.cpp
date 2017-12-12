@@ -12,13 +12,13 @@ AI_Wander::AI_Wander(AIUnit & _unit):AIState(_unit)
 {
 	mpTimer = new Timer();
 }
-
+ 
 AI_Wander::~AI_Wander()
 {}
 
 void AI_Wander::onEnter()
 {
-	getWanderDirection();
+//	getWanderDirection();
 
 	mpTimer->start();
 }

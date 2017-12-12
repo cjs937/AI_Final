@@ -35,7 +35,7 @@ Game::~Game()
 	cleanup();
 }
 
-bool Game::init()
+bool Game::init(int _width, int _height)
 {
 	srand(time(0));//seed random number generator
 
@@ -50,7 +50,7 @@ bool Game::init()
 
 	//create and init GraphicsSystem
 	mpGraphicsSystem = new GraphicsSystem();
-	bool goodGraphics = mpGraphicsSystem->init( WIDTH, HEIGHT );
+	bool goodGraphics = mpGraphicsSystem->init( _width, _height );
 	if(!goodGraphics) 
 	{
 		fprintf(stderr, "failed to initialize GraphicsSystem object!\n");

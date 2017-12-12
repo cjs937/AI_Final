@@ -36,7 +36,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	virtual bool init();
+	virtual bool init(int _width = WIDTH, int _height = HEIGHT);
 	bool initAllegro();
 	virtual void cleanup();
 
@@ -56,9 +56,9 @@ public:
 	inline void markForExit() { mShouldExit = true; };
 
 
-	//loadLevel
-	void loadLevel();
-	void saveLevel();
+	////loadLevel
+	//void loadLevel();
+	//void saveLevel();
 
 protected:
 	GraphicsSystem* mpGraphicsSystem;

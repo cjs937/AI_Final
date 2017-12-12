@@ -2,11 +2,14 @@
 #include "GridSteering.h"
 #include "StateHandler.h"
 #include "HitboxComponent.h"
+#include "Sprite.h"
 
 PlayerUnit::PlayerUnit(float _moveSpeed, KUInitData const & _data):KinematicUnit(_data)
 {
+	Vector2D spriteSize = getSprite()->getSize();
+	addComponent(new HitboxComponent(this, spriteSize.getX(), spriteSize.getY()));
+
 	addComponent(new StateHandler());
-	//addComponent(new HitboxComponent())
 
 	mMoveSpeed = _moveSpeed;
 	mHealth = 3;

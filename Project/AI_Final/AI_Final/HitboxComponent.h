@@ -1,10 +1,15 @@
 #pragma once
 #include "Trackable.h"
 #include "Vector2D.h"
+#include "Component.h"
 
-class HitboxComponent : public Trackable
+class KinematicUnit;
+
+class HitboxComponent : public Component
 {
 private:
+
+	KinematicUnit* mpUnit;
 
 	Vector2D mPositionA;
 	Vector2D mPositionB;
@@ -16,12 +21,11 @@ private:
 	float mWidth;
 	float mHeight;
 
-	bool mIsTrigger;
 	bool mIsColliding;
 
 public:
 
-	HitboxComponent(float _width, float _height, Vector2D const & _position, bool _isTrigger, Vector2D const & _offset = Vector2D(0, 0));
+	HitboxComponent(KinematicUnit* _unit, float _width, float _height, Vector2D const & _offset = Vector2D(0, 0));
 	HitboxComponent(HitboxComponent* const _otherBox);
 	~HitboxComponent();
 
@@ -29,14 +33,11 @@ public:
 	bool checkInBounds(Vector2D &_point);
 
 	void createBounds(Vector2D const & _position);
-	void update(Vector2D const & _position);
-
+	void updateBounds(Vector2D const & _position);
+	virtual void update() override;
 	Vector2D getULCorner();
 	Vector2D getURCorner();
 	Vector2D getBLCorner();
 	Vector2D getBRCorner();
 
-	bool isTrigger() { return mIsTrigger; };
-
-	void setIsTrigger(bool _isTrigger);
 };

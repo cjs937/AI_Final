@@ -1,16 +1,21 @@
 #include "HitboxComponent.h"
+#include "Defines.h"
+#include "GameApp.h"
+#include "DebugLine.h"
+#include "KinematicUnit.h"
 
-HitboxComponent::HitboxComponent(float _width, float _height, Vector2D const & _position, bool _isTrigger, Vector2D const & _offset) 
-	: mWidth(_width), mHeight(_height), mOffset(_offset), mIsTrigger(_isTrigger)
+HitboxComponent::HitboxComponent(KinematicUnit* _unit, float _width, float _height, Vector2D const & _offset): Component(HITBOX), 
+	mpUnit(_unit), mWidth(_width), mHeight(_height), mOffset(_offset)
 {
 	mWidth = _width;
 	mHeight = _height;
 
-	createBounds(_position + _offset);
+	createBounds(mpUnit->getPosition() + _offset);
 }
 
-HitboxComponent::HitboxComponent(HitboxComponent* _otherBox)
+HitboxComponent::HitboxComponent(HitboxComponent* _otherBox): Component(HITBOX)
 {
+	mpUnit = _otherBox->mpUnit;
 	mWidth = _otherBox->mWidth;
 	mHeight = _otherBox->mHeight;
 
@@ -94,19 +99,30 @@ void HitboxComponent::createBounds(Vector2D const & _position)
 	mPositionB.setY(mPositionA.getY());
 
 	mPositionC.setX(mPositionA.getX());
-	mPositionC.setY(mPositionA.getY() - mHeight);
+	mPositionC.setY(mPositionA.getY() + mHeight);
 
 	mPositionD.setX(mPositionA.getX() + mWidth);
-	mPositionD.setY(mPositionA.getY() - mHeight);
+	mPositionD.setY(mPositionA.getY() +   mHeight);
 }
 
 
-void HitboxComponent::update(Vector2D const & _position)//creates new hitbox if the unit has moved since the last frame
+void HitboxComponent::update()
+{
+	updateBounds(mpUnit->getPosition() + mOffset);
+}
+
+
+void HitboxComponent::updateBounds(Vector2D const & _position)//creates new hitbox if the unit has moved since the last frame
 {
 	if (mPositionA != _position)
 	{
 		createBounds(_position);
 	}
+
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionB));
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionC));
+	DEBUG->drawRequest(new DebugLine(mPositionC, mPositionD));
+	DEBUG->drawRequest(new DebugLine(mPositionB, mPositionD));
 }
 
 
@@ -131,9 +147,4 @@ Vector2D HitboxComponent::getBLCorner()
 Vector2D HitboxComponent::getBRCorner()
 {
 	return mPositionD;
-}
-
-void HitboxComponent::setIsTrigger(bool _isTrigger)
-{
-	mIsTrigger = _isTrigger;
 }
