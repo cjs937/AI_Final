@@ -11,7 +11,6 @@ Champlain College
 #include <allegro5/allegro.h>
 
 #include "Trackable.h"
-
 class GraphicsBuffer;
 
 class Sprite:public Trackable

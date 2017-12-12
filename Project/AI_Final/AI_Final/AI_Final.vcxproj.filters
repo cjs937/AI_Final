@@ -64,6 +64,12 @@
     <Filter Include="Source Files\State Machine\AIStates">
       <UniqueIdentifier>{cc94f42c-475b-4400-bc13-60bef64a55e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pathfinding">
+      <UniqueIdentifier>{465b1ada-b635-4af8-bd08-d90e02920941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathfinding">
+      <UniqueIdentifier>{83c226e7-3722-4c51-9392-ad072522e22d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +143,30 @@
     </ClCompile>
     <ClCompile Include="AI_Wander.cpp">
       <Filter>Source Files\State Machine\AIStates</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarPathfinder.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="GridGraph.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="GridPathfinder.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathfinder.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +268,30 @@
     </ClInclude>
     <ClInclude Include="AI_Wander.h">
       <Filter>Header Files\State Machine\AIStates</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathfinder.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="GridGraph.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="GridPathfinder.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinder.h">
+      <Filter>Header Files\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
