@@ -8,7 +8,14 @@ Spawner::Spawner(SpawnerType _type, Vector2D _position, bool _spawnOnStart) :
 }
 
 Spawner::~Spawner() 
-{}
+{
+	if (mpTimer != NULL)
+	{
+		delete mpTimer;
+
+		mpTimer = NULL;
+	}
+}
 
 
 //Should be overridden by children

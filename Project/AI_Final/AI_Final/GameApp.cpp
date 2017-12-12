@@ -31,8 +31,7 @@ GameApp::GameApp()
 }
 
 GameApp::~GameApp()
-{
-}
+{}
 
 bool GameApp::init(int _screenWidth, int _screenHeight)
 {
@@ -73,8 +72,6 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	mpUnitManager->addUnit(AI, Vector2D(200, 400), 1, Vector2D(), 0);
-
 	return true;
 }
 
@@ -94,8 +91,6 @@ void GameApp::processLoop()
 void GameApp::updateSystems()
 {
 	float dt = getDeltaTime();
-
-	DEBUG->log(std::to_string(dt));
 
 	mpMessageManager->processMessagesForThisframe();
 
@@ -177,6 +172,13 @@ void GameApp::cleanup()
 		delete mpLoader;
 
 		mpLoader = NULL;
+	}
+
+	if (mpGrid != NULL)
+	{
+		delete mpGrid;
+
+		mpGrid = NULL;
 	}
 
 	Game::cleanup();

@@ -87,7 +87,6 @@ private:
 	float mPrevFrameTime;
 	float mLoopStartTime;
 
-	//void installAllegro();
 	void updateSystems();
 };
 
