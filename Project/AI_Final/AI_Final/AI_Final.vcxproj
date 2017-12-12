@@ -123,6 +123,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GridSteering.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
@@ -134,9 +135,12 @@
     <ClCompile Include="KinematicUnit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PauseSystem.cpp" />
+    <ClCompile Include="PlayerSpawner.cpp" />
     <ClCompile Include="PlayerUnit.cpp" />
     <ClCompile Include="SaveableComponent.cpp" />
     <ClCompile Include="SaveSystem.cpp" />
+    <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="SpawnSystem.cpp" />
     <ClCompile Include="StateHandler.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -146,11 +150,13 @@
     <ClInclude Include="AIState.h" />
     <ClInclude Include="AI_Wander.h" />
     <ClInclude Include="BlendedSteering.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugSystem.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="GridSteering.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />
@@ -163,6 +169,7 @@
     <ClInclude Include="MovePlayerMessage.h" />
     <ClInclude Include="PausableComponent.h" />
     <ClInclude Include="PauseSystem.h" />
+    <ClInclude Include="PlayerSpawner.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerUnit.h" />
     <ClInclude Include="QuitGameMessage.h" />
@@ -170,6 +177,7 @@
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />
     <ClInclude Include="Steering.h" />

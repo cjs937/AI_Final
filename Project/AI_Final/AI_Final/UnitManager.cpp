@@ -9,6 +9,7 @@
 #include "AIUnit.h"
 #include "PlayerUnit.h"
 #include "AssetLoader.h"
+#include "SpawnSystem.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
@@ -33,14 +34,6 @@ void SharedUnitData::loadData(std::ifstream &_fin)
 UnitManager::UnitManager(SharedUnitData* _saveData) : mPlayerID(INVALID_ID)
 {
 	mSaveComponent = new SaveableComponent(_saveData);
-
-	mUnitMaxVelocity = DEFAULT_MAX_VEL;
-	mUnitMaxRotationVelocity = DEFAULT_MAX_ROTATION;
-
-	initBuffersAndSprites();
-
-	//first unit id will be 0
-	mAvailableIDs.push(0);
 }
 
 SharedUnitData* UnitManager::getUnitData()
@@ -48,24 +41,14 @@ SharedUnitData* UnitManager::getUnitData()
 	return static_cast<SharedUnitData*>(mSaveComponent->getSaveData());
 }
 
-
-void UnitManager::initBuffersAndSprites()
+void UnitManager::init()
 {
-	mBufferIDs.insert(IDPair(AI, gpGameApp->getGraphicsBufferManager()->loadBuffer("enemy-arrow.bmp")));
+	//first unit id will be 0
+	mAvailableIDs.push(0);
 
-	GraphicsBuffer* pAIBuffer = gpGameApp->getGraphicsBufferManager()->getBuffer(getBufferID(AI));
-	if (pAIBuffer != NULL)
-	{
-		gpGameApp->getSpriteManager()->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, pAIBuffer->getWidth(), pAIBuffer->getHeight());
-	}
-}
+	mpSpawnSystem = new SpawnSystem();
 
-IDType UnitManager::getBufferID(UnitType _unitType)
-{
-	if (mBufferIDs.find(_unitType) == mBufferIDs.end())
-		return INVALID_ID;
-
-	return mBufferIDs[_unitType];
+	mpSpawnSystem->initSpawners(gpGameApp->getGrid());
 }
 
 
@@ -80,6 +63,13 @@ UnitManager::~UnitManager()
 	}
 
 	mMapList.clear();
+
+	if (mpSpawnSystem != NULL)
+	{
+		delete mpSpawnSystem;
+
+		mpSpawnSystem = NULL;
+	}
 
 	if (mSaveComponent != NULL)
 	{
@@ -137,6 +127,8 @@ void UnitManager::update(float _dt)
 			j->second->update(_dt);
 		}
 	}
+
+	mpSpawnSystem->update(_dt);
 }
 
 void UnitManager::draw(GraphicsBuffer* _buffer)
@@ -149,7 +141,6 @@ void UnitManager::draw(GraphicsBuffer* _buffer)
 		}
 	}
 }
-
 
 
 KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, float orientation, const Vector2D& velocity, float rotationVel, float maxVelocity, float maxAcceleration)

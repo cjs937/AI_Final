@@ -43,10 +43,6 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 	
 	mpGraphicsBufferManager->init();
 
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 100.0f, 10.0f);
-
-	mpUnitManager = new UnitManager(unitData);
-
 	mpInputSystem = new InputSystem();
 
 	mpDebugSystem = new DebugSystem();
@@ -54,8 +50,16 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 	mpGrid = new Grid(_screenWidth, _screenHeight, GRID_SQUARE_SIZE);
 
 	mpLoader = new AssetLoader();
+
+	SharedUnitData* unitData = new SharedUnitData(150.0f, 100.0f, 10.0f);
+
+	mpUnitManager = new UnitManager(unitData);
+
 	mpLoader->loadAssets();
 	loadLevel();
+
+	//Unit manager should be initialized after grid & asset loader because it needs their data
+	mpUnitManager->init();
 
 
 	//mpLoader->loadAssets();
@@ -68,7 +72,6 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoopTimer->start();
 
-	mpUnitManager->addUnit(PLAYER, Vector2D(200, 200), 1, Vector2D(), 0);
 	mpUnitManager->addUnit(AI, Vector2D(200, 400), 1, Vector2D(), 0);
 
 	return true;

@@ -25,6 +25,7 @@ class KinematicUnit;
 class SaveableComponent;
 class PlayerUnit;
 class Sprite;
+class SpawnSystem;
 
 struct SharedUnitData : public SaveData
 {
@@ -45,44 +46,41 @@ public:
 class UnitManager : public Trackable
 {
 private:
+
 	//map of unit maps
 	std::map<UnitType, std::map<IDType, KinematicUnit*>*> mMapList;
-	std::map<UnitType, IDType> mBufferIDs;
-//	std::vector<TerrainUnit*> mTerrain;
 	std::stack<int> mAvailableIDs;
+
+	SpawnSystem* mpSpawnSystem;
 
 	SaveableComponent* mSaveComponent;
 
-	void initBuffersAndSprites();
 	Sprite* getUnitSprite(UnitType _unitType);
-	IDType getBufferID(UnitType _unitType);
-
-	float mUnitMaxVelocity;
-	float mUnitMaxRotationVelocity;
 
 	IDType mPlayerID;
 public:
 	UnitManager(SharedUnitData* _saveData);
 	~UnitManager();
 
-	std::map<UnitType, std::map<int, KinematicUnit*>*>* getMapList() { return &mMapList; }
-
+	void init();
 	void update(float _dt);
 	void draw(GraphicsBuffer* _buffer);
-
-	int getPlayerID() { return mPlayerID; };
-	PlayerUnit* getPlayerUnit();
-
-	std::map<int, KinematicUnit*>* getUnitMap(UnitType _type);
-	//std::vector<TerrainUnit*> getTerrain() { return mTerrain; };
-	KinematicUnit* getUnit(int _ID, UnitType _type);
 
 	KinematicUnit* addUnit(UnitType _type, const Vector2D& position, float orientation, const Vector2D& velocity, float rotationVel, float maxVelocity = 1.0f, float maxAcceleration = 1.0f);
 	bool removeUnit(int _ID);
 	void removeRandomUnit();
+
 	Component* addComponent(ComponentType _type, KinematicUnit* _unit);
 	Component* addComponent(Component* component, KinematicUnit* _unit);
 
+	//Accessors
+	std::map<UnitType, std::map<int, KinematicUnit*>*> getMapList() { return mMapList; }
+	std::map<int, KinematicUnit*>* getUnitMap(UnitType _type);
+	KinematicUnit* getUnit(int _ID, UnitType _type);
+	PlayerUnit* getPlayerUnit();
 	SharedUnitData* getUnitData();
+	SpawnSystem* getSpawnSystem() { return mpSpawnSystem; };
+	int getPlayerID() { return mPlayerID; };
+
 
 };
