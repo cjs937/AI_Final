@@ -1,5 +1,9 @@
 #include "Color.h"
 
+Color::Color()
+{
+}
+
 Color::Color(DefaultColor _color)
 {
 	switch (_color)
