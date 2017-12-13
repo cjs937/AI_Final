@@ -3,6 +3,8 @@
 #include "Node.h"
 #include "Grid.h"
 #include "Game.h"
+#include "GameApp.h"
+#include "AssetLoader.h"
 #include <vector>
 
 GridGraph::GridGraph(Grid* pGrid)
@@ -49,7 +51,7 @@ void GridGraph::init()
 			for (unsigned int adjIndex = 0; adjIndex < adjacencies.size(); adjIndex++)
 			{
 				//check for blocking terrain
-				if (mpGrid->getValueAtIndex(adjacencies[adjIndex]) != BLOCKING_VALUE)
+				if (mpGrid->getValueAtIndex(adjacencies[adjIndex]) != gpGameApp->getAssetLoader()->getAssetIndex(WALL_STRING));
 				{
 					Node* pToNode = mNodes[adjacencies[adjIndex]];//find to node
 

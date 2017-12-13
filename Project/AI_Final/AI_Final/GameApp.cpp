@@ -22,12 +22,18 @@
 #include "DebugSystem.h"
 #include "AIUnit.h"
 #include "Grid.h"
+#include "GridGraph.h"
+#include "AStarPathfinder.h"
+#include "Pathfinder.h"
+#include "GridPathfinder.h"
+#include "Path.h"
 
 GameApp* gpGameApp = NULL;
 
 GameApp::GameApp()
 {
 	gpGame = this;
+	mpPathfinder = NULL;
 }
 
 GameApp::~GameApp()
@@ -58,8 +64,12 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 	mpLoader->loadAssets();
 	loadLevel();
 
+	mpGridGraph = new GridGraph(mpGrid);
+	mpGridGraph->init();
 
-	//mpLoader->loadAssets();
+	setPathfinder(ASTAR);
+
+	//mpPathfinder = new AStarPathfinder(mpGridGraph);
 
 	//hide the mouse
 	if (!al_hide_mouse_cursor(mpGraphicsSystem->getDisplay()))
@@ -176,6 +186,19 @@ void GameApp::cleanup()
 		mpLoader = NULL;
 	}
 
+	if (mpGridGraph != NULL)
+	{
+		delete mpGridGraph;
+
+		mpGridGraph = NULL;
+	}
+
+	if (mpPathfinder != NULL)
+	{
+		delete mpPathfinder;
+		mpPathfinder = NULL;
+	}
+
 	Game::cleanup();
 }
 
@@ -215,5 +238,31 @@ void GameApp::loadLevel()
 		//pEditor->getGridVisualizer()->setModified();
 		cout << "Grid loaded!\n";
 		Sleep(1000);//very bogus
+	}
+}
+
+
+
+void GameApp::setPathfinder(PathfinderType _type)
+{
+	if (mpPathfinder != NULL)
+	{
+		if (mpPathfinder->getType() == _type)
+			return;
+
+		delete mpPathfinder;
+	}
+
+	switch (_type)
+	{
+	case(ASTAR):
+	{
+
+		mpPathfinder = new AStarPathfinder(mpGridGraph);
+
+		break;
+	}
+	default:
+		mpPathfinder = NULL;
 	}
 }

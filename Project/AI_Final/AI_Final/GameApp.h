@@ -28,6 +28,9 @@ class InputSystem;
 class AssetLoader;
 class DebugSystem;
 class Grid;
+class GridGraph;
+class GridPathfinder;
+enum PathfinderType;
 
 class AIUnit;
 
@@ -64,10 +67,13 @@ public:
 	AssetLoader* getAssetLoader() { return mpLoader; };
 	DebugSystem* getDebugSystem() { return mpDebugSystem; };
 	Grid* getGrid() { return mpGrid; };
+	GridGraph* getGridGraph() { return mpGridGraph; };
+	GridPathfinder* getPathfinder() { return mpPathfinder; };
 
 	float getDeltaTime();
 	float getCurrentTime(); 
 
+	void setPathfinder(PathfinderType _type);
 
 	//loadLevel
 	void loadGrid(std::ifstream& theStream);
@@ -82,6 +88,8 @@ private:
 	DebugSystem* mpDebugSystem;
 
 	Grid* mpGrid;
+	GridGraph* mpGridGraph;
+	GridPathfinder* mpPathfinder;
 
 	bool mContinueLoop = true;
 	float mPrevFrameTime;

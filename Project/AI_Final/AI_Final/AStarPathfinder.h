@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 #include "GridPathfinder.h"
 #include <queue>
 

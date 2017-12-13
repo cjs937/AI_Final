@@ -6,9 +6,10 @@
 #include "Grid.h"
 #include "GameApp.h"
 #include "Vector2D.h"
-#include "PerformanceTracker.h"
+#include "GridGraph.h"
 
-AStarPathfinder::AStarPathfinder(GridGraph* _graph) :GridPathfinder(_graph, Color(BLUE))
+
+AStarPathfinder::AStarPathfinder(GridGraph* _graph) //:GridPathfinder(_graph, Color(BLUE))
 {}
 
 AStarPathfinder::~AStarPathfinder()
@@ -16,9 +17,6 @@ AStarPathfinder::~AStarPathfinder()
 
 const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 {
-	gpPerformanceTracker->clearTracker("path");
-	gpPerformanceTracker->startTracking("path");
-
 	AStarState currentState = AStarState(pTo);
 
 	AStarNode startNode = AStarNode(pFrom);
@@ -45,9 +43,6 @@ const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 		std::cout << "No path was found.\n";
 		return mPath;
 	}
-
-	gpPerformanceTracker->stopTracking("path");
-	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
 
 	return generatePath(currentState);
 }

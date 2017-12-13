@@ -11,7 +11,9 @@ class GridPathfinder :public Pathfinder
 public:
 	friend class PathfindingDebugContent;
 
-	GridPathfinder(GridGraph* pGraph, Color _pathColor = Color(BLACK));
+	GridPathfinder();
+	GridPathfinder(GridGraph* pGraph);
+	//GridPathfinder(GridGraph* pGraph, Color _pathColor = Color(BLACK));
 	virtual ~GridPathfinder();
 
 	virtual const Path& findPath(Node* pFrom, Node* pTo) = 0;

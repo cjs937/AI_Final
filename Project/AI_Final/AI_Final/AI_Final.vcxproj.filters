@@ -168,6 +168,9 @@
     <ClCompile Include="Pathfinder.cpp">
       <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="AI_Pathfind.cpp">
+      <Filter>Source Files\State Machine\AIStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Spawner.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="Pathfinder.h">
       <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Pathfind.h">
+      <Filter>Header Files\State Machine\AIStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
