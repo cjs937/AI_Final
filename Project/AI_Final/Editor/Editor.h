@@ -31,7 +31,7 @@ public:
 	inline Grid* getGrid() { return mpGrid; };
 	inline GridVisualizer* getGridVisualizer() { return mpGridVisualizer; };
 
-	virtual bool init();
+	virtual bool init(int _width, int _height);
 	virtual void cleanup();
 
 	//game loop

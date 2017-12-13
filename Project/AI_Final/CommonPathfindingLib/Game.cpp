@@ -50,7 +50,7 @@ bool Game::init(int _width, int _height)
 
 	//create and init GraphicsSystem
 	mpGraphicsSystem = new GraphicsSystem();
-	bool goodGraphics = mpGraphicsSystem->init( _width, _height );
+	bool goodGraphics = mpGraphicsSystem->init( WIDTH, HEIGHT );
 	if(!goodGraphics) 
 	{
 		fprintf(stderr, "failed to initialize GraphicsSystem object!\n");

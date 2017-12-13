@@ -36,7 +36,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	virtual bool init(int _width = WIDTH, int _height = HEIGHT);
+	virtual bool init(int _width, int _height);
 	bool initAllegro();
 	virtual void cleanup();
 
