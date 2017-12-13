@@ -45,7 +45,7 @@ class KinematicUnit: public Kinematic
 {
 public:
 	KinematicUnit( KUInitData const & _data );
-	~KinematicUnit();
+	virtual ~KinematicUnit();
 
 	//getters and setters
 	const Vector2D& getPosition() const { return mPosition; };

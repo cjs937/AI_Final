@@ -3,6 +3,7 @@
 #include "Vector2D.h"
 #include "Defines.h"
 #include "PlayerUnit.h"
+#include "GameApp.h"
 
 class MovePlayerMessage : public GameMessage
 {

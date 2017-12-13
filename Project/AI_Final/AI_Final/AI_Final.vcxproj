@@ -119,6 +119,7 @@
     <ClCompile Include="AIUnit.cpp" />
     <ClCompile Include="AI_Wander.cpp" />
     <ClCompile Include="BlendedSteering.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DebugLine.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugSystem.h" />
+    <ClInclude Include="DropBombMessage.h" />
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="GridSteering.h" />
     <ClInclude Include="GameApp.h" />
@@ -175,6 +177,7 @@
     <ClInclude Include="PlayerUnit.h" />
     <ClInclude Include="QuitGameMessage.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RemoveUnitMessage.h" />
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Spawner.h" />

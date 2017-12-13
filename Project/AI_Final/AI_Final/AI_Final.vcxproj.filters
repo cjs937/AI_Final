@@ -159,6 +159,9 @@
     <ClCompile Include="UnitCollisionMessage.cpp">
       <Filter>Source Files\Messages</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -221,9 +224,6 @@
     <ClInclude Include="PlayerState.h">
       <Filter>Header Files\State Machine\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="MovePlayerMessage.h">
-      <Filter>Header Files\Messages</Filter>
-    </ClInclude>
     <ClInclude Include="Steering.h">
       <Filter>Header Files\Units\Steering</Filter>
     </ClInclude>
@@ -273,6 +273,15 @@
       <Filter>Header Files\Units\Spawners</Filter>
     </ClInclude>
     <ClInclude Include="UnitCollisionMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePlayerMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="DropBombMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveUnitMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
   </ItemGroup>

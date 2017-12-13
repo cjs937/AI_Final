@@ -10,8 +10,8 @@ enum UnitType
 	//NONE = -1,
 	PLAYER,
 	AI,	
-	WALL,
-	CIRCLE,
+	BOMB,
+	EXPLOSION,
 	NUM_TYPES
 };
 
@@ -31,7 +31,7 @@ struct SharedUnitData : public SaveData
 {
 public:
 
-	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance);
+	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay, float _explosionUptime);
 	~SharedUnitData();
 
 	virtual std::string getSerializedData() override;
@@ -41,6 +41,9 @@ public:
 	float playerSpeed;
 	float aiSpeed;
 	float raycastDistance;
+	float bombExplosionDelay;
+	float playerBombDropDelay;
+	float explosionUptime;
 };
 
 class UnitManager : public Trackable

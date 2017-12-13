@@ -11,14 +11,16 @@
 #include "AssetLoader.h"
 #include "SpawnSystem.h"
 #include "CollisionSystem.h"
+#include "Bomb.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
 typedef pair<UnitType, IDType> IDPair;
 
+/*SharedUnitData functions */
 
-SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance): SaveData(UNIT_VALUES),
-playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance)
+SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay)
 {}
 
 SharedUnitData::~SharedUnitData()
@@ -32,6 +34,9 @@ std::string SharedUnitData::getSerializedData()
 void SharedUnitData::loadData(std::ifstream &_fin)
 {}
 
+//////////////////////////////////////////////
+
+/*Unit Manager Functions*/
 UnitManager::UnitManager(SharedUnitData* _saveData) : mPlayerID(INVALID_ID)
 {
 	mSaveComponent = new SaveableComponent(_saveData);
@@ -179,12 +184,14 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 	switch (_type)
 	{
 	case(PLAYER):
-		newUnit = new PlayerUnit(getUnitData()->playerSpeed, unitData);
+		newUnit = new PlayerUnit(unitData);
 		break;
 	case(AI):
 		newUnit = new AIUnit(unitData);
 		break;
-
+	case(BOMB):
+		newUnit = new Bomb(unitData);
+		break;
 	default:
 		newUnit = new KinematicUnit(unitData);
 		break;
@@ -203,13 +210,9 @@ Sprite* UnitManager::getUnitSprite(UnitType _unitType)
 	{
 		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(PLAYER_ID);
 	}
-	else if (_unitType == WALL)
+	else if (_unitType == BOMB)
 	{
-		spriteID = WALL_SPRITE_ID;
-	}
-	else if (_unitType == CIRCLE)
-	{
-		spriteID = CIRCLE_SPRITE_ID;
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(BOMB_ID);
 	}
 	else
 	{

@@ -2,8 +2,10 @@
 #include "KinematicUnit.h"
 #include "StateHandler.h"
 
+enum UnitType;
 class PlayerState;
 class StateHandler;
+class Timer;
 
 class PlayerUnit : public KinematicUnit
 {
@@ -11,7 +13,7 @@ class PlayerUnit : public KinematicUnit
 
 public:
 
-	PlayerUnit(float _moveSpeed, KUInitData const & _data);
+	PlayerUnit(KUInitData const & _data);
 
 	~PlayerUnit();
 
@@ -24,12 +26,14 @@ public:
 
 	void applyPowerup(); // pass in powerup pointer when we have them
 
-	void onHit();
+	void onHit(UnitType _colliderType);
 
 	void die();
 
 private:
 	//StateHandler* mStateMachine;
+	Timer* mpTimer;
+	float mBombDropDelay;
 	float mMoveSpeed;
 	int mHealth;
 };
