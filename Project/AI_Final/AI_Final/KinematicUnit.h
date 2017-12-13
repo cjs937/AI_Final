@@ -11,6 +11,8 @@ Champlain College
 */
 
 //forward declarations
+enum ComponentType;
+
 class Sprite;
 class GraphicsBuffer;
 class Component;
@@ -46,16 +48,17 @@ public:
 	~KinematicUnit();
 
 	//getters and setters
-	void setTarget( const Vector2D& target ) { mTarget = target; };
 	const Vector2D& getPosition() const { return mPosition; };
 	float getMaxVelocity() const { return mMaxVelocity; };
 	Vector2D getVelocity() const { return mVelocity; };
-	float getMaxAcceleration() const { return mMaxAcceleration; };
 	void setVelocity( const Vector2D& velocity ){ mVelocity = velocity; };
 	int getID() { return mUnitID; };
 	Sprite* getSprite() { return mpSprite; };
 	Vector2D getCenterPosition();
 	Steering* getSteering() { return mpCurrentSteering; };
+
+	//Returns component based on type, otherwise returns NULL
+	Component* getComponent(ComponentType _type);
 	void addComponent(Component* _newComponent);
 	virtual void setNewOrientation();//face the direction you are moving
 	
@@ -67,9 +70,7 @@ public:
 private:
 	Sprite* mpSprite;
 	Steering* mpCurrentSteering;
-	Vector2D mTarget;//used only for Kinematic seek and arrive
 	float mMaxVelocity;
-	float mMaxAcceleration;
 	int mUnitID;
 
 protected:

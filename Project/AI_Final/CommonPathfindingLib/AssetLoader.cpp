@@ -73,7 +73,7 @@ void AssetLoader::spriteLoad(std::string assetPath, int value, std::string typeO
 
 bool AssetLoader::checkIfCollisionNumber(int value)
 {
-	for (int i = 0; i < mpCollisions.size(); i++)
+	for (unsigned int i = 0; i < mpCollisions.size(); i++)
 		if (mpCollisions.at(i) == value)
 			return true;
 	return false;

@@ -2,7 +2,7 @@
 #include "Vector2D.h"
 
 
-static class Utility
+class Utility
 {
 public:
 	static float dotProduct(Vector2D _vectorA, Vector2D _vectorB);

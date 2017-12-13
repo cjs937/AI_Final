@@ -6,6 +6,8 @@
 #include "Component.h"
 #include "GameApp.h"
 #include "CollisionSystem.h"
+#include "HitboxComponent.h"
+
 using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );
@@ -23,14 +25,14 @@ KinematicUnit::KinematicUnit(KUInitData const & _data )
 ,mpSprite(_data.pSprite)
 ,mpCurrentSteering(NULL)
 ,mMaxVelocity(_data.maxVelocity)
-,mMaxAcceleration(_data.maxAcceleration)
 ,mUnitID(_data.ID)
 {
+	addComponent(new HitboxComponent(this));
 }
 
 KinematicUnit::~KinematicUnit()
 {
-	for (int i = 0; i < mComponents.size(); ++i)
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
 	{
 		delete mComponents[i];
 
@@ -47,7 +49,7 @@ void KinematicUnit::draw( GraphicsBuffer* pBuffer )
 
 void KinematicUnit::update(float time)
 {
-	for (int i = 0; i < mComponents.size(); ++i)
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
 		mComponents[i]->update();
 
 	Steering* steering;
@@ -90,6 +92,19 @@ Vector2D KinematicUnit::getCenterPosition()
 
 	return center;
 }
+
+
+Component* KinematicUnit::getComponent(ComponentType _type)
+{
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
+	{
+		if (mComponents[i]->getType() == _type)
+			return mComponents[i];
+	}
+
+	return NULL;
+}
+
 
 //private - deletes old Steering before setting
 void KinematicUnit::setSteering( Steering* pSteering )

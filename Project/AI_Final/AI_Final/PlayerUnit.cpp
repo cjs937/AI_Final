@@ -7,7 +7,6 @@
 PlayerUnit::PlayerUnit(float _moveSpeed, KUInitData const & _data):KinematicUnit(_data)
 {
 	Vector2D spriteSize = getSprite()->getSize();
-	addComponent(new HitboxComponent(this, spriteSize.getX(), spriteSize.getY()));
 
 	addComponent(new StateHandler());
 

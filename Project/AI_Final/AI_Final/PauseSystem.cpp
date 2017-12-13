@@ -8,7 +8,7 @@ PauseSystem::~PauseSystem() {};
 void PauseSystem::systemPause() 
 {
 	//pause all objects
-	for (int i = 0; i < mPausableObjects.size(); ++i)
+	for (unsigned int i = 0; i < mPausableObjects.size(); ++i)
 	{
 		mPausableObjects[i]->pause();
 	}
@@ -19,7 +19,7 @@ void PauseSystem::systemPause()
 void PauseSystem::systemUnpause()
 {
 	//unpause all objects
-	for (int i = 0; i < mPausableObjects.size(); ++i)
+	for (unsigned int i = 0; i < mPausableObjects.size(); ++i)
 	{
 		mPausableObjects[i]->unpause();
 	}

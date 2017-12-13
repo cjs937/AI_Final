@@ -3,13 +3,23 @@
 #include "GameApp.h"
 #include "DebugLine.h"
 #include "KinematicUnit.h"
+#include "Sprite.h"
+
+HitboxComponent::HitboxComponent(KinematicUnit* _unit, Vector2D const & _offset): Component(HITBOX), 
+	mpUnit(_unit), mOffset(_offset)
+{
+	Vector2D size = _unit->getSprite()->getSize();
+
+	mWidth = size.getX();
+	mHeight = size.getY();
+
+	createBounds(_unit->getPosition() + _offset);
+}
+
 
 HitboxComponent::HitboxComponent(KinematicUnit* _unit, float _width, float _height, Vector2D const & _offset): Component(HITBOX), 
 	mpUnit(_unit), mWidth(_width), mHeight(_height), mOffset(_offset)
 {
-	mWidth = _width;
-	mHeight = _height;
-
 	createBounds(mpUnit->getPosition() + _offset);
 }
 

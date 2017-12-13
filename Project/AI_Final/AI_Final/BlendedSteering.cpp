@@ -11,7 +11,7 @@ BlendedSteering::BlendedSteering(KinematicUnit* _unit)
 
 BlendedSteering::~BlendedSteering()
 {
-	for (int i = 0; i < mBehaviors.size(); ++i)
+	for (unsigned int i = 0; i < mBehaviors.size(); ++i)
 	{
 		delete mBehaviors[i];
 
@@ -27,10 +27,7 @@ Steering* BlendedSteering::getSteering()
 	mLinear = Vector2D();
 	mAngular = 0;
 
-	//float maxVelocity = gpGameApp->getUnitManager()->getMaxVelocity();
-	//float maxRotation = gpGameApp->getUnitManager()->getMaxRotation();
-
-	for (int i = 0; i < mBehaviors.size(); ++i)//mBehaviors.begin(); i != mBehaviors.end(); ++i)
+	for (unsigned int i = 0; i < mBehaviors.size(); ++i)
 	{
 		Steering* currentSteering = mBehaviors[i]->steeringBehavior->getSteering();
 		float weight = mBehaviors[i]->weight;
@@ -39,9 +36,6 @@ Steering* BlendedSteering::getSteering()
 
 		steering->setAngular(steering->getAngular() + currentSteering->getAngular() * weight);
 	}
-
-	//steering->setLinear(Vector2D(min(steering->getLinear().getX(), maxVelocity), min(steering->getLinear().getY(), maxVelocity)));
-	//steering->setAngular(min(steering->getAngular(), maxRotation));
 
 	return steering;
 }
@@ -55,10 +49,6 @@ void BlendedSteering::addBehavior(Steering* _newBehavior, float _weight)
 
 bool BlendedSteering::removeBehavior(int _index)
 {
-	//if (_index < 0 || _index > mBehaviors.size())
-	//	return false;
-
-	//mBehaviors.erase(mBehaviors.at((size_t)_index));
 	return false;
 }
 

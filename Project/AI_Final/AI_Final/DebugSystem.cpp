@@ -11,7 +11,7 @@ DebugSystem::DebugSystem()
 
 DebugSystem::~DebugSystem()
 {
-	for (int i = 0; i < mObjectsThisFrame.size(); ++i)
+	for (unsigned int i = 0; i < mObjectsThisFrame.size(); ++i)
 	{
 		delete mObjectsThisFrame[i];
 
@@ -43,7 +43,7 @@ void DebugSystem::draw(GraphicsBuffer* _backBuffer)
 	std::vector<DebugObject*> objectsToSave;
 
 	//draws all debug objects
-	for (int i = 0; i < mObjectsThisFrame.size(); ++i)
+	for (unsigned int i = 0; i < mObjectsThisFrame.size(); ++i)
 	{
 		if (mIsActive)
 			mObjectsThisFrame[i]->draw(_backBuffer);

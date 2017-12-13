@@ -15,7 +15,7 @@ SpawnSystem::~SpawnSystem()
 
 void SpawnSystem::clear()
 {
-	for (int i = 0; i < mSpawners.size(); ++i)
+	for (unsigned int i = 0; i < mSpawners.size(); ++i)
 	{
 		delete mSpawners[i];
 
@@ -62,7 +62,7 @@ void SpawnSystem::initSpawners(Grid* _grid)
 //update each unit spawner
 void SpawnSystem::update(float dt)
 {
-	for (int i = 0; i < mSpawners.size(); ++i)
+	for (unsigned int i = 0; i < mSpawners.size(); ++i)
 	{
 		mSpawners[i]->update();
 	}
@@ -77,7 +77,7 @@ std::vector<Spawner*> SpawnSystem::getSpawnersOfType(SpawnerType _type)
 {
 	std::vector<Spawner*> spawnersToReturn;
 
-	for (int i = 0; i < mSpawners.size(); ++i)
+	for (unsigned int i = 0; i < mSpawners.size(); ++i)
 	{
 		if (mSpawners[i]->getType() == _type)
 			spawnersToReturn.push_back(mSpawners[i]);

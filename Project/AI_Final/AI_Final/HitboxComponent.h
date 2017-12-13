@@ -25,6 +25,7 @@ private:
 
 public:
 
+	HitboxComponent(KinematicUnit* _unit, Vector2D const & _offset = Vector2D(0, 0));
 	HitboxComponent(KinematicUnit* _unit, float _width, float _height, Vector2D const & _offset = Vector2D(0, 0));
 	HitboxComponent(HitboxComponent* const _otherBox);
 	~HitboxComponent();
