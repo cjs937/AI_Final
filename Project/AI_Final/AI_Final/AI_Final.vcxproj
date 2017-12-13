@@ -142,6 +142,7 @@
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="SpawnSystem.cpp" />
     <ClCompile Include="StateHandler.cpp" />
+    <ClCompile Include="UnitCollisionMessage.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -181,6 +182,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />
     <ClInclude Include="Steering.h" />
+    <ClInclude Include="UnitCollisionMessage.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

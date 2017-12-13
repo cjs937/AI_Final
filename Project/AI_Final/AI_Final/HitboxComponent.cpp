@@ -79,7 +79,7 @@ bool HitboxComponent::checkInBounds(Vector2D &_point) // checks if a point has c
 
 	if (mPositionA.getX() <= _point.getX() && _point.getX() <= mPositionB.getX())
 	{
-		if (mPositionC.getY() <= _point.getY() && _point.getY() <= mPositionA.getY())
+		if (mPositionC.getY() >= _point.getY() && _point.getY() >= mPositionA.getY())
 		{
 			return true;
 		}

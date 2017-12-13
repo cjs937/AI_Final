@@ -51,7 +51,7 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoader = new AssetLoader();
 
-	SharedUnitData* unitData = new SharedUnitData(150.0f, 100.0f, 10.0f);
+	SharedUnitData* unitData = new SharedUnitData(250.0f, 100.0f, 10.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 
@@ -71,6 +71,10 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 	}
 
 	mpLoopTimer->start();
+
+	//Unit test - adds an AI and player unit near each other
+	//mpUnitManager->addUnit(PLAYER, Vector2D(100, 100), 1, Vector2D(), 0);
+	//mpUnitManager->addUnit(AI, Vector2D(150, 100), 1, Vector2D(), 0);
 
 	return true;
 }

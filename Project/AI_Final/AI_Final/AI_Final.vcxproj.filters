@@ -156,6 +156,9 @@
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files\Units\Spawners</Filter>
     </ClCompile>
+    <ClCompile Include="UnitCollisionMessage.cpp">
+      <Filter>Source Files\Messages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files\Units\Spawners</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitCollisionMessage.h">
+      <Filter>Header Files\Messages</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

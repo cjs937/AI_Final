@@ -10,6 +10,7 @@
 #include "PlayerUnit.h"
 #include "AssetLoader.h"
 #include "SpawnSystem.h"
+#include "CollisionSystem.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
@@ -120,6 +121,8 @@ KinematicUnit* UnitManager::getUnit(int _ID, UnitType _type)
 
 void UnitManager::update(float _dt)
 {
+	CollisionSystem::checkAllUnitCollisions();
+
 	for (auto i = mMapList.begin(); i != mMapList.end(); ++i)
 	{
 		for (auto j = i->second->begin(); j != i->second->end(); ++j)
