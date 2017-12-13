@@ -15,7 +15,8 @@ AIUnit::AIUnit(KUInitData const & _data) : KinematicUnit(_data)
 	addComponent(stateHandler);
 }
 
-AIUnit::~AIUnit() {}
+AIUnit::~AIUnit() 
+{}
 
 void AIUnit::move(Vector2D _direction, float _ms)
 {

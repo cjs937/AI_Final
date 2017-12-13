@@ -32,9 +32,9 @@ Editor::~Editor()
 	cleanup();
 }
 
-bool Editor::init()
+bool Editor::init(int _width, int _height)
 {
-	bool retVal = Game::init();
+	bool retVal = Game::init(_width, _height);
 	if( retVal == false )
 	{
 		return false;

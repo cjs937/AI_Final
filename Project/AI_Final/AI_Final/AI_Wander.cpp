@@ -14,7 +14,14 @@ AI_Wander::AI_Wander(AIUnit & _unit):AIState(_unit)
 }
  
 AI_Wander::~AI_Wander()
-{}
+{
+	if (mpTimer != NULL)
+	{
+		delete mpTimer;
+
+		mpTimer = NULL;
+	}
+}
 
 void AI_Wander::onEnter()
 {
