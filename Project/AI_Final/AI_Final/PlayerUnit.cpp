@@ -10,6 +10,8 @@ PlayerUnit::PlayerUnit(KUInitData const & _data):KinematicUnit(_data)
 {
 	mHealth = 3;
 
+	mScore = 0;
+
 	setSteering(new GridSteering(this));
 
 	mpTimer = new Timer();

@@ -20,8 +20,8 @@ typedef pair<UnitType, IDType> IDPair;
 
 /*SharedUnitData functions */
 
-SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime): SaveData(UNIT_VALUES),
-playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay)
+SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime, float _enemyRespawnTime): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay), enemyRespawnTime(_enemyRespawnTime)
 {}
 
 SharedUnitData::~SharedUnitData()

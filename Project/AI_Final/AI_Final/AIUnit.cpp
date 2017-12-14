@@ -5,6 +5,7 @@
 #include "Defines.h"
 #include "GameApp.h"
 #include "RemoveUnitMessage.h"
+#include "SpawnNewEnemyMessage.h"
 
 AIUnit::AIUnit(KUInitData const & _data) : KinematicUnit(_data)
 {
@@ -39,4 +40,6 @@ void AIUnit::die()
 	//spawn coin at position
 
 	MESSAGE_MANAGER->addMessage(new RemoveUnitMessage(this), 0);
+
+	MESSAGE_MANAGER->addMessage(new SpawnNewEnemyMessage(), 0);
 }

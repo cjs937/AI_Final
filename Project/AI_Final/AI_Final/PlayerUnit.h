@@ -36,4 +36,5 @@ private:
 	float mBombDropDelay;
 	float mMoveSpeed;
 	int mHealth;
+	int mScore;
 };

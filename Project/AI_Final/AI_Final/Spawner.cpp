@@ -1,5 +1,6 @@
 #include "Spawner.h"
 #include "Timer.h"
+#include "GameApp.h"
 
 Spawner::Spawner(SpawnerType _type, Vector2D _position, bool _spawnOnStart) :
 	mType(_type), mPosition(_position), mSpawnOnStart(_spawnOnStart)
@@ -23,7 +24,7 @@ void Spawner::update()
 {
 	if (mDelaying)
 	{
-		if (mpTimer->getElapsedTime() >= mCurrentSpawnDelay)
+		if (mpTimer->getElapsedTime() * gpGameApp->getDeltaTime() >= mCurrentSpawnDelay)
 		{
 			mpTimer->stop();
 
