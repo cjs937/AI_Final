@@ -80,7 +80,7 @@ public:
 	virtual void setNewOrientation();//face the direction you are moving
 	
 	//draw yourself to the indicated buffer
-	void draw( GraphicsBuffer* pBuffer );
+	virtual void draw( GraphicsBuffer* pBuffer );
 	//move according to the current velocities and update velocities based on current Steering
 	virtual void update(float time) override;
 

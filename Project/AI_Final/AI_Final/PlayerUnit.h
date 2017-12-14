@@ -24,6 +24,8 @@ public:
 
 	virtual void update(float _dt) override;
 
+	virtual void draw(GraphicsBuffer* pBuffer) override;
+
 	void dropBomb();
 
 	void applyPowerup(); // pass in powerup pointer when we have them

@@ -5,6 +5,9 @@
 #include "Sprite.h"
 #include "Defines.h"
 #include "GameApp.h"
+#include "AssetLoader.h"
+#include "SpriteManager.h"
+#include "Sprite.h"
 
 PlayerUnit::PlayerUnit(KUInitData const & _data):KinematicUnit(_data)
 {
@@ -17,6 +20,10 @@ PlayerUnit::PlayerUnit(KUInitData const & _data):KinematicUnit(_data)
 	setSteering(new GridSteering(this));
 
 	mpTimer = new Timer();
+
+	int powerupSpriteID = gpGameApp->getAssetLoader()->getAssetIndex(INVINCIBLE_ID);
+
+	mpPoweredUpSprite = gpGameApp->getSpriteManager()->getSprite(powerupSpriteID);
 
 	mpTimer->start();
 }
@@ -38,6 +45,25 @@ void PlayerUnit::update(float _dt)
 
 	if (isPoweredUp())
 		checkInvuln();
+}
+
+void PlayerUnit::draw(GraphicsBuffer* pBuffer)
+{
+	Sprite* toDraw;
+
+	if (isPoweredUp())
+	{
+		toDraw = mpPoweredUpSprite;
+	}
+	else
+	{
+		toDraw = getSprite();
+	}
+
+	if (toDraw == NULL)
+		return;
+
+	toDraw->draw(*pBuffer, mPosition.getX(), mPosition.getY(), mOrientation);
 }
 
 

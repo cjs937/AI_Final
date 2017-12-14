@@ -7,6 +7,7 @@
 #include "RemoveUnitMessage.h"
 #include "SpawnNewUnitMessage.h"
 #include "Spawner.h"
+#include "PlayerUnit.h"
 
 AIUnit::AIUnit(KUInitData const & _data) : KinematicUnit(_data)
 {
@@ -33,6 +34,11 @@ void AIUnit::handleCollision(UnitType _colliderType)
 	if (_colliderType == EXPLOSION)
 	{
 		die();
+	}
+	else if (_colliderType == PLAYER)
+	{
+		if (UNIT_MANAGER->getPlayerUnit()->isPoweredUp())
+			die();
 	}
 }
 
