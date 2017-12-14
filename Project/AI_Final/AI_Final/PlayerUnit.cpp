@@ -31,6 +31,16 @@ PlayerUnit::~PlayerUnit()
 	}
 }
 
+
+void PlayerUnit::update(float _dt)
+{
+	KinematicUnit::update(_dt);
+
+	if (isPoweredUp())
+		checkInvuln();
+}
+
+
 void PlayerUnit::move(Vector2D const & _direction)
 {
 	Vector2D direction = _direction;
@@ -50,12 +60,35 @@ void PlayerUnit::dropBomb()
 }
 
 void PlayerUnit::applyPowerup()
-{}
+{
+	mPoweredUp = true;
+
+	mpTimer->start();
+
+	DEBUG->log("on");
+}
+
+void PlayerUnit::disablePowerup()
+{
+	if (!isPoweredUp())
+		return;
+
+	mPoweredUp = false;
+
+	mpTimer->stop();
+
+	DEBUG->log("off");
+
+}
 
 void PlayerUnit::handleCollision(UnitType _colliderType)
 {
 	switch (_colliderType)
 	{
+	case (POWERUP):
+	{
+		applyPowerup();
+	}
 	default:
 		break;
 	}
@@ -63,3 +96,11 @@ void PlayerUnit::handleCollision(UnitType _colliderType)
 
 void PlayerUnit::die()
 {}
+
+void PlayerUnit::checkInvuln()
+{
+	if (UNIT_MANAGER->getUnitData()->playerPowerupTime <= mpTimer->getElapsedTime() * gpGameApp->getDeltaTime())
+	{
+		disablePowerup();
+	}
+}

@@ -21,8 +21,8 @@ typedef pair<UnitType, IDType> IDPair;
 
 /*SharedUnitData functions */
 
-SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime, float _enemyRespawnTime, float _powerupRespawnTime, int _maxEnemies, int _maxCandies): SaveData(UNIT_VALUES),
-playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay), enemyRespawnTime(_enemyRespawnTime), powerupRespawnTime(_powerupRespawnTime),
+SharedUnitData::SharedUnitData(float _playerSpeed, float _playerPowerupTime, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime, float _enemyRespawnTime, float _powerupRespawnTime, int _maxEnemies, int _maxCandies): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), playerPowerupTime(_playerPowerupTime), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay), enemyRespawnTime(_enemyRespawnTime), powerupRespawnTime(_powerupRespawnTime),
 maxEnemies( _maxEnemies), maxCandies(_maxCandies)
 {}
 

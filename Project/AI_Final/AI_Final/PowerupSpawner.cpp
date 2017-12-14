@@ -19,9 +19,9 @@ void PowerupSpawner::spawnObject()
 
 bool PowerupSpawner::canSpawn()
 {
-	int numPowerups = UNIT_MANAGER->getUnitCount(AI);
+	int numPowerups = UNIT_MANAGER->getUnitCount(POWERUP);
 
-	if (numPowerups < UNIT_MANAGER->getUnitData()->maxCandies);
+	if (numPowerups < UNIT_MANAGER->getUnitData()->maxCandies)
 	{
 		return true;
 	}

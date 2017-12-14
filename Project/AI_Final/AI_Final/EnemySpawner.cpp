@@ -21,7 +21,7 @@ bool EnemySpawner::canSpawn()
 {
 	int numEnemies = UNIT_MANAGER->getUnitCount(AI);
 
-	if (numEnemies < UNIT_MANAGER->getUnitData()->maxEnemies);
+	if (numEnemies < UNIT_MANAGER->getUnitData()->maxEnemies)
 	{
 		return true;
 	}
