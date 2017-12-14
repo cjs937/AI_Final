@@ -117,20 +117,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIUnit.cpp" />
-    <ClCompile Include="AI_Pathfind.cpp" />
-    <ClCompile Include="AI_RunState.cpp" />
     <ClCompile Include="AI_Wander.cpp" />
-    <ClCompile Include="AStarPathfinder.cpp" />
     <ClCompile Include="BlendedSteering.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupSpawner.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="GridGraph.cpp" />
-    <ClCompile Include="GridPathfinder.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="GridSteering.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
@@ -141,40 +138,33 @@
     <ClCompile Include="Kinematic.cpp" />
     <ClCompile Include="KinematicUnit.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Path.cpp" />
-    <ClCompile Include="Pathfinder.cpp" />
     <ClCompile Include="PauseSystem.cpp" />
     <ClCompile Include="PlayerSpawner.cpp" />
     <ClCompile Include="PlayerUnit.cpp" />
     <ClCompile Include="SaveableComponent.cpp" />
     <ClCompile Include="SaveSystem.cpp" />
-    <ClCompile Include="AI_SeekState.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="SpawnSystem.cpp" />
     <ClCompile Include="StateHandler.cpp" />
+    <ClCompile Include="UnitCollisionMessage.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIUnit.h" />
     <ClInclude Include="AIState.h" />
-    <ClInclude Include="AI_Pathfind.h" />
-    <ClInclude Include="AI_RunState.h" />
     <ClInclude Include="AI_Wander.h" />
-    <ClInclude Include="AStarPathfinder.h" />
     <ClInclude Include="BlendedSteering.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="PowerupSpawner.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Connection.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugSystem.h" />
+    <ClInclude Include="DropBombMessage.h" />
     <ClInclude Include="EnemySpawner.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="GridGraph.h" />
-    <ClInclude Include="GridPathfinder.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="GridSteering.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />
@@ -185,29 +175,26 @@
     <ClInclude Include="Kinematic.h" />
     <ClInclude Include="KinematicUnit.h" />
     <ClInclude Include="MovePlayerMessage.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Path.h" />
-    <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="PausableComponent.h" />
     <ClInclude Include="PauseSystem.h" />
     <ClInclude Include="PlayerSpawner.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerUnit.h" />
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="QuitGameMessage.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RemoveUnitMessage.h" />
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
-    <ClInclude Include="AI_SeekState.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="SpawnNewUnitMessage.h" />
     <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />
     <ClInclude Include="Steering.h" />
+    <ClInclude Include="UnitCollisionMessage.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Utility.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

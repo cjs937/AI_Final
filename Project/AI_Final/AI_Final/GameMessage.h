@@ -7,7 +7,11 @@ enum MessageType
 	INVALID_MESSAGE_TYPE = -1,
 	INPUT_MESSAGE,
 	QUIT_GAME,
-	MOVE_PLAYER
+	MOVE_PLAYER,
+	DROP_BOMB,
+	REMOVE_UNIT,
+	SPAWN_ENEMY,
+	UNIT_COLLISION
 };
 
 class GameMessage: public Trackable

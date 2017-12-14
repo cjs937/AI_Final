@@ -26,9 +26,11 @@ public:
 	static bool checkTerrainCollision(Vector2D _start, Vector2D _direction, float _castDistance);
 	static bool checkTerrainCollision(KinematicUnit* _unit, Steering* _steering);
 	static bool checkTerrainCollision(Ray* _ray);
+	static void checkAllUnitCollisions();
 private:
 
 	static bool rayCast(Ray* _ray);
+	static void checkCollisions(KinematicUnit* _unit);
 	//static RayCollision* rayIntersectsSegment(Ray* _ray, Vector2D _pointA, Vector2D _pointB);
 	//static RayCollision* checkWallIntersection(KinematicUnit* _unit, TerrainUnit* _wall);
 };

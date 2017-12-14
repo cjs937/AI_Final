@@ -2,8 +2,10 @@
 #include "KinematicUnit.h"
 #include "StateHandler.h"
 
+enum UnitType;
 class PlayerState;
 class StateHandler;
+class Timer;
 
 class PlayerUnit : public KinematicUnit
 {
@@ -11,7 +13,7 @@ class PlayerUnit : public KinematicUnit
 
 public:
 
-	PlayerUnit(float _moveSpeed, KUInitData const & _data);
+	PlayerUnit(KUInitData const & _data);
 
 	~PlayerUnit();
 
@@ -20,16 +22,31 @@ public:
 
 	void move( Vector2D const & _direction );
 
+	virtual void update(float _dt) override;
+
 	void dropBomb();
 
 	void applyPowerup(); // pass in powerup pointer when we have them
 
-	void onHit();
+	void disablePowerup();
+
+	virtual void handleCollision(UnitType _colliderType) override;
 
 	void die();
 
+	bool isPoweredUp() { return mPoweredUp; };
+
+	Sprite* getPoweredUpSprite() { return mpPoweredUpSprite; };
 private:
-	//StateHandler* mStateMachine;
+
+	Sprite* mpPoweredUpSprite;
+	Timer* mpTimer;
+	float mBombDropDelay;
 	float mMoveSpeed;
 	int mHealth;
+	int mScore;
+	bool mPoweredUp;
+
+	//Checks to see if player is still invincible
+	void checkInvuln();
 };

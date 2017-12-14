@@ -162,6 +162,7 @@
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files\Units\Spawners</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AStarPathfinder.cpp">
       <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
@@ -194,6 +195,22 @@
     </ClCompile>
     <ClCompile Include="AI_RunState.cpp">
       <Filter>Source Files\State Machine\AIStates</Filter>
+=======
+    <ClCompile Include="UnitCollisionMessage.cpp">
+      <Filter>Source Files\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerupSpawner.cpp">
+      <Filter>Source Files\Units\Spawners</Filter>
+    </ClCompile>
+    <ClCompile Include="Powerup.cpp">
+      <Filter>Source Files\Units</Filter>
+>>>>>>> units
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,9 +274,6 @@
     <ClInclude Include="PlayerState.h">
       <Filter>Header Files\State Machine\PlayerStates</Filter>
     </ClInclude>
-    <ClInclude Include="MovePlayerMessage.h">
-      <Filter>Header Files\Messages</Filter>
-    </ClInclude>
     <ClInclude Include="Steering.h">
       <Filter>Header Files\Units\Steering</Filter>
     </ClInclude>
@@ -308,6 +322,7 @@
     <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files\Units\Spawners</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="AStarPathfinder.h">
       <Filter>Header Files\Pathfinding</Filter>
     </ClInclude>
@@ -344,5 +359,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+=======
+    <ClInclude Include="UnitCollisionMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePlayerMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="DropBombMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveUnitMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupSpawner.h">
+      <Filter>Header Files\Units\Spawners</Filter>
+    </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnNewUnitMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+>>>>>>> units
   </ItemGroup>
 </Project>

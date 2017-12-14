@@ -3,13 +3,23 @@
 #include "GameApp.h"
 #include "DebugLine.h"
 #include "KinematicUnit.h"
+#include "Sprite.h"
+
+HitboxComponent::HitboxComponent(KinematicUnit* _unit, Vector2D const & _offset): Component(HITBOX), 
+	mpUnit(_unit), mOffset(_offset)
+{
+	Vector2D size = _unit->getSprite()->getSize();
+
+	mWidth = size.getX();
+	mHeight = size.getY();
+
+	createBounds(_unit->getPosition() + _offset);
+}
+
 
 HitboxComponent::HitboxComponent(KinematicUnit* _unit, float _width, float _height, Vector2D const & _offset): Component(HITBOX), 
 	mpUnit(_unit), mWidth(_width), mHeight(_height), mOffset(_offset)
 {
-	mWidth = _width;
-	mHeight = _height;
-
 	createBounds(mpUnit->getPosition() + _offset);
 }
 
@@ -69,7 +79,7 @@ bool HitboxComponent::checkInBounds(Vector2D &_point) // checks if a point has c
 
 	if (mPositionA.getX() <= _point.getX() && _point.getX() <= mPositionB.getX())
 	{
-		if (mPositionC.getY() <= _point.getY() && _point.getY() <= mPositionA.getY())
+		if (mPositionC.getY() >= _point.getY() && _point.getY() >= mPositionA.getY())
 		{
 			return true;
 		}
@@ -109,6 +119,11 @@ void HitboxComponent::createBounds(Vector2D const & _position)
 void HitboxComponent::update()
 {
 	updateBounds(mpUnit->getPosition() + mOffset);
+
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionB));
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionC));
+	DEBUG->drawRequest(new DebugLine(mPositionC, mPositionD));
+	DEBUG->drawRequest(new DebugLine(mPositionB, mPositionD));
 }
 
 
@@ -118,11 +133,6 @@ void HitboxComponent::updateBounds(Vector2D const & _position)//creates new hitb
 	{
 		createBounds(_position);
 	}
-
-	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionB));
-	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionC));
-	DEBUG->drawRequest(new DebugLine(mPositionC, mPositionD));
-	DEBUG->drawRequest(new DebugLine(mPositionB, mPositionD));
 }
 
 

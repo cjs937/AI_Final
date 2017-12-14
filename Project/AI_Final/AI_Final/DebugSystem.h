@@ -4,7 +4,7 @@
 #include <iostream>
 
 class GraphicsBuffer;
-class Ray;
+struct Ray;
 
 struct DebugObject : public Trackable
 {

@@ -18,7 +18,7 @@ void SaveSystem::saveState(std::string _fileName)
 	fout.open(_fileName);
 
 	//save data to fout for all objects
-	for (int i = 0; i < mSaveableObjects.size(); ++i)
+	for (unsigned int i = 0; i < mSaveableObjects.size(); ++i)
 	{
 		SaveableComponent* currObject = mSaveableObjects[i];
 		

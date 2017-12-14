@@ -25,6 +25,7 @@ public:
 	void setValueAtIndex( int index, int value );
 	void setValueAtPixelXY( int x, int y, int value );
 	Vector2D getULCornerOfSquare( int index ) const;
+	Vector2D getCenterOfSquare(int _index) const;
 
 	//accessors
 	int getPixelWidth() const { return mPixelWidth; };

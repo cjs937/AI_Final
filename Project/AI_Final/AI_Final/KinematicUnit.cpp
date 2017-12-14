@@ -6,13 +6,15 @@
 #include "Component.h"
 #include "GameApp.h"
 #include "CollisionSystem.h"
+#include "HitboxComponent.h"
+
 using namespace std;
 
 Steering gNullSteering( gZeroVector2D, 0.0f );
 
 
-KUInitData::KUInitData(int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity, float _maxAcceleration)
-	:ID(_ID), pSprite(_pSprite), position(_position), orientation(_orientation), velocity(_velocity), rotationVel(_rotationVel), maxVelocity(_maxVelocity), maxAcceleration(_maxAcceleration)
+KUInitData::KUInitData(UnitType _type, int _ID, Sprite* _pSprite, const Vector2D& _position, float _orientation, const Vector2D& _velocity, float _rotationVel, float _maxVelocity, float _maxAcceleration)
+	:type(_type), ID(_ID), pSprite(_pSprite), position(_position), orientation(_orientation), velocity(_velocity), rotationVel(_rotationVel), maxVelocity(_maxVelocity), maxAcceleration(_maxAcceleration)
 {}
 
 KUInitData::~KUInitData() {}
@@ -20,17 +22,18 @@ KUInitData::~KUInitData() {}
 
 KinematicUnit::KinematicUnit(KUInitData const & _data )
 :Kinematic( _data.position, _data.orientation, _data.velocity, _data.rotationVel )
+,mType(_data.type)
 ,mpSprite(_data.pSprite)
 ,mpCurrentSteering(NULL)
 ,mMaxVelocity(_data.maxVelocity)
-,mMaxAcceleration(_data.maxAcceleration)
 ,mUnitID(_data.ID)
 {
+	addComponent(new HitboxComponent(this));
 }
 
 KinematicUnit::~KinematicUnit()
 {
-	for (int i = 0; i < mComponents.size(); ++i)
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
 	{
 		delete mComponents[i];
 
@@ -47,7 +50,7 @@ void KinematicUnit::draw( GraphicsBuffer* pBuffer )
 
 void KinematicUnit::update(float time)
 {
-	for (int i = 0; i < mComponents.size(); ++i)
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
 		mComponents[i]->update();
 
 	Steering* steering;
@@ -90,6 +93,31 @@ Vector2D KinematicUnit::getCenterPosition()
 
 	return center;
 }
+
+
+Component* KinematicUnit::getComponent(ComponentType _type)
+{
+	for (unsigned int i = 0; i < mComponents.size(); ++i)
+	{
+		if (mComponents[i]->getType() == _type)
+			return mComponents[i];
+	}
+
+	return NULL;
+}
+
+HitboxComponent* KinematicUnit::getHitbox()
+{
+	//checks if unit has a hitbox
+	Component* hitboxTest = getComponent(HITBOX);
+
+	if (hitboxTest == NULL)
+		return NULL;
+
+	//cast should always work
+	return dynamic_cast<HitboxComponent*>(hitboxTest);
+}
+
 
 //private - deletes old Steering before setting
 void KinematicUnit::setSteering( Steering* pSteering )

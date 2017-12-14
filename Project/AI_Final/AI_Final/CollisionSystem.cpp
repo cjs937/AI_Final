@@ -10,7 +10,9 @@
 #include "AssetLoader.h"
 #include "DebugSystem.h"
 #include "DebugLine.h"
-
+#include <map>
+#include "HitboxComponent.h"
+#include "UnitCollisionMessage.h"
 
 bool CollisionSystem::checkTerrainCollision(Vector2D _start, Vector2D _direction, float _castDistance)
 {
@@ -40,6 +42,56 @@ bool CollisionSystem::checkTerrainCollision(Ray* _ray)
 
 	return collided;
 }
+
+void CollisionSystem::checkAllUnitCollisions()
+{
+	std::map<UnitType, std::map<IDType, KinematicUnit*>*> unitMap = UNIT_MANAGER->getMapList();
+	//std::vector<std::pair<int, int>> completedChecks;
+
+	for (auto i = unitMap.begin(); i != unitMap.end(); ++i)
+	{
+		std::map<IDType, KinematicUnit*>* currentMap = i->second;
+
+		for (auto j = currentMap->begin(); j != currentMap->end(); ++j)
+		{
+			//If unit is marked for deletion
+			if (j->second->isDeleting())
+				continue;
+
+			checkCollisions(j->second);
+		}
+	}
+
+}
+
+void CollisionSystem::checkCollisions(KinematicUnit* _unit)
+{
+	HitboxComponent* unitBox = dynamic_cast<HitboxComponent*>(_unit->getComponent(HITBOX));
+
+	if (unitBox == NULL)
+		return;
+
+	std::map<UnitType, std::map<IDType, KinematicUnit*>*> unitMap = UNIT_MANAGER->getMapList();
+
+	for (auto i = unitMap.begin(); i != unitMap.end(); ++i)
+	{
+		std::map<IDType, KinematicUnit*>* currentMap = i->second;
+
+		for (auto otherUnit = currentMap->begin(); otherUnit != currentMap->end(); ++otherUnit)
+		{
+			if (otherUnit->second == _unit)
+				continue;
+
+			HitboxComponent* otherBox = dynamic_cast<HitboxComponent*>(otherUnit->second->getComponent(HITBOX));
+
+			if (unitBox->checkCollision(otherBox))
+			{
+				MESSAGE_MANAGER->addMessage(new UnitCollisionMessage(_unit, otherUnit->second), 0);
+			}
+		}
+	}
+}
+
 
 bool CollisionSystem::rayCast(Ray* _ray)
 {

@@ -43,6 +43,14 @@ sprite
 ../sprites/enemyScared.png
 eh
 enemyScared
+sprite
+../sprites/explosion.png
+eh
+explosion
+sprite
+../sprites/powerup.png
+eh
+powerup
 level
 ../levels/pathgridExample.txt
 blah

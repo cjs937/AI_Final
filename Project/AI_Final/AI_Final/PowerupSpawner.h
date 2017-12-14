@@ -1,14 +1,13 @@
 #pragma once
 #include "Spawner.h"
 
-class PlayerSpawner : public Spawner
+class PowerupSpawner : public Spawner
 {
 public:
-	PlayerSpawner(Vector2D _position);
-
-	~PlayerSpawner();
+	PowerupSpawner(Vector2D _position);
+	~PowerupSpawner();
 
 	virtual void spawnObject() override;
-
 	virtual bool canSpawn() override;
+
 };

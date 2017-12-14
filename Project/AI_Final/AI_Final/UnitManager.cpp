@@ -10,14 +10,20 @@
 #include "PlayerUnit.h"
 #include "AssetLoader.h"
 #include "SpawnSystem.h"
+#include "CollisionSystem.h"
+#include "Bomb.h"
+#include "Explosion.h"
+#include "Powerup.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
 typedef pair<UnitType, IDType> IDPair;
 
+/*SharedUnitData functions */
 
-SharedUnitData::SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance): SaveData(UNIT_VALUES),
-playerSpeed(_playerSpeed), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance)
+SharedUnitData::SharedUnitData(float _playerSpeed, float _playerPowerupTime, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay,  float _explosionUptime, float _enemyRespawnTime, float _powerupRespawnTime, int _maxEnemies, int _maxCandies): SaveData(UNIT_VALUES),
+playerSpeed(_playerSpeed), playerPowerupTime(_playerPowerupTime), aiSpeed(_aiSpeed), raycastDistance(_raycastDistance), playerBombDropDelay(_playerBombDropDelay), explosionUptime(_explosionUptime), bombExplosionDelay(_bombExplosionDelay), enemyRespawnTime(_enemyRespawnTime), powerupRespawnTime(_powerupRespawnTime),
+maxEnemies( _maxEnemies), maxCandies(_maxCandies)
 {}
 
 SharedUnitData::~SharedUnitData()
@@ -32,6 +38,9 @@ void SharedUnitData::loadData(std::ifstream &_fin)
 {
 }
 
+//////////////////////////////////////////////
+
+/*Unit Manager Functions*/
 UnitManager::UnitManager(SharedUnitData* _saveData) : mPlayerID(INVALID_ID)
 {
 	mSaveComponent = new SaveableComponent(_saveData);
@@ -82,14 +91,13 @@ UnitManager::~UnitManager()
 
 std::map<int, KinematicUnit*>* UnitManager::getUnitMap(UnitType _type)
 {
-	try
+	for (auto i = mMapList.begin(); i != mMapList.end(); ++i)
 	{
-		return mMapList[_type];
+		if (i->first == _type)
+			return i->second;
 	}
-	catch (std::out_of_range)
-	{
-		return NULL;
-	}
+
+	return NULL;
 }
 
 
@@ -121,6 +129,8 @@ KinematicUnit* UnitManager::getUnit(int _ID, UnitType _type)
 
 void UnitManager::update(float _dt)
 {
+	CollisionSystem::checkAllUnitCollisions();
+
 	for (auto i = mMapList.begin(); i != mMapList.end(); ++i)
 	{
 		for (auto j = i->second->begin(); j != i->second->end(); ++j)
@@ -172,17 +182,25 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	KinematicUnit* newUnit;
 
-	KUInitData unitData(newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
+	KUInitData unitData(_type, newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
 
 	switch (_type)
 	{
 	case(PLAYER):
-		newUnit = new PlayerUnit(getUnitData()->playerSpeed, unitData);
+		newUnit = new PlayerUnit(unitData);
 		break;
 	case(AI):
 		newUnit = new AIUnit(unitData);
 		break;
-
+	case(BOMB):
+		newUnit = new Bomb(unitData);
+		break;
+	case(EXPLOSION):
+		newUnit = new Explosion(unitData);
+		break;
+	case(POWERUP):
+		newUnit = new Powerup(unitData);
+		break;
 	default:
 		newUnit = new KinematicUnit(unitData);
 		break;
@@ -201,13 +219,17 @@ Sprite* UnitManager::getUnitSprite(UnitType _unitType)
 	{
 		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(PLAYER_ID);
 	}
-	else if (_unitType == WALL)
+	else if (_unitType == BOMB)
 	{
-		spriteID = WALL_SPRITE_ID;
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(BOMB_ID);
 	}
-	else if (_unitType == CIRCLE)
+	else if(_unitType == EXPLOSION)
 	{
-		spriteID = CIRCLE_SPRITE_ID;
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(EXPLOSION_ID);
+	}
+	else if (_unitType == POWERUP)
+	{
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(POWERUP_ID);
 	}
 	else
 	{
@@ -322,4 +344,14 @@ PlayerUnit* UnitManager::getPlayerUnit()
 		return NULL;
 
 	return static_cast<PlayerUnit*>(getUnit(mPlayerID, PLAYER));
+}
+
+int UnitManager::getUnitCount(UnitType _type)
+{
+	std::map<int, KinematicUnit*>* unitMap = getUnitMap(_type);
+
+	if (unitMap == NULL)
+		return NULL;
+
+	return unitMap->size();
 }

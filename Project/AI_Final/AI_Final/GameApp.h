@@ -16,6 +16,9 @@ const IDType CIRCLE_SPRITE_ID = 4;
 
 const IDDescriptor PLAYER_ID = "player";
 const IDDescriptor AI_ID = "enemy";
+const IDDescriptor BOMB_ID = "bomb";
+const IDDescriptor EXPLOSION_ID = "explosion";
+const IDDescriptor POWERUP_ID = "powerup";
 
 class Timer;
 class SaveSystem;

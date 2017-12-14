@@ -4,6 +4,7 @@
 #include "GameMessageManager.h"
 #include "QuitGameMessage.h"
 #include "MovePlayerMessage.h"
+#include "DropBombMessage.h"
 
 void InputMessage::process()
 {
@@ -40,6 +41,13 @@ void InputMessage::process()
 		}
 
 		break;
+	case ALLEGRO_KEY_SPACE:
+	{
+		if(mInputType == KEY_DOWN)
+			newMessage = new DropBombMessage();
+
+		break;
+	}
 	}
 	default:
 		break;

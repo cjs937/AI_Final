@@ -104,7 +104,7 @@ std::vector<Vector2D> AI_Wander::getPossibleDirections(float _rayDistance)
 	std::vector<int> adjacentIndicies = grid->getAdjacentIndices(currentTileID);
 
 	//loops through the 4 directions
-	for (int i = 0; i < adjacentIndicies.size(); ++i)
+	for (unsigned int i = 0; i < adjacentIndicies.size(); ++i)
 	{
 		if (!gpGameApp->getAssetLoader()->checkIfCollisionNumber(adjacentIndicies[i]))
 		{

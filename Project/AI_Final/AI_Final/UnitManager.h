@@ -4,24 +4,15 @@
 #include <stack>
 #include "Defines.h"
 #include "SaveableComponent.h"
-
-enum UnitType
-{
-	//NONE = -1,
-	PLAYER,
-	AI,	
-	WALL,
-	CIRCLE,
-	NUM_TYPES
-};
+#include "KinematicUnit.h"
 
 const float DEFAULT_MAX_VEL = 100.0f;
 const float DEFAULT_MAX_ROTATION = 100.0f;//0.5f;
 
 enum ComponentType;
+
 class Component;
 class TerrainUnit;
-class KinematicUnit;
 class SaveableComponent;
 class PlayerUnit;
 class Sprite;
@@ -31,7 +22,9 @@ struct SharedUnitData : public SaveData
 {
 public:
 
-	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance);
+	SharedUnitData(float _playerSpeed, float _playerPowerupTime, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay, float _explosionUptime, float _enemyRespawnTime, 
+					float _powerupRespawnTime, int _maxEnemies, int _maxCandies);
+
 	~SharedUnitData();
 
 	virtual std::string getSerializedData() override;
@@ -39,8 +32,18 @@ public:
 	virtual void loadData(std::ifstream &_fin) override;
 
 	float playerSpeed;
+	float playerPowerupTime;
 	float aiSpeed;
 	float raycastDistance;
+	float bombExplosionDelay;
+	float playerBombDropDelay;
+	float explosionUptime;
+	float enemyRespawnTime;
+	float powerupRespawnTime;
+
+	int maxEnemies;
+	int maxCandies;
+
 };
 
 class UnitManager : public Trackable
@@ -81,6 +84,6 @@ public:
 	SharedUnitData* getUnitData();
 	SpawnSystem* getSpawnSystem() { return mpSpawnSystem; };
 	int getPlayerID() { return mPlayerID; };
-
+	int getUnitCount(UnitType _type);
 
 };
