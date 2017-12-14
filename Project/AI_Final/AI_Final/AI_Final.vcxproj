@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="AIUnit.cpp" />
     <ClCompile Include="AI_Pathfind.cpp" />
+    <ClCompile Include="AI_RunState.cpp" />
     <ClCompile Include="AI_Wander.cpp" />
     <ClCompile Include="AStarPathfinder.cpp" />
     <ClCompile Include="BlendedSteering.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="AIUnit.h" />
     <ClInclude Include="AIState.h" />
     <ClInclude Include="AI_Pathfind.h" />
+    <ClInclude Include="AI_RunState.h" />
     <ClInclude Include="AI_Wander.h" />
     <ClInclude Include="AStarPathfinder.h" />
     <ClInclude Include="BlendedSteering.h" />

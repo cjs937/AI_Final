@@ -19,6 +19,7 @@ class Grid;
 class GridVisualizer;
 class GraphicsBuffer;
 class AssetLoader;
+class EditorHud;
 
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
@@ -49,6 +50,7 @@ public:
 	//sets the current level
 	void setCurrentLevel(int var);
 	inline int getCurrentLevel() const { return mCurrentLevel; };
+	inline EditorHud* getHud() { return mpHud; };
 
     //draw level
 	void draw();
@@ -57,11 +59,12 @@ public:
 	void loadLevel();
 	void saveLevel();
 
+
 private:
 	Grid* mpGrid;
 	GridVisualizer* mpGridVisualizer;
-
 	AssetLoader* mpLoader;
+	EditorHud* mpHud;
 
 	int mTypeOfObject, mCounter, mCurrentLevel, mLevelCounter;
 	IDType mpWallIconBufferID;

@@ -21,6 +21,7 @@ class GraphicsBufferManager;
 class SpriteManager;
 class Game;
 class LevelEditor;
+class Hud;
 struct ALLEGRO_FONT;
 
 extern PerformanceTracker* gpPerformanceTracker;
@@ -54,13 +55,10 @@ public:
 	inline double getCurrentTime() const { return mpMasterTimer->getElapsedTime(); };
 	inline ALLEGRO_FONT* getFont() const { return mpFont; };
 	inline void markForExit() { mShouldExit = true; };
-
-
-	////loadLevel
-	//void loadLevel();
-	//void saveLevel();
+	inline Hud* getHud() { return mpHud; };
 
 protected:
+	Hud* mpHud;
 	GraphicsSystem* mpGraphicsSystem;
 	GraphicsBufferManager* mpGraphicsBufferManager;
 	SpriteManager* mpSpriteManager;

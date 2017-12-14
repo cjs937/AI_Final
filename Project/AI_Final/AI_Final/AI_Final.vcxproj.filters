@@ -192,6 +192,9 @@
     <ClCompile Include="AI_SeekState.cpp">
       <Filter>Source Files\State Machine\AIStates</Filter>
     </ClCompile>
+    <ClCompile Include="AI_RunState.cpp">
+      <Filter>Source Files\State Machine\AIStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -333,6 +336,9 @@
       <Filter>Header Files\State Machine\AIStates</Filter>
     </ClInclude>
     <ClInclude Include="AI_SeekState.h">
+      <Filter>Header Files\State Machine\AIStates</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_RunState.h">
       <Filter>Header Files\State Machine\AIStates</Filter>
     </ClInclude>
   </ItemGroup>

@@ -39,7 +39,7 @@ void GameMessageManager::processMessagesForThisframe()
 	}
 }
 
-void GameMessageManager::addMessage( GameMessage* pMessage, int delay )
+void GameMessageManager::addMessage( GameMessages* pMessage, int delay )
 {
 	double currentTime = gpGameApp->getCurrentTime();
 

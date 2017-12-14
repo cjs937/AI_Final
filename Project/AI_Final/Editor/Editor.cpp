@@ -12,6 +12,7 @@
 #include "SpriteManager.h"
 #include "Vector2D.h"
 #include "assetLoader.h"
+#include "EditorHud.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ Editor::Editor() : Game()
 	mCounter = 0; // initialize this to nothing will use to track current sprite drawn
 	mLevelCounter = 0;
 	mCurrentLevel = 0;
+	mpHud = NULL;
 }
 
 Editor::~Editor()
@@ -46,7 +48,7 @@ bool Editor::init(int _width, int _height)
 	mpLoader->loadAssets();
 	mCounter = mpLoader->getAssetIdMax();
 	mLevelCounter = mpLoader->getLevelIdMax();
-
+	mpHud = new EditorHud();
 	mpMasterTimer->start();
 	return true;
 }
@@ -57,6 +59,8 @@ void Editor::cleanup()
 	mpGrid = NULL;
 	delete mpLoader;
 	mpLoader = NULL;
+	delete mpHud;
+	mpHud = NULL;
 }
 
 void Editor::beginLoop()
@@ -67,6 +71,7 @@ void Editor::beginLoop()
 
 void Editor::processLoop()
 {
+
 	ALLEGRO_MOUSE_STATE mouseState;
 	al_get_mouse_state( &mouseState );
 	ALLEGRO_KEYBOARD_STATE keyState;
@@ -105,6 +110,7 @@ void Editor::processLoop()
 
 	mPreviousKeyState = keyState;
 	mPreviousMouseState = mouseState;
+	mpHud->update(getTypeOffObject(), mpGraphicsSystem->getBackBuffer());
 
 	draw();
 
