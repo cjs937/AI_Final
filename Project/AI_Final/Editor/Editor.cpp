@@ -35,7 +35,7 @@ Editor::~Editor()
 bool Editor::init(int _width, int _height)
 {
 	bool retVal = Game::init(_width, _height);
-	if( retVal == false )
+	if (retVal == false)
 	{
 		return false;
 	}
@@ -68,17 +68,17 @@ void Editor::beginLoop()
 void Editor::processLoop()
 {
 	ALLEGRO_MOUSE_STATE mouseState;
-	al_get_mouse_state( &mouseState );
+	al_get_mouse_state(&mouseState);
 	ALLEGRO_KEYBOARD_STATE keyState;
-	al_get_keyboard_state( &keyState );
+	al_get_keyboard_state(&keyState);
 
-	if( al_mouse_button_down( &mouseState, 1 ))//left mouse click
+	if (al_mouse_button_down(&mouseState, 1))//left mouse click
 	{
-		mpGrid->setValueAtPixelXY( mouseState.x, mouseState.y, getTypeOffObject() );
+		mpGrid->setValueAtPixelXY(mouseState.x, mouseState.y, getTypeOffObject());
 	}
-	else if( al_mouse_button_down( &mouseState, 2 ) )//right mouse down
+	else if (al_mouse_button_down(&mouseState, 2))//right mouse down
 	{
-		mpGrid->setValueAtPixelXY( mouseState.x, mouseState.y, CLEAR_VALUE );
+		mpGrid->setValueAtPixelXY(mouseState.x, mouseState.y, CLEAR_VALUE);
 	}
 	if (al_key_down(&keyState, ALLEGRO_KEY_Q) && !al_key_down(&mPreviousKeyState, ALLEGRO_KEY_Q)) // pressed q button
 	{
@@ -123,7 +123,7 @@ bool Editor::endLoop()
 }
 
 void Editor::setTypeOfObject(int var)
-{ 
+{
 	mTypeOfObject += var;
 	if (mTypeOfObject >= mCounter)
 		mTypeOfObject = 1;
@@ -140,14 +140,14 @@ void Editor::setCurrentLevel(int var)
 		mCurrentLevel = mLevelCounter - 1;
 }
 
-void Editor::saveGrid( ofstream& theStream )
+void Editor::saveGrid(ofstream& theStream)
 {
-	mpGrid->save( theStream );
+	mpGrid->save(theStream);
 }
 
-void Editor::loadGrid( std::ifstream& theStream )
+void Editor::load(std::ifstream& theStream)
 {
-	mpGrid->load(theStream);
+	mpGrid->loadGrid(theStream);
 }
 
 void Editor::loadLevel()
@@ -158,7 +158,7 @@ void Editor::loadLevel()
 	{
 		//levelInput = 
 		ifstream theStream(mpLoader->getLevelName(mCurrentLevel));
-		pEditor->loadGrid(theStream);
+		pEditor->load(theStream);
 		theStream.close();
 		//pEditor->getGridVisualizer()->setModified();
 		cout << "Grid loaded!\n";

@@ -6,7 +6,6 @@
 #include "Vector2D.h"
 
 /*Editor - class to hold all application related info.
-
 Dean Lawson
 Champlain College
 2011
@@ -39,8 +38,8 @@ public:
 	virtual void processLoop();
 	virtual bool endLoop();
 
-	void saveGrid( std::ofstream& theStream );
-	void loadGrid( std::ifstream& theStream );
+	void saveGrid(std::ofstream& theStream);
+	void load(std::ifstream& theStream);
 
 	//these are fore setting and getting the type of object
 	void setTypeOfObject(int var);
@@ -50,7 +49,7 @@ public:
 	void setCurrentLevel(int var);
 	inline int getCurrentLevel() const { return mCurrentLevel; };
 
-    //draw level
+	//draw level
 	void draw();
 
 	//loadLevel

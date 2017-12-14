@@ -21,6 +21,7 @@ const IDDescriptor EXPLOSION_ID = "explosion";
 const IDDescriptor POWERUP_ID = "powerup";
 const IDDescriptor INVINCIBLE_ID = "invincible";
 
+enum PathfinderType;
 
 class Timer;
 class SaveSystem;
@@ -33,7 +34,8 @@ class InputSystem;
 class AssetLoader;
 class DebugSystem;
 class Grid;
-
+class GridGraph;
+class GridPathfinder;
 class AIUnit;
 
 class GameApp : public Game
@@ -69,13 +71,16 @@ public:
 	AssetLoader* getAssetLoader() { return mpLoader; };
 	DebugSystem* getDebugSystem() { return mpDebugSystem; };
 	Grid* getGrid() { return mpGrid; };
+	GridGraph* getGridGraph() { return mpGridGraph; };
+	GridPathfinder* getPathfinder() { return mpPathfinder; };
 
 	float getDeltaTime();
 	float getCurrentTime(); 
 
+	void setPathfinder(PathfinderType _type);
 
 	//loadLevel
-	void loadGrid(std::ifstream& theStream);
+	void load(std::ifstream& theStream);
 	void loadLevel();
 
 private:
@@ -87,6 +92,8 @@ private:
 	DebugSystem* mpDebugSystem;
 
 	Grid* mpGrid;
+	GridGraph* mpGridGraph;
+	GridPathfinder* mpPathfinder;
 
 	bool mContinueLoop = true;
 	float mPrevFrameTime;

@@ -22,6 +22,11 @@
 #include "DebugSystem.h"
 #include "AIUnit.h"
 #include "Grid.h"
+#include "GridGraph.h"
+#include "AStarPathfinder.h"
+#include "Pathfinder.h"
+#include "GridPathfinder.h"
+#include "Path.h"
 
 GameApp* gpGameApp = NULL;
 
@@ -57,6 +62,11 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoader->loadAssets();
 	loadLevel();
+
+	mpGridGraph = new GridGraph(mpGrid);
+	mpGridGraph->init();
+
+	setPathfinder(ASTAR);
 
 	//Unit manager should be initialized after grid & asset loader because it needs their data
 	mpUnitManager->init();
@@ -185,6 +195,19 @@ void GameApp::cleanup()
 		mpGrid = NULL;
 	}
 
+	if (mpGridGraph != NULL)
+	{
+		delete mpGridGraph;
+
+		mpGridGraph = NULL;
+	}
+
+	if (mpPathfinder != NULL)
+	{
+		delete mpPathfinder;
+		mpPathfinder = NULL;
+	}
+
 	Game::cleanup();
 }
 
@@ -206,9 +229,10 @@ void GameApp::quit()
 	mContinueLoop = false;
 }
 
-void GameApp::loadGrid(std::ifstream& theStream)
+void GameApp::load(std::ifstream& theStream)
 {
-	mpGrid->load(theStream);
+	mpGrid->loadGrid(theStream);
+	//mpGrid->load(theStream);
 }
 
 void GameApp::loadLevel()
@@ -219,10 +243,31 @@ void GameApp::loadLevel()
 	{
 		//levelInput = 
 		ifstream theStream(mpLoader->getLevelName(0));
-		pGameApp->loadGrid(theStream);
+		pGameApp->load(theStream);
 		theStream.close();
 		//pEditor->getGridVisualizer()->setModified();
 		cout << "Grid loaded!\n";
 		Sleep(1000);//very bogus
+	}
+}
+
+void GameApp::setPathfinder(PathfinderType _type)
+{
+	if (mpPathfinder != NULL)
+	{
+		if (mpPathfinder->getType() == _type)
+			return;
+
+		delete mpPathfinder;
+	}
+	switch (_type)
+	{
+	case(ASTAR):
+	{
+		mpPathfinder = new AStarPathfinder(mpGridGraph);
+		break;
+	}
+	default:
+		mpPathfinder = NULL;
 	}
 }

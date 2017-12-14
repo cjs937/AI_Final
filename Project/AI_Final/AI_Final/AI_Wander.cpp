@@ -7,12 +7,16 @@
 #include "Timer.h"
 #include "Grid.h"
 #include "AssetLoader.h"
+#include "AI_Pathfind.h"
+#include "PlayerUnit.h"
+#include "AI_SeekState.h"
 
-AI_Wander::AI_Wander(AIUnit & _unit):AIState(_unit)
+AI_Wander::AI_Wander(AIUnit & _unit) :AIState(_unit)
 {
 	mpTimer = new Timer();
+	mpSwitchOff = new Timer();
 }
- 
+
 AI_Wander::~AI_Wander()
 {
 	if (mpTimer != NULL)
@@ -21,21 +25,37 @@ AI_Wander::~AI_Wander()
 
 		mpTimer = NULL;
 	}
+
+	if (mpSwitchOff != NULL)
+	{
+		delete mpSwitchOff;
+
+		mpSwitchOff = NULL;
+	}
 }
 
 void AI_Wander::onEnter()
 {
-//	getWanderDirection();
+	//	getWanderDirection();
 
 	mpTimer->start();
+	mpSwitchOff->start();
 }
 
 State* AI_Wander::update()
 {
-	if(mpTimer->getElapsedTime() >= WANDER_DELAY)
+	if (mpTimer->getElapsedTime() >= WANDER_DELAY)
 		getWanderDirection();
 
 	move();
+
+	Vector2D playerPos = gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition();
+	if ((playerPos - mUnit->getCenterPosition()).getLengthSquared() <= MAX_DISTANCE && mpSwitchOff->getElapsedTime() >= PATHFIND_DELAY)
+	{
+		mpTimer->stop();
+		mpSwitchOff->stop();
+		return new AI_Pathfind(*mUnit);
+	}
 
 	//should return null unless base behavior changes
 	return AIState::update();
@@ -76,7 +96,7 @@ void AI_Wander::move()
 
 
 std::vector<Vector2D> AI_Wander::getPossibleDirections(float _rayDistance)
-{				
+{
 	std::vector<Vector2D> possibleDirections;
 	Vector2D unitPosition = mUnit->getCenterPosition();
 	Grid* grid = gpGameApp->getGrid();
@@ -85,7 +105,7 @@ std::vector<Vector2D> AI_Wander::getPossibleDirections(float _rayDistance)
 	std::vector<int> adjacentIndicies = grid->getAdjacentIndices(currentTileID);
 
 	//loops through the 4 directions
-	for (unsigned int i = 0; i < adjacentIndicies.size(); ++i)
+	for (int i = 0; i < adjacentIndicies.size(); ++i)
 	{
 		if (!gpGameApp->getAssetLoader()->checkIfCollisionNumber(adjacentIndicies[i]))
 		{
@@ -103,9 +123,8 @@ Vector2D AI_Wander::getDirectionFromIndex(Vector2D _unitPosition, int _index)
 	Vector2D squarePos = gpGameApp->getGrid()->getULCornerOfSquare(_index);
 
 	Vector2D direction = (squarePos - _unitPosition);
-	
+
 	direction.normalize();
 
 	return direction;
 }
-

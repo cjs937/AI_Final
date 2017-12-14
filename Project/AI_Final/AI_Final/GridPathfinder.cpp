@@ -6,13 +6,13 @@
 #include "Game.h"
 #include "GraphicsBuffer.h"
 
-GridPathfinder::GridPathfinder(GridGraph* pGraph, Color _pathColor)
-	:Pathfinder(pGraph, _pathColor)
+GridPathfinder::GridPathfinder()
+{}
+
+GridPathfinder::GridPathfinder(GridGraph* pGraph)
+	:Pathfinder(pGraph)
 	, mTimeElapsed(0.0)
 {
-#ifdef VISUALIZE_PATH
-	mpVisualizer = NULL;
-#endif
 }
 
 GridPathfinder::~GridPathfinder()
@@ -34,7 +34,7 @@ void GridPathfinder::drawVisualization(Grid* pGrid, GraphicsBuffer* pDest)
 		mpVisualizer->clear();
 	}
 
-	ALLEGRO_COLOR pathColor = mPathColor.color;
+	ALLEGRO_COLOR pathColor = Color(RED).color;
 	ALLEGRO_COLOR startColor = Color(WHITE).color;
 	ALLEGRO_COLOR stopColor = Color(GREEN).color;
 

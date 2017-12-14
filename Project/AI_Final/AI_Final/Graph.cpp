@@ -42,15 +42,6 @@ std::vector<Connection*> Graph::getConnections(const NODE_ID& fromId)
 	}
 }
 
-//std::vector<Connection*> Graph::getNonDiagonalConnections( const Node& from )
-//{
-//	std::vector<Connection*> allConnections = getConnections(from);
-//
-//
-//
-//
-//}
-
 Node* Graph::getNode(int index)
 {
 	if (index < (int)mNodes.size())

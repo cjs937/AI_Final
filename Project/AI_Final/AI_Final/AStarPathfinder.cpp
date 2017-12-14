@@ -6,9 +6,9 @@
 #include "Grid.h"
 #include "GameApp.h"
 #include "Vector2D.h"
-#include "PerformanceTracker.h"
+#include "GridGraph.h"
 
-AStarPathfinder::AStarPathfinder(GridGraph* _graph) :GridPathfinder(_graph, Color(BLUE))
+AStarPathfinder::AStarPathfinder(GridGraph* _graph)// :GridPathfinder(_graph, Color(BLUE))
 {}
 
 AStarPathfinder::~AStarPathfinder()
@@ -16,9 +16,6 @@ AStarPathfinder::~AStarPathfinder()
 
 const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 {
-	gpPerformanceTracker->clearTracker("path");
-	gpPerformanceTracker->startTracking("path");
-
 	AStarState currentState = AStarState(pTo);
 
 	AStarNode startNode = AStarNode(pFrom);
@@ -36,6 +33,9 @@ const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 
 		currentState.closedList.push_back(currentState.currentNode);
 
+		if (currentState.openList.size() == 0)
+			break;
+
 		currentState.currentNode = currentState.openList.top();
 	}
 
@@ -46,15 +46,12 @@ const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 		return mPath;
 	}
 
-	gpPerformanceTracker->stopTracking("path");
-	mTimeElapsed = gpPerformanceTracker->getElapsedTime("path");
-
 	return generatePath(currentState);
 }
 
 void AStarPathfinder::evaluateConnections(AStarState &_currentState)
 {
-	std::vector<Connection*> connections = mpGraph->getConnections(*_currentState.currentNode.node);
+	std::vector<Connection*> connections = gpGameApp->getGridGraph()->getConnections(*_currentState.currentNode.node);
 	std::vector<AStarNode>::iterator closedListIter;
 
 	for (size_t i = 0; i < connections.size(); ++i)
