@@ -29,7 +29,8 @@ std::string SharedUnitData::getSerializedData()
 }
 
 void SharedUnitData::loadData(std::ifstream &_fin)
-{}
+{
+}
 
 UnitManager::UnitManager(SharedUnitData* _saveData) : mPlayerID(INVALID_ID)
 {

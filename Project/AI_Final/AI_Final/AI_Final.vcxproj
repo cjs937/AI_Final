@@ -148,6 +148,7 @@
     <ClCompile Include="PlayerUnit.cpp" />
     <ClCompile Include="SaveableComponent.cpp" />
     <ClCompile Include="SaveSystem.cpp" />
+    <ClCompile Include="AI_SeekState.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="SpawnSystem.cpp" />
     <ClCompile Include="StateHandler.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
+    <ClInclude Include="AI_SeekState.h" />
     <ClInclude Include="Spawner.h" />
     <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
@@ -201,6 +203,9 @@
     <ClInclude Include="Steering.h" />
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,8 +6,7 @@
 
 class Timer;
 
-const float PATHFIND_DELAY = 2.0f;
-const float MAX_DISTANCE = 1000;
+const float MAX_DISTANCE = 10000;
 
 class AI_Pathfind : public AIState
 {
@@ -22,12 +21,15 @@ class AI_Pathfind : public AIState
 		Vector2D mDirection;
 		Path mPath;
 		Node* mpToNode;
+		int mResetCheck;
 
 		int mTo, mFrom, currentIndexPos;
 
 		void getPath();
 
-		Vector2D getDirectionFromIndex(float _rayDistance);
+		Vector2D getNextDirection();
+		Vector2D getDirectionFromIndex(Vector2D _unitPosition, int _index);
+		bool mPathFound;
 		void move();
 
 };

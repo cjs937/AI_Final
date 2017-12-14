@@ -145,9 +145,9 @@ void Editor::saveGrid( ofstream& theStream )
 	mpGrid->save( theStream );
 }
 
-void Editor::loadGrid( std::ifstream& theStream )
+void Editor::load( std::ifstream& theStream )
 {
-	mpGrid->load(theStream);
+	mpGrid->loadGrid(theStream);
 }
 
 void Editor::loadLevel()
@@ -158,7 +158,7 @@ void Editor::loadLevel()
 	{
 		//levelInput = 
 		ifstream theStream(mpLoader->getLevelName(mCurrentLevel));
-		pEditor->loadGrid(theStream);
+		pEditor->load(theStream);
 		theStream.close();
 		//pEditor->getGridVisualizer()->setModified();
 		cout << "Grid loaded!\n";

@@ -5,6 +5,7 @@
 class Timer;
 
 const float WANDER_DELAY = 2000.0f;
+const float PATHFIND_DELAY = 8000.0f;
 
 class AI_Wander : public AIState
 {
@@ -18,6 +19,7 @@ public:
 private:
 	Vector2D mDirection;
 	Timer* mpTimer;
+	Timer* mpSwitchOff;
 
 	//returns array with possible directions to move in. _numDirections will hold the num indecies
 	std::vector<Vector2D> getPossibleDirections(float _rayDistance);

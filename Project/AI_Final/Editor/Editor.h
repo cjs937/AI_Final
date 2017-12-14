@@ -40,7 +40,7 @@ public:
 	virtual bool endLoop();
 
 	void saveGrid( std::ofstream& theStream );
-	void loadGrid( std::ifstream& theStream );
+	void load( std::ifstream& theStream );
 
 	//these are fore setting and getting the type of object
 	void setTypeOfObject(int var);

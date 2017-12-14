@@ -133,7 +133,7 @@ void Grid::save( std::ofstream& file )
 	}
 }
 
-void Grid::load( std::ifstream& file )
+void Grid::loadGrid( std::ifstream& file )
 {
 	int numSquares = mGridWidth * mGridHeight;
 	for( int i=0; i<numSquares; i++ )

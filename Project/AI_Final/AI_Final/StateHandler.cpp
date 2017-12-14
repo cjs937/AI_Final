@@ -4,12 +4,16 @@
 StateHandler::StateHandler():Component(STATE_HANDLER)
 {
 	mCurrentState = NULL;
+	mPreviousState = NULL;
 }
 
 StateHandler::~StateHandler()
 {
 	if (mCurrentState != NULL)
 		delete mCurrentState;
+
+	if (mPreviousState != NULL)
+		delete mPreviousState;
 }
 
 //Updates the current state
@@ -34,10 +38,14 @@ void StateHandler::changeState(State & _newState, bool _exitCurrentState)
 		if (_exitCurrentState)
 			mCurrentState->onExit();
 
-		delete mCurrentState;
+		mPreviousState = mCurrentState;
 	}
 
 	mCurrentState = &_newState;
+	//if (mPreviousState != NULL)
+	//{
+	//	delete mPreviousState;
+	//}
 
 	mCurrentState->onEnter();
 }

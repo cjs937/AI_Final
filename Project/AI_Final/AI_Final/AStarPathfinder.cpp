@@ -48,7 +48,7 @@ const Path& AStarPathfinder::findPath(Node* pFrom, Node* pTo)
 
 void AStarPathfinder::evaluateConnections(AStarState &_currentState)
 {
-	std::vector<Connection*> connections = mpGraph->getConnections(*_currentState.currentNode.node);
+	std::vector<Connection*> connections = gpGameApp->getGridGraph()->getConnections(*_currentState.currentNode.node);
 	std::vector<AStarNode>::iterator closedListIter;
 
 	for (size_t i = 0; i < connections.size(); ++i)

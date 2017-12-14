@@ -11,9 +11,11 @@
 #include "AStarPathfinder.h"
 #include "Grid.h"
 #include "GridGraph.h"
+#include "AI_Wander.h"
+#include "DebugLine.h"
+#include "AI_SeekState.h"
 
-
-AI_Pathfind::AI_Pathfind(AIUnit & _unit)
+AI_Pathfind::AI_Pathfind(AIUnit & _unit) : AIState (_unit)
 {
 }
 
@@ -23,22 +25,39 @@ AI_Pathfind::~AI_Pathfind()
 
 void AI_Pathfind::onEnter()
 {
+	mResetCheck = 0;
 	mTo = 0;
 	mFrom = 0;
 	currentIndexPos = 0;
 	mpToNode = NULL;
+	mPathFound = false;
 }
 
 State* AI_Pathfind::update()
 {
 	Vector2D playerPos = gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition();
-	if ((gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition()
-		 -mUnit->getCenterPosition()).getLengthSquared() <= MAX_DISTANCE)
+	if ((playerPos - mUnit->getCenterPosition()).getLengthSquared() <= MAX_DISTANCE || mPath.getNumNodes() > 0)
 	{
-		if (mPath.getNumNodes() <= 0)
+		if (mPath.getNumNodes() == 1)
+		{
+			//mPath.clear();
+			mPathFound = false;
+			return new AI_SeekState(*mUnit);
+		}
+		if (mPathFound == false)
+		{
 			getPath();
-		
-			mDirection = getDirectionFromIndex(0.0);
+			mPathFound = true;
+		}
+		mDirection = getNextDirection();
+		move();
+	}
+	else
+	{
+		//mPath.clear();
+		mPathFound = false;
+		return new AI_SeekState(*mUnit);
+
 	}
 	return AIState::update();
 }
@@ -46,29 +65,42 @@ State* AI_Pathfind::update()
 void AI_Pathfind::getPath()
 {
 	//dear God what have I created.
-	mFrom = gpGameApp->getGrid()->getSquareIndexFromPixelXY(mUnit->getCenterPosition().getX(), mUnit->getCenterPosition().getY());
-	mTo = gpGameApp->getGrid()->getSquareIndexFromPixelXY(gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition().getX(), gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition().getY());
+	mFrom = gpGameApp->getGrid()->getSquareIndexFromPixelXY(mUnit->getPosition().getX(), mUnit->getPosition().getY());
+	mTo = gpGameApp->getGrid()->getSquareIndexFromPixelXY(gpGameApp->getUnitManager()->getPlayerUnit()->getPosition().getX(), gpGameApp->getUnitManager()->getPlayerUnit()->getPosition().getY());
 	
-	mPath = gpGameApp->getPathfinder()->findPath(gpGameApp->getGridGraph()->getNode(mFrom), gpGameApp->getGridGraph()->getNode(mTo));
+	mPath = gpGameApp->getPathfinder()->findPath(gpGameApp->getGridGraph()->getNode(mTo), gpGameApp->getGridGraph()->getNode(mFrom));
 }
 //if the plyer is on the next node of the path it will get the one after it, if
 //the node was null it will get the first path node.
-Vector2D AI_Pathfind::getDirectionFromIndex(float _rayDistance)
+Vector2D AI_Pathfind::getNextDirection()
 {
 	Vector2D unitPosition = mUnit->getCenterPosition();
 	Grid* grid = gpGameApp->getGrid();
 	int currentTileID = grid->getSquareIndexFromPixelXY(unitPosition.getX(), unitPosition.getY());
-	
+
 	if (mpToNode == NULL)
 		mpToNode = mPath.getAndRemoveNextNode();
-	else
+	else if (currentTileID == mpToNode->getId())
+	{
+		mResetCheck++;
 		if (currentTileID == mpToNode->getId())
 			mpToNode = mPath.getAndRemoveNextNode();
+	}
 	//initialize and use to return direction
-	Vector2D squarePos = gpGameApp->getGrid()->getULCornerOfSquare(mpToNode->getId());
-	Vector2D direction = (squarePos - grid->getULCornerOfSquare(currentTileID));
-	direction.normalize();
+	Vector2D direction = getDirectionFromIndex(grid->getULCornerOfSquare(currentTileID), mpToNode->getId());
+	std::cout << direction.getX() << "       " << direction.getY() << std::endl;
 	
+	return direction;
+}
+
+Vector2D AI_Pathfind::getDirectionFromIndex(Vector2D _unitPosition, int _index)
+{
+	Vector2D squarePos = gpGameApp->getGrid()->getULCornerOfSquare(_index);
+
+	Vector2D direction = (squarePos - _unitPosition);
+
+	direction.normalize();
+
 	return direction;
 }
 

@@ -6,16 +6,6 @@
 #include "Game.h"
 #include "GraphicsBuffer.h"
 
-/*
-GridPathfinder::GridPathfinder(GridGraph* pGraph, Color _pathColor)
-	:Pathfinder(pGraph, _pathColor)
-	, mTimeElapsed(0.0)
-{
-#ifdef VISUALIZE_PATH
-	mpVisualizer = NULL;
-#endif
-}*/
-
 GridPathfinder::GridPathfinder()
 {}
 

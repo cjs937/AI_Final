@@ -63,6 +63,7 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoader->loadAssets();
 	loadLevel();
+	//ifstream theStream(mpLoader->getLevelName(0));
 
 	mpGridGraph = new GridGraph(mpGrid);
 	mpGridGraph->init();
@@ -225,9 +226,10 @@ void GameApp::quit()
 	mContinueLoop = false;
 }
 
-void GameApp::loadGrid(std::ifstream& theStream)
+void GameApp::load(std::ifstream& theStream)
 {
-	mpGrid->load(theStream);
+	mpGrid->loadGrid(theStream);
+	//mpGrid->load(theStream);
 }
 
 void GameApp::loadLevel()
@@ -238,7 +240,7 @@ void GameApp::loadLevel()
 	{
 		//levelInput = 
 		ifstream theStream(mpLoader->getLevelName(0));
-		pGameApp->loadGrid(theStream);
+		pGameApp->load(theStream);
 		theStream.close();
 		//pEditor->getGridVisualizer()->setModified();
 		cout << "Grid loaded!\n";
@@ -266,3 +268,4 @@ void GameApp::setPathfinder(PathfinderType _type)
 				mpPathfinder = NULL;
 		}
 }
+

@@ -7,10 +7,14 @@
 #include "Timer.h"
 #include "Grid.h"
 #include "AssetLoader.h"
+#include "AI_Pathfind.h"
+#include "PlayerUnit.h"
+#include "AI_SeekState.h"
 
 AI_Wander::AI_Wander(AIUnit & _unit):AIState(_unit)
 {
 	mpTimer = new Timer();
+	mpSwitchOff = new Timer();
 }
  
 AI_Wander::~AI_Wander()
@@ -21,6 +25,13 @@ AI_Wander::~AI_Wander()
 
 		mpTimer = NULL;
 	}
+
+	if (mpSwitchOff != NULL)
+	{
+		delete mpSwitchOff;
+
+		mpSwitchOff = NULL;
+	}
 }
 
 void AI_Wander::onEnter()
@@ -28,6 +39,7 @@ void AI_Wander::onEnter()
 //	getWanderDirection();
 
 	mpTimer->start();
+	mpSwitchOff->start();
 }
 
 State* AI_Wander::update()
@@ -36,6 +48,13 @@ State* AI_Wander::update()
 		getWanderDirection();
 
 	move();
+
+	Vector2D playerPos = gpGameApp->getUnitManager()->getPlayerUnit()->getCenterPosition();
+	if ((playerPos - mUnit->getCenterPosition()).getLengthSquared() <= MAX_DISTANCE && mpSwitchOff->getElapsedTime() >= PATHFIND_DELAY)
+	{
+		mpTimer->stop();
+		return new AI_Pathfind(*mUnit);
+	}
 
 	//should return null unless base behavior changes
 	return AIState::update();

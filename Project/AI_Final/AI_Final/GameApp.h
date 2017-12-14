@@ -76,7 +76,7 @@ public:
 	void setPathfinder(PathfinderType _type);
 
 	//loadLevel
-	void loadGrid(std::ifstream& theStream);
+	void load(std::ifstream& theStream);
 	void loadLevel();
 
 private:

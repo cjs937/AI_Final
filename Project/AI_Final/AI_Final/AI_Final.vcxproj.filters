@@ -189,6 +189,9 @@
     <ClCompile Include="AI_Pathfind.cpp">
       <Filter>Source Files\State Machine\AIStates</Filter>
     </ClCompile>
+    <ClCompile Include="AI_SeekState.cpp">
+      <Filter>Source Files\State Machine\AIStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -329,5 +332,11 @@
     <ClInclude Include="AI_Pathfind.h">
       <Filter>Header Files\State Machine\AIStates</Filter>
     </ClInclude>
+    <ClInclude Include="AI_SeekState.h">
+      <Filter>Header Files\State Machine\AIStates</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
