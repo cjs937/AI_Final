@@ -27,6 +27,7 @@ enum UnitType
 	AI,
 	BOMB,
 	EXPLOSION,
+	POWERUP,
 	NUM_TYPES
 };
 

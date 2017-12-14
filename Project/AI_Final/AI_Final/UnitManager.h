@@ -22,7 +22,9 @@ struct SharedUnitData : public SaveData
 {
 public:
 
-	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay, float _explosionUptime, float _enemyRespawnTime);
+	SharedUnitData(float _playerSpeed, float _aiSpeed, float _raycastDistance, float _playerBombDropDelay, float _bombExplosionDelay, float _explosionUptime, float _enemyRespawnTime, 
+					float _powerupRespawnTime, int _maxEnemies, int _maxCandies);
+
 	~SharedUnitData();
 
 	virtual std::string getSerializedData() override;
@@ -36,6 +38,11 @@ public:
 	float playerBombDropDelay;
 	float explosionUptime;
 	float enemyRespawnTime;
+	float powerupRespawnTime;
+
+	int maxEnemies;
+	int maxCandies;
+
 };
 
 class UnitManager : public Trackable
@@ -76,6 +83,6 @@ public:
 	SharedUnitData* getUnitData();
 	SpawnSystem* getSpawnSystem() { return mpSpawnSystem; };
 	int getPlayerID() { return mPlayerID; };
-
+	int getUnitCount(UnitType _type);
 
 };

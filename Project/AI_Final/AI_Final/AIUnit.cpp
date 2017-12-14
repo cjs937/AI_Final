@@ -5,7 +5,8 @@
 #include "Defines.h"
 #include "GameApp.h"
 #include "RemoveUnitMessage.h"
-#include "SpawnNewEnemyMessage.h"
+#include "SpawnNewUnitMessage.h"
+#include "Spawner.h"
 
 AIUnit::AIUnit(KUInitData const & _data) : KinematicUnit(_data)
 {
@@ -41,5 +42,5 @@ void AIUnit::die()
 
 	MESSAGE_MANAGER->addMessage(new RemoveUnitMessage(this), 0);
 
-	MESSAGE_MANAGER->addMessage(new SpawnNewEnemyMessage(), 0);
+	MESSAGE_MANAGER->addMessage(new SpawnNewUnitMessage(ENEMY_SPAWN), UNIT_MANAGER->getUnitData()->enemyRespawnTime);
 }

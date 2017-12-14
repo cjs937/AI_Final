@@ -11,11 +11,19 @@ PlayerSpawner::~PlayerSpawner()
 
 void PlayerSpawner::spawnObject()
 {	
+	if (!canSpawn())
+		return;
+
+	UNIT_MANAGER->addUnit(PLAYER, getPosition(), 1, Vector2D(), 0);
+}
+
+bool PlayerSpawner::canSpawn()
+{
 	//Player is a singleton, so if there is already one in the scene prevent another one from spawning
 	if (UNIT_MANAGER->getPlayerUnit() != NULL)
 	{
-		return;
+		return false;
 	}
 
-	UNIT_MANAGER->addUnit(PLAYER, getPosition(), 1, Vector2D(), 0);
+	return true;
 }

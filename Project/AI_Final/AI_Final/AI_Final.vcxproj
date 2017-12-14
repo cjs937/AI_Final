@@ -120,6 +120,8 @@
     <ClCompile Include="AI_Wander.cpp" />
     <ClCompile Include="BlendedSteering.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupSpawner.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DebugLine.cpp" />
@@ -154,6 +156,7 @@
     <ClInclude Include="AI_Wander.h" />
     <ClInclude Include="BlendedSteering.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="PowerupSpawner.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
@@ -177,13 +180,14 @@
     <ClInclude Include="PlayerSpawner.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerUnit.h" />
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="QuitGameMessage.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RemoveUnitMessage.h" />
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Spawner.h" />
-    <ClInclude Include="SpawnNewEnemyMessage.h" />
+    <ClInclude Include="SpawnNewUnitMessage.h" />
     <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />

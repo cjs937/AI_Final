@@ -37,4 +37,5 @@ private:
 	float mMoveSpeed;
 	int mHealth;
 	int mScore;
+	bool mPoweredUp;
 };

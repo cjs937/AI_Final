@@ -12,6 +12,8 @@ PlayerUnit::PlayerUnit(KUInitData const & _data):KinematicUnit(_data)
 
 	mScore = 0;
 
+	mPoweredUp = false;
+
 	setSteering(new GridSteering(this));
 
 	mpTimer = new Timer();
@@ -48,7 +50,7 @@ void PlayerUnit::dropBomb()
 }
 
 void PlayerUnit::applyPowerup()
-{}// pass in powerup pointer when we have them
+{}
 
 void PlayerUnit::handleCollision(UnitType _colliderType)
 {

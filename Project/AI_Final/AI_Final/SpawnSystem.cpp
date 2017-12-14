@@ -4,6 +4,7 @@
 #include "AssetLoader.h"
 #include "PlayerSpawner.h"
 #include "EnemySpawner.h"
+#include "PowerupSpawner.h"
 
 SpawnSystem::SpawnSystem()
 {}
@@ -28,6 +29,7 @@ void SpawnSystem::initSpawners(Grid* _grid)
 	int size = _grid->getGridWidth() * _grid->getGridHeight();
 	int playerSpawnIndex = gpGameApp->getAssetLoader()->getAssetIndex("playerSpawn");
 	int enemySpawnIndex = gpGameApp->getAssetLoader()->getAssetIndex("enemySpawn");
+	int powerupSpawnIndex = gpGameApp->getAssetLoader()->getAssetIndex("invincibleSpawn");
 
 	//get any non-zero squares and make them desired sprites
 	for (int i = 0; i < size; i++)
@@ -43,6 +45,10 @@ void SpawnSystem::initSpawners(Grid* _grid)
 		else if (indexValue == enemySpawnIndex)
 		{
 			newSpawner = new EnemySpawner(_grid->getULCornerOfSquare(i));
+		}
+		else if (indexValue == powerupSpawnIndex)
+		{
+			newSpawner = new PowerupSpawner(_grid->getULCornerOfSquare(i));
 		}
 		else
 		{

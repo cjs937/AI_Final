@@ -26,6 +26,8 @@ public:
 	//Should be overridden by children
 	virtual void update();
 	virtual void spawnObject() = 0;
+	//Make sure object spawner is spawning can be spawned at this time
+	virtual bool canSpawn() = 0;
 	
 private:
 	Timer* mpTimer;

@@ -9,4 +9,6 @@ public:
 	~EnemySpawner();
 
 	virtual void spawnObject() override;
+	virtual bool canSpawn() override;
+
 };

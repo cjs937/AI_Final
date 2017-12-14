@@ -24,7 +24,7 @@ void Spawner::update()
 {
 	if (mDelaying)
 	{
-		if (mpTimer->getElapsedTime() * gpGameApp->getDeltaTime() >= mCurrentSpawnDelay)
+		if (mCurrentSpawnDelay <= mpTimer->getElapsedTime() * gpGameApp->getDeltaTime() )
 		{
 			mpTimer->stop();
 
@@ -42,4 +42,6 @@ void Spawner::spawnDelayedObject(float _delay)
 	mCurrentSpawnDelay = _delay;
 
 	mpTimer->start();
+
+	mpTimer->start();//(mCurrentSpawnDelay);
 }
