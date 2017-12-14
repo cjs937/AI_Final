@@ -119,6 +119,11 @@ void HitboxComponent::createBounds(Vector2D const & _position)
 void HitboxComponent::update()
 {
 	updateBounds(mpUnit->getPosition() + mOffset);
+
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionB));
+	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionC));
+	DEBUG->drawRequest(new DebugLine(mPositionC, mPositionD));
+	DEBUG->drawRequest(new DebugLine(mPositionB, mPositionD));
 }
 
 
@@ -128,11 +133,6 @@ void HitboxComponent::updateBounds(Vector2D const & _position)//creates new hitb
 	{
 		createBounds(_position);
 	}
-
-	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionB));
-	DEBUG->drawRequest(new DebugLine(mPositionA, mPositionC));
-	DEBUG->drawRequest(new DebugLine(mPositionC, mPositionD));
-	DEBUG->drawRequest(new DebugLine(mPositionB, mPositionD));
 }
 
 

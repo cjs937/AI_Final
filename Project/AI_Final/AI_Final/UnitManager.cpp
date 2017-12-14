@@ -12,6 +12,7 @@
 #include "SpawnSystem.h"
 #include "CollisionSystem.h"
 #include "Bomb.h"
+#include "Explosion.h"
 
 typedef std::pair <UnitType, std::map<int, KinematicUnit*>*> mapListPair;
 typedef std::pair <int, KinematicUnit*> mapPair;
@@ -179,7 +180,7 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 
 	KinematicUnit* newUnit;
 
-	KUInitData unitData(newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
+	KUInitData unitData(_type, newID, unitSprite, position, orientation, velocity, rotationVel, maxVelocity, maxAcceleration);
 
 	switch (_type)
 	{
@@ -191,6 +192,9 @@ KinematicUnit* UnitManager::addUnit(UnitType _type, const Vector2D& position, fl
 		break;
 	case(BOMB):
 		newUnit = new Bomb(unitData);
+		break;
+	case(EXPLOSION):
+		newUnit = new Explosion(unitData);
 		break;
 	default:
 		newUnit = new KinematicUnit(unitData);
@@ -213,6 +217,10 @@ Sprite* UnitManager::getUnitSprite(UnitType _unitType)
 	else if (_unitType == BOMB)
 	{
 		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(BOMB_ID);
+	}
+	else if(_unitType == EXPLOSION)
+	{
+		spriteID = gpGameApp->getAssetLoader()->getAssetIndex(EXPLOSION_ID);
 	}
 	else
 	{

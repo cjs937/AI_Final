@@ -9,5 +9,8 @@ public:
 
 	void move(Vector2D _direction, float _ms);
 
+	virtual void handleCollision(UnitType _colliderType) override;
+
 private:
+	void die();
 };

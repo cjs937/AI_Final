@@ -141,3 +141,12 @@ void Grid::load( std::ifstream& file )
 		file >> mpValues[i];
 	}
 }
+
+Vector2D Grid::getCenterOfSquare(int _index) const
+{
+	Vector2D UL = getULCornerOfSquare(_index);
+
+	Vector2D center = Vector2D(UL.getX() + GRID_SQUARE_SIZE / 2, UL.getY() + GRID_SQUARE_SIZE / 2);
+
+	return center;
+}

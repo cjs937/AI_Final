@@ -51,7 +51,7 @@ bool GameApp::init(int _screenWidth, int _screenHeight)
 
 	mpLoader = new AssetLoader();
 
-	SharedUnitData* unitData = new SharedUnitData(250.0f, 100.0f, 10.0f, 1.0f, 10.0f, 0.5f);
+	SharedUnitData* unitData = new SharedUnitData(250.0f, 100.0f, 10.0f, 1.0f, 10.0f, 10.0f);
 
 	mpUnitManager = new UnitManager(unitData);
 

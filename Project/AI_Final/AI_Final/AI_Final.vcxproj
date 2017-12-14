@@ -125,6 +125,7 @@
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="GridSteering.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="DebugSystem.h" />
     <ClInclude Include="DropBombMessage.h" />
     <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="GridSteering.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="SaveableComponent.h" />
     <ClInclude Include="SaveSystem.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="SpawnNewEnemyMessage.h" />
     <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />

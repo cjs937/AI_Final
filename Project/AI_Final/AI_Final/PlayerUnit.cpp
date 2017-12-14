@@ -48,7 +48,7 @@ void PlayerUnit::dropBomb()
 void PlayerUnit::applyPowerup()
 {}// pass in powerup pointer when we have them
 
-void PlayerUnit::onHit(UnitType _colliderType)
+void PlayerUnit::handleCollision(UnitType _colliderType)
 {
 	switch (_colliderType)
 	{

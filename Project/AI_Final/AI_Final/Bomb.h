@@ -2,7 +2,7 @@
 #include "KinematicUnit.h"
 
 class Timer;
-
+class Vector2D;
 
 class Bomb : public KinematicUnit
 {
@@ -17,4 +17,5 @@ private:
 	Timer* mpTimer;
 
 	void explode();
+	std::vector<Vector2D> getExplosionPositions();
 };

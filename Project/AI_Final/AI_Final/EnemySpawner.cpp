@@ -1,6 +1,7 @@
 #include "EnemySpawner.h"
 #include "Defines.h"
 #include "GameApp.h"
+#include "KinematicUnit.h"
 
 EnemySpawner::EnemySpawner(Vector2D _position): Spawner(ENEMY_SPAWN, _position)
 {}

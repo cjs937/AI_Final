@@ -1,6 +1,7 @@
 #include "PlayerSpawner.h"
 #include "GameApp.h"
 #include "Defines.h"
+#include "KinematicUnit.h"
 
 PlayerSpawner::PlayerSpawner(Vector2D _position):Spawner(PLAYER_SPAWN, _position)
 {}

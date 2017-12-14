@@ -54,6 +54,10 @@ void CollisionSystem::checkAllUnitCollisions()
 
 		for (auto j = currentMap->begin(); j != currentMap->end(); ++j)
 		{
+			//If unit is marked for deletion
+			if (j->second->isDeleting())
+				continue;
+
 			checkCollisions(j->second);
 		}
 	}

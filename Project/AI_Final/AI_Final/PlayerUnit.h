@@ -26,7 +26,7 @@ public:
 
 	void applyPowerup(); // pass in powerup pointer when we have them
 
-	void onHit(UnitType _colliderType);
+	virtual void handleCollision(UnitType _colliderType) override;
 
 	void die();
 
