@@ -7,6 +7,7 @@ class AIState : public State
 protected:
 	AIUnit* mUnit;
 
+	AIState() {};
 	AIState(AIUnit & _unit) :mUnit(&_unit) {};
 	~AIState() {};
 

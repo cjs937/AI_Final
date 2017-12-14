@@ -9,6 +9,8 @@ static const IDType INVALID_ID = -1;
 static const IDType HIGHEST_ID = 9999;
 
 static const IDDescriptor ERROR_STRING = "error";
+static const IDDescriptor WALL_STRING = "wall";
+
 
 const IDType WIDTH = 1024;
 const IDType HEIGHT = 768;

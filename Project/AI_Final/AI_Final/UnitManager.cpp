@@ -35,7 +35,8 @@ std::string SharedUnitData::getSerializedData()
 }
 
 void SharedUnitData::loadData(std::ifstream &_fin)
-{}
+{
+}
 
 //////////////////////////////////////////////
 

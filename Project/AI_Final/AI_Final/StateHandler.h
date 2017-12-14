@@ -15,4 +15,5 @@ public:
 
 private:
 	State* mCurrentState;
+	State* mPreviousState;
 };

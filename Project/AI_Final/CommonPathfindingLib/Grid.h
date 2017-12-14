@@ -38,7 +38,7 @@ public:
 	std::vector<int> getAdjacentIndices( int theSquareIndex ) const;
 
 	void save( std::ofstream& file );
-	void load( std::ifstream& file );
+	void loadGrid( std::ifstream& file );
 
 	void draw(GraphicsBuffer* _backBuffer);
 	void drawLevel(Vector2D _pos, Sprite* _spriteToDraw, GraphicsBuffer* _backBuffer);
